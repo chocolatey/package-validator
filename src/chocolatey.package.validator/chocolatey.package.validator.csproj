@@ -1,0 +1,225 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6FFB1930-80C3-4B7E-B4C8-8A610583E496}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>chocolatey.package.validator</RootNamespace>
+    <AssemblyName>chocolatey.package.validator</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.2.2.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="Elmah">
+      <HintPath>..\packages\elmah.corelibrary.1.2.1\lib\Elmah.dll</HintPath>
+    </Reference>
+    <Reference Include="EnsureThat">
+      <HintPath>..\packages\Ensure.That.0.5.0\lib\EnsureThat.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.3\lib\net40-full\log4net.dll</HintPath>
+    </Reference>
+    <Reference Include="Lokad.ActionPolicy">
+      <HintPath>..\..\lib\Lokad\Lokad.ActionPolicy.dll</HintPath>
+    </Reference>
+    <Reference Include="Lokad.Shared">
+      <HintPath>..\..\lib\Lokad\Lokad.Shared.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownMailer">
+      <HintPath>..\packages\MarkdownMailer.1.2.1.0\lib\net40\MarkdownMailer.dll</HintPath>
+    </Reference>
+    <Reference Include="MarkdownSharp">
+      <HintPath>..\packages\MarkdownSharp.1.13.0.0\lib\35\MarkdownSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Edm, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Edm.5.6.0\lib\net40\Microsoft.Data.Edm.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.OData, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.OData.5.6.0\lib\net40\Microsoft.Data.OData.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Data.Services.Client, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Data.Services.Client.5.6.0\lib\net40\Microsoft.Data.Services.Client.dll</HintPath>
+    </Reference>
+    <Reference Include="NuGet.Core, Version=1.6.30117.9648, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Nuget-Chocolatey\NuGet.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Reactive.EventAggregator">
+      <HintPath>..\packages\Reactive.EventAggregator.2.0.0\lib\net40\Reactive.EventAggregator.dll</HintPath>
+    </Reference>
+    <Reference Include="SimpleInjector">
+      <HintPath>..\packages\SimpleInjector.2.0.0\lib\net40-client\SimpleInjector.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Reactive.Core">
+      <HintPath>..\packages\Rx-Core.2.2.5\lib\net40\System.Reactive.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Interfaces">
+      <HintPath>..\packages\Rx-Interfaces.2.2.5\lib\net40\System.Reactive.Interfaces.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Reactive.Linq">
+      <HintPath>..\packages\Rx-Linq.2.2.5\lib\net40\System.Reactive.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Spatial, Version=5.6.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Spatial.5.6.0\lib\net40\System.Spatial.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\SolutionVersion.cs">
+      <Link>Properties\SolutionVersion.cs</Link>
+      <ExcludeFromStyleCop>True</ExcludeFromStyleCop>
+    </Compile>
+    <Compile Include="domain\PackageTestLog.cs" />
+    <Compile Include="EnumerableExtensions.cs" />
+    <Compile Include="EnumerationExtensions.cs" />
+    <Compile Include="infrastructure.app\ApplicationFileType.cs" />
+    <Compile Include="infrastructure.app\FileInformation.cs" />
+    <Compile Include="infrastructure.app\messaging\ImportFilesCompleteMessage.cs" />
+    <Compile Include="infrastructure.app\messaging\SubmitPackageMessage.cs" />
+    <Compile Include="infrastructure.app\messaging\ShutdownMessage.cs" />
+    <Compile Include="infrastructure.app\messaging\StartupMessage.cs" />
+    <Compile Include="infrastructure.app\results\NuGetServiceGetClientResult.cs" />
+    <Compile Include="infrastructure.app\results\PackageTestResult.cs" />
+    <Compile Include="infrastructure.app\messaging\PackageValidationResultMessage.cs" />
+    <Compile Include="infrastructure\rules\IRule.cs" />
+    <Compile Include="infrastructure.app\rules\ProjectUrlRequiredRule.cs" />
+    <Compile Include="infrastructure\rules\ValidationLevelType.cs" />
+    <Compile Include="infrastructure.app\services\INuGetService.cs" />
+    <Compile Include="infrastructure.app\services\IPackageCheckService.cs" />
+    <Compile Include="infrastructure.app\services\IPackageSubmitResultsService.cs" />
+    <Compile Include="infrastructure.app\results\VagrantOutputResult.cs" />
+    <Compile Include="infrastructure.app\services\NuGetService.cs" />
+    <Compile Include="infrastructure.app\tasks\CheckForSubmittedPackagesTask.cs" />
+    <Compile Include="infrastructure.app\tasks\ShutdownAfterWorkCompletedTask.cs" />
+    <Compile Include="infrastructure.app\tasks\StartupTask.cs" />
+    <Compile Include="infrastructure.app\tasks\TaskTracker.cs" />
+    <Compile Include="infrastructure.app\tasks\UpdateWebsiteInformationTask.cs" />
+    <Compile Include="infrastructure.app\webservices\ChocolateySubmittedFeedService.cs" />
+    <Compile Include="infrastructure\commands\CommandExecutor.cs" />
+    <Compile Include="infrastructure\commands\ICommandExecutor.cs" />
+    <Compile Include="infrastructure\commands\PowershellExecutor.cs" />
+    <Compile Include="infrastructure\commands\ProcessOutput.cs" />
+    <Compile Include="infrastructure\container\SimpleInjectorContainerResolutionBehavior.cs" />
+    <Compile Include="infrastructure.app\services\EmailDistributionService.cs" />
+    <Compile Include="infrastructure.app\services\IEmailDistributionService.cs" />
+    <Compile Include="infrastructure\filesystem\DotNetFileSystem.cs" />
+    <Compile Include="infrastructure\filesystem\filewatchers\FileFoundEventArgs.cs" />
+    <Compile Include="infrastructure\filesystem\filewatchers\FileFoundEventHandler.cs" />
+    <Compile Include="infrastructure\filesystem\filewatchers\FileWatcher.cs" />
+    <Compile Include="infrastructure\filesystem\filewatchers\IFileWatcher.cs" />
+    <Compile Include="infrastructure\filesystem\IFileSystem.cs" />
+    <Compile Include="infrastructure\filesystem\IKnownFolder.cs" />
+    <Compile Include="infrastructure\filesystem\KnownFolder.cs" />
+    <Compile Include="infrastructure\logging\log4netappenders\SmtpCustomAppender.cs" />
+    <Compile Include="infrastructure\messaging\EventManager.cs" />
+    <Compile Include="infrastructure\messaging\IMessage.cs" />
+    <Compile Include="infrastructure\results\IResults.cs" />
+    <Compile Include="infrastructure\results\Result.cs" />
+    <Compile Include="infrastructure\results\ResultMessage.cs" />
+    <Compile Include="infrastructure\results\ResultType.cs" />
+    <Compile Include="infrastructure\results\UploadResults.cs" />
+    <Compile Include="infrastructure\schedules\IntervalOccurred.cs" />
+    <Compile Include="infrastructure\schedules\ISchedule.cs" />
+    <Compile Include="infrastructure\services\IFileServingService.cs" />
+    <Compile Include="infrastructure.app\services\IMessageService.cs" />
+    <Compile Include="infrastructure.app\services\MessageService.cs" />
+    <Compile Include="infrastructure\services\IMessageSubscriptionManagerService.cs" />
+    <Compile Include="infrastructure\services\IRegularExpressionService.cs" />
+    <Compile Include="infrastructure\configuration\MailSettingsSmtpFolderConverter.cs" />
+    <Compile Include="infrastructure\services\FileSystemService.cs" />
+    <Compile Include="infrastructure\services\IDateTimeService.cs" />
+    <Compile Include="infrastructure\services\IFileSystemService.cs" />
+    <Compile Include="infrastructure\services\INotificationSendService.cs" />
+    <Compile Include="infrastructure\configuration\Config.cs" />
+    <Compile Include="infrastructure.app\configuration\ConfigurationSettings.cs" />
+    <Compile Include="infrastructure\logging\ILog.cs" />
+    <Compile Include="infrastructure.app\ApplicationParameters.cs" />
+    <Compile Include="infrastructure.app\configuration\IConfigurationSettings.cs" />
+    <Compile Include="infrastructure\logging\Log.cs" />
+    <Compile Include="infrastructure\logging\NullLog.cs" />
+    <Compile Include="infrastructure.app\registration\Bootstrap.cs" />
+    <Compile Include="infrastructure.app\registration\ContainerBinding.cs" />
+    <Compile Include="infrastructure\logging\Log4NetLog.cs" />
+    <Compile Include="infrastructure\services\MessageSubscriptionManagerService.cs" />
+    <Compile Include="infrastructure\services\RegularExpressionService.cs" />
+    <Compile Include="infrastructure\services\SmtpMarkdownNotificationSendService.cs" />
+    <Compile Include="infrastructure\services\SmtpNotificationSendService.cs" />
+    <Compile Include="infrastructure\services\SystemDateTimeService.cs" />
+    <Compile Include="infrastructure\services\SystemDateTimeUtcService.cs" />
+    <Compile Include="infrastructure\synchronization\SemaphoreLock.cs" />
+    <Compile Include="infrastructure\synchronization\TransactionLock.cs" />
+    <Compile Include="infrastructure\synchronization\TransactionLockObject.cs" />
+    <Compile Include="infrastructure\tasks\ITask.cs" />
+    <Compile Include="infrastructure\tokens\TokenReplacer.cs" />
+    <Compile Include="LogExtensions.cs" />
+    <Compile Include="NameValueCollectionExtensions.cs" />
+    <Compile Include="NullExtensions.cs" />
+    <Compile Include="ObjectExtensions.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PropertyInfoExtensions.cs" />
+    <Compile Include="StringExtensions.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <CodeAnalysisDictionary Include="..\CustomDictionary.xml">
+      <Link>CustomDictionary.xml</Link>
+    </CodeAnalysisDictionary>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

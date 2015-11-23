@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=4.3.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"/>
+    <section name="log4net" type="log4net.Config.Log4NetConfigurationSectionHandler, log4net"/>
+  </configSections>
+  
+  <appSettings>
+    <add key="IsDebugMode" value="false"/>
+    <add key="Path.Files" value="..\App_Data\Files"/>
+    <add key="TestingEmailOverride" value="${email.everything.to}"/>
+    <add key="CommandExecutionTimeoutSeconds" value="720"/>
+    <add key="PackagesUrl" value="${packages.url}"/>
+    <add key="PackagesApiKey" value="${packages.apikey}"/>
+  </appSettings>
+  
+  <system.net>
+    <mailSettings>
+      <!-- Local Debug directory -->
+      <smtp deliveryMethod="${server.smtp.deliveryMethod}" from="package-validator-service@noreply.org">
+        <network host="${server.smtp}" defaultCredentials="${email.use.defaultCredentials}" enableSsl="${server.smtp.enablessl}" port="${server.smtp.port}" ${server.smtp.credentials} />
+        <specifiedPickupDirectory pickupDirectoryLocation=".\App_Data\Email"/>
+      </smtp>
+    </mailSettings>
+  </system.net>
+  
+  <log4net>
+  
+    <appender name="ColoredConsoleAppender" type="log4net.Appender.ColoredConsoleAppender">
+      <mapping>
+        <level value="FATAL" />
+        <foreColor value="White" />
+        <backColor value="Red" />
+      </mapping>
+      <mapping>
+        <level value="ERROR" />
+        <foreColor value="Red" />
+      </mapping>
+      <mapping>
+        <level value="WARN" />
+        <foreColor value="Yellow" />
+      </mapping>
+      <mapping>
+        <level value="INFO" />
+        <foreColor value="White" />
+      </mapping>
+      <mapping>
+        <level value="DEBUG" />
+        <foreColor value="Blue" />
+        <backColor value="White" />
+      </mapping>
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%message%newline" />
+      </layout>
+      <filter type="log4net.Filter.LevelRangeFilter">
+        <param name="LevelMin" value="${log.level}" />
+        <param name="LevelMax" value="FATAL" />
+      </filter>
+    </appender>
+
+    <appender name="RollingLogFileAppender" type="log4net.Appender.RollingFileAppender">
+      <file value=".\logs\package.validator.host.log"/>
+      <appendToFile value="true"/>
+      <maxSizeRollBackups value="25"/>
+      <maximumFileSize value="1MB"/>
+      <rollingStyle value="Size"/>
+      <staticLogFileName value="true"/>
+      <lockingModel type="log4net.Appender.FileAppender+MinimalLock"/>
+      <layout type="log4net.Layout.PatternLayout">
+        <!--<header value="[Header]&#13;&#10;" />-->
+        <!--<footer value="[Footer]&#13;&#10;" />-->
+        <!--<conversionPattern value="%date [%thread] %-5level %logger [%ndc] - %message%newline" />-->
+        <conversionPattern value="%date %thread [%-5level] - %message%newline"/>
+      </layout>
+    </appender>
+    
+    <appender name="ErrorSmtpAppender" type="chocolatey.package.validator.Infrastructure.Logging.Log4netAppenders.SmtpCustomAppender">
+      <authentication value="${server.smtp.authentication.type}" />
+      <smtpHost value="${server.smtp}" />
+      <username value="${server.smtp.username}" />
+      <password value="${server.smtp.password}" />
+      <enablessl value="${server.smtp.enablessl}" />
+      <port value="${server.smtp.port}" />
+      <to value="${email.errors.to}" />
+      <from value="package-validator-service@noreply.org" />
+      <subject value="Chocolatey Package Validator Errors - ${environment}" />
+      <bufferSize value="1"/>
+      <lossy value="true"/>
+      <evaluator type="log4net.Core.LevelEvaluator">
+        <threshold value="ERROR"/>
+      </evaluator>
+      <layout type="log4net.Layout.PatternLayout">
+        <conversionPattern value="%newline%date [%thread] %-5level %logger - %message%newline"/>
+        <!--<conversionPattern value="%newline%date [%thread] %-5level %logger [%property{NDC}] - %message%newline" />-->
+      </layout>
+    </appender>
+    
+    <root>
+      <level value="${log.level}"/>
+      <appender-ref ref="ColoredConsoleAppender"/>
+      <appender-ref ref="RollingLogFileAppender"/>
+      <appender-ref ref="ErrorSmtpAppender"/>
+    </root>
+  </log4net>
+
+
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.5.2"/>
+  </startup>
+  
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="System.Reactive.Interfaces" publicKeyToken="31bf3856ad364e35" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-2.1.30214.0" newVersion="2.1.30214.0"/>
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Reactive.Linq" publicKeyToken="31bf3856ad364e35" culture="neutral"/>
+        <bindingRedirect oldVersion="0.0.0.0-2.1.30214.0" newVersion="2.1.30214.0"/>
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+</configuration>
