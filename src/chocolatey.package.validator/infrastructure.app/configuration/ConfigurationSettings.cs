@@ -108,42 +108,5 @@ namespace chocolatey.package.validator.infrastructure.app.configuration
         public string PackagesUrl { get { return get_application_settings_value("PackagesUrl"); } }
         public string PackagesApiKey { get { return get_application_settings_value("PackagesApiKey"); } }
 
-        /// <summary>
-        ///   Gets the Token for accessing GitHub.
-        /// </summary>
-        public string GitHubToken
-        {
-            get
-            {
-                return get_application_settings_value("GitHub.Token");
-            }
-        }
-
-        /// <summary>
-        ///   Gets the UserName for accessing GitHub.
-        /// </summary>
-        public string GitHubUserName
-        {
-            get
-            {
-                var gitHubUserName = get_application_settings_value("GitHub.UserName");
-
-                return gitHubUserName;
-            }
-        }
-
-        /// <summary>
-        ///   Gets the Password for accessing GitHub.
-        /// </summary>
-        public string GitHubPassword
-        {
-            get
-            {
-                var gitHubPassword = get_application_settings_value("GitHub.Password");
-
-                return gitHubPassword;
-            }
-        }
-
     }
 }
