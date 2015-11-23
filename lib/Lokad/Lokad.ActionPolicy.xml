@@ -1,0 +1,207 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Lokad.ActionPolicy</name>
+    </assembly>
+    <members>
+        <member name="T:GlobalAssemblyInfo">
+            <summary>
+             Assembly information class that is shared between all projects
+            </summary>
+        </member>
+        <member name="T:Lokad.ActionPolicy">
+            <summary>
+            Policy that could be applied to delegates to
+            augment their behavior (i.e. to retry on problems)
+            </summary>
+        </member>
+        <member name="M:Lokad.ActionPolicy.#ctor(System.Action{System.Action})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lokad.ActionPolicy"/> class.
+            </summary>
+            <param name="policy">The policy.</param>
+        </member>
+        <member name="M:Lokad.ActionPolicy.Do(System.Action)">
+            <summary>
+            Performs the specified action within the policy.
+            </summary>
+            <param name="action">The action to perform.</param>
+        </member>
+        <member name="M:Lokad.ActionPolicy.Get``1(System.Func{``0})">
+            <summary>
+            Performs the specified action within the policy and returns the result
+            </summary>
+            <typeparam name="TResult">The type of the result.</typeparam>
+            <param name="action">The action to perform.</param>
+            <returns>result returned by <paramref name="action"/></returns>
+        </member>
+        <member name="F:Lokad.ActionPolicy.Null">
+            <summary>
+            Action policy that does not do anything
+            </summary>
+        </member>
+        <member name="M:Lokad.ActionPolicy.With(Lokad.ExceptionHandler)">
+            <summary> Starts building <see cref="T:Lokad.ActionPolicy"/> 
+            that can handle exceptions, as determined by 
+            <paramref name="handler"/> </summary>
+            <param name="handler">The exception handler.</param>
+            <returns>syntax</returns>
+        </member>
+        <member name="M:Lokad.ActionPolicy.From(System.Func{System.Exception,System.Boolean})">
+            <summary> Starts building <see cref="T:Lokad.ActionPolicy"/> 
+            that can handle exceptions, as determined by 
+            <paramref name="doWeHandle"/> function</summary>
+            <param name="doWeHandle"> function that returns <em>true</em> if we can hande the specified exception.</param>
+            <returns>syntax</returns>
+        </member>
+        <member name="M:Lokad.ActionPolicy.Handle``1">
+            <summary> Starts building simple <see cref="T:Lokad.ActionPolicy"/>
+            that can handle <typeparamref name="TException"/> </summary>
+            <typeparam name="TException">The type of the exception to handle.</typeparam>
+            <returns>syntax</returns>
+        </member>
+        <member name="M:Lokad.ActionPolicy.Handle``2">
+            <summary> Starts building simple <see cref="T:Lokad.ActionPolicy"/>
+            that can handle <typeparamref name="TEx1"/> or <typeparamref name="TEx1"/>
+            </summary>
+            <typeparam name="TEx1">The type of the exception to handle.</typeparam>
+            <typeparam name="TEx2">The type of the exception to handle.</typeparam>
+            <returns>syntax</returns>
+        </member>
+        <member name="M:Lokad.ActionPolicy.Handle``3">
+            <summary> Starts building simple <see cref="T:Lokad.ActionPolicy"/>
+            that can handle <typeparamref name="TEx1"/> or <typeparamref name="TEx1"/>
+            </summary>
+            <typeparam name="TEx1">The first type of the exception to handle.</typeparam>
+            <typeparam name="TEx2">The second of the exception to handle.</typeparam>
+            <typeparam name="TEx3">The third of the exception to handle.</typeparam>
+            <returns>syntax</returns>
+        </member>
+        <member name="T:Lokad.ActionPolicyWithState">
+            <summary>
+            Same as <see cref="T:Lokad.ActionPolicy"/>, but indicates that this policy
+            holds some state and thus must have syncronized access.
+            </summary>
+        </member>
+        <member name="M:Lokad.ActionPolicyWithState.#ctor(System.Action{System.Action})">
+            <summary>
+            Initializes a new instance of the <see cref="T:Lokad.ActionPolicyWithState"/> class.
+            </summary>
+            <param name="policy">The policy.</param>
+        </member>
+        <member name="T:Lokad.ExceptionHandler">
+            <summary> This delegate represents <em>catch</em> block
+            </summary>
+            <param name="ex">Exception to handle</param>
+            <returns><em>true</em> if we can handle exception</returns>
+        </member>
+        <member name="T:Lokad.ExceptionHandlerSyntax">
+            <summary> Fluent API for defining <see cref="T:Lokad.ActionPolicy"/> 
+            that allows to handle exceptions. </summary>
+        </member>
+        <member name="M:Lokad.ExceptionHandlerSyntax.Retry(Lokad.Syntax{Lokad.ExceptionHandler},System.Int32)">
+            <summary>
+            Builds <see cref="T:Lokad.ActionPolicy"/> that will retry exception handling
+            for a couple of times before giving up.
+            </summary>
+            <param name="syntax">The syntax.</param>
+            <param name="retryCount">The retry count.</param>
+            <returns>reusable instance of policy</returns>
+        </member>
+        <member name="M:Lokad.ExceptionHandlerSyntax.Retry(Lokad.Syntax{Lokad.ExceptionHandler},System.Int32,System.Action{System.Exception,System.Int32})">
+            <summary>
+            Builds <see cref="T:Lokad.ActionPolicy"/> that will retry exception handling
+            for a couple of times before giving up.
+            </summary>
+            <param name="syntax">The syntax.</param>
+            <param name="retryCount">The retry count.</param>
+            <param name="onRetry">The action to perform on retry (i.e.: write to log).
+            First parameter is the exception and second one is its number in sequence. </param>
+            <returns>reusable policy instance </returns>
+        </member>
+        <member name="M:Lokad.ExceptionHandlerSyntax.RetryForever(Lokad.Syntax{Lokad.ExceptionHandler},System.Action{System.Exception})">
+            <summary> Builds <see cref="T:Lokad.ActionPolicy"/> that will keep retrying forever </summary>
+            <param name="syntax">The syntax to extend.</param>
+            <param name="onRetry">The action to perform when the exception could be retried.</param>
+            <returns> reusable instance of policy</returns>
+        </member>
+        <member name="M:Lokad.ExceptionHandlerSyntax.WaitAndRetry(Lokad.Syntax{Lokad.ExceptionHandler},System.Collections.Generic.IEnumerable{System.TimeSpan},System.Action{System.Exception,System.TimeSpan})">
+            <summary> <para>Builds the policy that will keep retrying as long as 
+            the exception could be handled by the <paramref name="syntax"/> being 
+            built and <paramref name="sleepDurations"/> is providing the sleep intervals.
+            </para>
+            <para>See <see cref="T:Lokad.Range"/> for methods to create long intervals on-the-fly</para>
+            </summary>
+            <param name="syntax">The syntax.</param>
+            <param name="sleepDurations">The sleep durations.</param>
+            <param name="onRetry">The action to perform on retry (i.e.: write to log).
+            First parameter is the exception and second one is the planned sleep duration. </param>
+            <returns>new policy instance</returns>
+        </member>
+        <member name="M:Lokad.ExceptionHandlerSyntax.WaitAndRetry(Lokad.Syntax{Lokad.ExceptionHandler},System.Collections.Generic.IEnumerable{System.TimeSpan})">
+            <summary> <para>Builds the policy that will keep retrying as long as 
+            the exception could be handled by the <paramref name="syntax"/> being 
+            built and <paramref name="sleepDurations"/> is providing the sleep intervals.
+            </para>
+            <para>See <see cref="T:Lokad.Range"/> for methods to create long intervals on-the-fly</para>
+            </summary>
+            <param name="syntax">The syntax.</param>
+            <param name="sleepDurations">The sleep durations.</param>
+            <returns>new policy instance</returns>
+        </member>
+        <member name="M:Lokad.ExceptionHandlerSyntax.CircuitBreaker(Lokad.Syntax{Lokad.ExceptionHandler},System.TimeSpan,System.Int32)">
+            <summary>
+             <para>Builds the policy that will "break the circuit" after <paramref name="countBeforeBreaking"/>
+            exceptions that could be handled by the <paramref name="syntax"/> being built. The circuit 
+            stays broken for the <paramref name="duration"/>. Any attempt to
+            invoke method within the policy, while the circuit is broken, will immediately re-throw
+            the last exception.  </para>
+            <para>If the action fails within the policy after the block period, then the breaker 
+            is blocked again for the next <paramref name="duration"/>.
+            It will be reset, otherwise.</para> 
+            </summary>
+            <param name="syntax">The syntax.</param>
+            <param name="duration">How much time the breaker will stay open before resetting</param>
+            <param name="countBeforeBreaking">How many exceptions are needed to break the circuit</param>
+            <returns>shared policy instance</returns>
+            <remarks>(see "ReleaseIT!" for the details)</remarks>
+        </member>
+        <member name="T:Lokad.HandlingProvider`2">
+            <summary>
+            Simple reliability layer for the <see cref="T:Lokad.IProvider`2"/>
+            </summary>
+            <typeparam name="TKey">type of the Key item</typeparam>
+            <typeparam name="TValue">type of the values</typeparam>
+        </member>
+        <member name="M:Lokad.HandlingProvider`2.#ctor(Lokad.IProvider{`0,`1},Lokad.ActionPolicy)">
+            <summary>
+            Creates generic reliability wrapper around the <see cref="T:Lokad.IProvider`2"/>
+            </summary>
+            <param name="provider"></param>
+            <param name="policy"></param>
+        </member>
+        <member name="M:Lokad.HandlingProvider`2.Get(`0)">
+            <summary>
+            <see cref="M:Lokad.IProvider`2.Get(`0)"/>
+            </summary>
+            <param name="key"></param>
+            <returns></returns>
+        </member>
+        <member name="T:Lokad.HandlingProvider">
+            <summary>
+            This shortcuts simplifies creation of <see cref="T:Lokad.HandlingProvider"/> instances
+            </summary>
+        </member>
+        <member name="M:Lokad.HandlingProvider.For``2(Lokad.IProvider{``0,``1},Lokad.ActionPolicy)">
+            <summary>
+            Creates new instance of <see cref="T:Lokad.HandlingProvider`2"/>
+            by wrapping another <see cref="T:Lokad.IProvider`2"/> instance
+            </summary>
+            <typeparam name="TKey">The type of the key.</typeparam>
+            <typeparam name="TValue">The type of the value.</typeparam>
+            <param name="provider">The provider to wrap.</param>
+            <param name="policy">The action policy.</param>
+            <returns>new provider instance</returns>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="BuildSettings">
+  <!-- Project UppercuT - http://projectuppercut.org -->
+  <!-- Learn how to edit this file at http://uppercut.pbwiki.com -->
+  <!-- In the build folder there is a default.build.settings. You can override defaults by adding those here and changing the values -->
+
+  <!-- Required Items -->
+  <property name="project.name" value="chocolatey.package.validator" overwrite="false" />
+  <property name="repository.path" value="https://github.com/chocolatey/package-validator" overwrite="false" />
+  <property name="company.name" value="RealDimensions Software, LLC" overwrite="false" />
+
+  <!-- Folder Overrides -->
+  <property name="folder.build_scripts" value=".build" overwrite="false" />
+  <property name="folder.build_scripts_custom" value=".build.custom" overwrite="false" />
+
+  <!-- ASSEMBLY VARIABLES -->
+  <property name="version.use_semanticversioning" value="true" overwrite="false" />
+  <property name="version.major" value="0" overwrite="false" />
+  <property name="version.minor" value="0" overwrite="false" />
+  <property name="version.patch" value="1" overwrite="false" />
+  <property name="version.fix" value="0" overwrite="false" />
+  <property name="version.nuget.prerelease" value="" overwrite="false" />
+  <property name="version.use.build_date" value="false" overwrite="false" />
+  <property name="assembly.description" value="${project.name} is a product of ${company.name} - All rights reserved." overwrite="false" />
+  <property name="assembly.copyright" value="Copyright © 2015 - Present, ${company.name} - All Rights Reserved." overwrite="false" />
+  <property name="sign.project_with_key" value="false" overwrite="false" />
+
+  <property name="microsoft.framework" value="net-4.5" overwrite="false" />
+
+  <!-- Build Features Overrides -->
+  <property name="test.framework" value="nunit" overwrite="false" />
+  <property name="cover.framework" value="opencover" overwrite="false" />
+
+  <property name="run.environmentbuilder" value="true" overwrite="false" />
+  <property name="run.deploymentbuilder" value="false" overwrite="false" />
+  <property name="run.gems" value="false" overwrite="false" />
+  <property name="run.metrics" value="false" overwrite="false" />
+  <property name="run.nitriq" value="false" overwrite="false" />
+  <property name="run.moma" value="false" overwrite="false" />
+  <property name="run.fxcop" value="true" overwrite="false" />
+  <property name="run.stylecop" value="true" overwrite="false" />
+  <property name="run.obfuscator" value="false" overwrite="false" />
+  <property name="run.ilmerge" value="false" overwrite="false" />
+
+  <!-- EXTERNAL TOOL OVERRIDES -->
+  <property name="path.separator" value="${string::trim(path::combine(' ', ' '))}" />
+  <property name="dirs.current" value="${directory::get-current-directory()}" />
+
+  <property name="app.test.console" value="${dirs.current}${path.separator}src${path.separator}packages${path.separator}NUnit.Runners.2.6.4${path.separator}tools${path.separator}nunit-console.exe" overwrite="false" />
+  <property name="app.test.console.x86" value="${dirs.current}${path.separator}src${path.separator}packages${path.separator}NUnit.Runners.2.6.4${path.separator}tools${path.separator}nunit-console-x86.exe" overwrite="false" />
+  <property name="codecoverage.filters" value="+[${project.name}*]* -[${project.name}*test*]* -[${project.name}]*adapters.* -[${project.name}]*infrastructure.app.configuration.*Setting* -[${project.name}]*app.configuration.*Configuration -[${project.name}]*app.domain.* -[${project.name}]*app.messages.* -[${project.name}]*.registration.* -[${project.name}]*app.templates.* -[${project.name}]*commandline.Option* -[${project.name}]*licensing.* -[${project.name}]*infrastructure.results.*" />
+  <property name="app.coveralls" value="${dirs.current}${path.separator}src${path.separator}packages${path.separator}coveralls.io.1.1.86${path.separator}tools${path.separator}coveralls.net.exe" overwrite="false" />
+  <property name="app.strongname" value="C:${path.separator}Program Files${path.separator}Microsoft SDKs${path.separator}Windows${path.separator}v7.0A${path.separator}Bin${path.separator}sn.exe" />
+  <property name="app.strongname" value="C:${path.separator}Program Files (x86)${path.separator}Microsoft SDKs${path.separator}Windows${path.separator}v7.0A${path.separator}Bin${path.separator}sn.exe" if="${not file::exists(app.strongname)}" />
+
+  <property name="run.ilmerge" value="false" overwrite="false" />
+
+</project>
