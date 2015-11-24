@@ -16,6 +16,7 @@
 namespace chocolatey.package.validator.infrastructure.app.tasks
 {
     using System;
+    using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
     using configuration;
@@ -62,18 +63,24 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
         {
             _timer.Stop();
 
-            this.Log().Info(() => "Checking for submitted packages to validate.");
+            this.Log().Info(() => "Checking for submitted packages.");
 
             var submittedPackagesUri = NuGetService.get_service_endpoint_url(_configurationSettings.PackagesUrl, SERVICE_ENDPOINT);
 
             var service = new FeedContext_x0060_1(submittedPackagesUri);
 
             // this only returns 40 results but at least we'll have something to start with
-            foreach (var package in service.Packages.Where(p => p.PackageTestResultStatus == null || p.PackageTestResultStatus == "Pending" || p.PackageTestResultStatus == "Unknown").or_empty_list_if_null())
+            IList<V2FeedPackage> submittedPackages = service.Packages.Where(p => p.PackageTestResultStatus == null || p.PackageTestResultStatus == "Pending" || p.PackageTestResultStatus == "Unknown").or_empty_list_if_null().ToList();
+
+            this.Log().Info("Pulled {0} packages in submitted status for review.".format_with(submittedPackages.Count));
+
+            foreach (var package in submittedPackages)
             {
-                this.Log().Info(() => "{0} found in submitted state.".format_with(package.Title));
+                this.Log().Info("{0} found in submitted state.".format_with(package.Title));
                 EventManager.publish(new SubmitPackageMessage(package.Id, package.Version));
             }
+
+            this.Log().Info(() => "Finished checking for submitted packages.");
 
             _timer.Start();
         }
