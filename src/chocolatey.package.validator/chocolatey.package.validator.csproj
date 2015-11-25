@@ -132,6 +132,8 @@
     <Compile Include="infrastructure.app\rules\DoscUrlMissingSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\InstallAutomationScriptNamedCorrectlyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlDoesNotMatchProjectUrlGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\LicenseUrlMissingGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\LicenseUrlMissingWhenLicenseAcceptanceTrueRequirement.cs" />
     <Compile Include="infrastructure.app\rules\MailingListUrlMissingSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\PackageIdUsesDotsNote.cs" />
     <Compile Include="infrastructure.app\rules\PackageInternalFilesAreNotPackagedRequirement.cs" />
