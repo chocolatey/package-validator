@@ -20,7 +20,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class DoscUrlMissingSuggestion : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "The nuspec has been enhanced to allow you to put in `docsUrl`, pointing to the location of the wiki or docs of the software. Please consider adding it to the nuspec, if available."; } }
+        public override string ValidationFailureMessage { get { return "The nuspec has been enhanced to allow you to add docsUrl, pointing to the location of the wiki or docs of the software. Please consider adding it to the nuspec, if available."; } }
 
         protected override PackageValidationOutput is_valid(IPackage package)
         {

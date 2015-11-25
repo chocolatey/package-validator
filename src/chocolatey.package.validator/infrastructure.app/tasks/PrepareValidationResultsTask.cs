@@ -57,7 +57,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (flaggedGuidelines.Count() != 0)
             {
                 resultsMessage.Append("{0}##### Guidelines{1}".format_with(resultsMessage.Length ==0 ? string.Empty : Environment.NewLine, Environment.NewLine));
-                resultsMessage.Append("Guidelines are strong suggestions that improves the quality of the package. These are considered something to fix for next time to increase the quality of the package. Over time guidelines can become requirements. A package version can be approved without addressing guideline comments.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("Guidelines are strong suggestions that improve the quality of a package version. These are considered something to fix for next time to increase the quality of the package. Over time guidelines can become requirements. A package version can be approved without addressing guideline comments.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var flaggedGuideline in flaggedGuidelines.or_empty_list_if_null())
             {
