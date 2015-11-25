@@ -64,7 +64,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
                 resultsMessage.Append("* " + flaggedGuideline.ValidationFailureMessage + Environment.NewLine);
             }
             
-            var flaggedSuggestions = message.ValidationResults.Where(r => r.Validated == false && (r.ValidationLevel == ValidationLevelType.Suggestion || r.ValidationLevel == ValidationLevelType.Note));
+            var flaggedSuggestions = message.ValidationResults.Where(r => r.Validated == false && (r.ValidationLevel == ValidationLevelType.Suggestion));
             if (flaggedSuggestions.Count() != 0)
             {
                 resultsMessage.Append("{0}##### Suggestions{1}".format_with(resultsMessage.Length == 0 ? string.Empty : Environment.NewLine, Environment.NewLine));
@@ -73,6 +73,17 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             foreach (var flaggedSuggestion in flaggedSuggestions.or_empty_list_if_null())
             {
                 resultsMessage.Append("* " + flaggedSuggestion.ValidationFailureMessage + Environment.NewLine);
+            }
+            
+            var flaggedNotes = message.ValidationResults.Where(r => r.Validated == false && (r.ValidationLevel == ValidationLevelType.Note));
+            if (flaggedNotes.Count() != 0)
+            {
+                resultsMessage.Append("{0}##### Notes{1}".format_with(resultsMessage.Length == 0 ? string.Empty : Environment.NewLine, Environment.NewLine));
+                resultsMessage.Append("Notes typically flag things for both you and the reviewer.{0}{0}".format_with(Environment.NewLine));
+            }
+            foreach (var flaggedNote in flaggedNotes.or_empty_list_if_null())
+            {
+                resultsMessage.Append("* " + flaggedNote.ValidationFailureMessage + Environment.NewLine);
             }
 
             var validationMessages = resultsMessage.ToString();

@@ -37,6 +37,10 @@ namespace chocolatey.package.validator.infrastructure.rules
             else if (name.EndsWith("suggestion"))
             {
                 ValidationLevel = ValidationLevelType.Suggestion;
+            } 
+            else if (name.EndsWith("note"))
+            {
+                ValidationLevel = ValidationLevelType.Note;
             }
             else
             {
