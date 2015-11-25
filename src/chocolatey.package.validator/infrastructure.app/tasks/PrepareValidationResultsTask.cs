@@ -46,7 +46,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (failedRequirements.Count() != 0)
             {
                 resultsMessage.Append("##### Requirements{0}".format_with(Environment.NewLine));
-                resultsMessage.Append("When a package has failed requirements, the package requires fixing or response by the maintainer. If items are flagged correctly, they must be fixed before the package can be approved.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("When a package version has failed requirements, the package version requires fixing or response by the maintainer. If items are flagged correctly, they must be fixed before the package version can be approved. The exact same version should be uploaded during moderation review.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var failedRequirement in failedRequirements.or_empty_list_if_null())
             {
@@ -56,8 +56,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             var flaggedGuidelines = message.ValidationResults.Where(r => r.Validated == false && r.ValidationLevel == ValidationLevelType.Guideline);
             if (flaggedGuidelines.Count() != 0)
             {
-                resultsMessage.Append("{0}##### Guidelines{0}".format_with(Environment.NewLine));
-                resultsMessage.Append("When a package has guidelines suggested, it is items that will improved the quality of the package. These are considered something to fix for next time to increase the quality of the package. Over time one or more Guideline can become a Requirement. A package guideline flag can be approved without fixing the issue.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("{0}##### Guidelines{1}".format_with(resultsMessage.Length ==0 ? string.Empty : Environment.NewLine, Environment.NewLine));
+                resultsMessage.Append("Guidelines are strong suggestions that improves the quality of the package. These are considered something to fix for next time to increase the quality of the package. Over time guidelines can become requirements. A package version can be approved without addressing guideline comments.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var flaggedGuideline in flaggedGuidelines.or_empty_list_if_null())
             {
@@ -67,14 +67,21 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             var flaggedSuggestions = message.ValidationResults.Where(r => r.Validated == false && (r.ValidationLevel == ValidationLevelType.Suggestion || r.ValidationLevel == ValidationLevelType.Note));
             if (flaggedSuggestions.Count() != 0)
             {
-                resultsMessage.Append("{0}##### Suggestions{0}".format_with(Environment.NewLine));
-                resultsMessage.Append("When a package has suggestions, it is items that are newer and should be considered. A package suggestion flag can be approved without fixing the issue.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("{0}##### Suggestions{1}".format_with(resultsMessage.Length == 0 ? string.Empty : Environment.NewLine, Environment.NewLine));
+                resultsMessage.Append("Suggestions are newly introduced items that should be considered. A package version can be approved without addressing suggestion comments.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var flaggedSuggestion in flaggedSuggestions.or_empty_list_if_null())
             {
                 resultsMessage.Append("* " + flaggedSuggestion.ValidationFailureMessage + Environment.NewLine);
             }
-            
+
+            var validationMessages = resultsMessage.ToString();
+            if (!string.IsNullOrWhiteSpace(validationMessages))
+            {
+                var messageToSend = validationMessages;
+                // send the message
+            }
+
             //todo if you find any that failed validation, it's time to update the website
             //create a message for updating the website with the validation set
             //EventManager.publish(new PackageValidationResultMessage(message.PackageId, message.PackageVersion, validationResults, DateTime.UtcNow));
