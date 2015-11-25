@@ -15,10 +15,22 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
+    using NuGet;
     using infrastructure.rules;
 
-    public class ProjectUrlRequiredRule : IRule
+    public class TagsNotEmptyGuideline : BasePackageRule
     {
-        public ValidationLevelType ValidationLevel { get { return ValidationLevelType.Requirement; } }
+        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Guideline;
+        private const string VALIDATION_FAILURE_MESSAGE = "Tags (tags) are space separated values for referencing categories for software. Please include tags in the nuspec as space separated values.";
+
+        public TagsNotEmptyGuideline()
+            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+        {
+        }
+
+        protected override PackageValidationOutput is_valid(IPackage package)
+        {
+            return !string.IsNullOrWhiteSpace(package.Tags);
+        }
     }
 }

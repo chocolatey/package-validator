@@ -15,8 +15,14 @@
 
 namespace chocolatey.package.validator.infrastructure.rules
 {
-    public interface IRule
+    using NuGet;
+
+    public interface IPackageRule
     {
         ValidationLevelType ValidationLevel { get; }
+
+        string ValidationFailureMessage { get; }
+
+        PackageValidationResult validate(IPackage package);
     }
 }
