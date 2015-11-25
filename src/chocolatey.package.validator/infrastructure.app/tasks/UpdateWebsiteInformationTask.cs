@@ -16,10 +16,12 @@
 namespace chocolatey.package.validator.infrastructure.app.tasks
 {
     using System;
+    using System.Linq;
     using System.Net;
     using System.Text;
     using configuration;
     using infrastructure.messaging;
+    using infrastructure.rules;
     using infrastructure.tasks;
     using messaging;
     using NuGet;
@@ -41,7 +43,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
         public void initialize()
         {
-            _subscription = EventManager.subscribe<PackageValidationResultMessage>(update_website, null, null);
+            //todo Point at a new message
+           // _subscription = EventManager.subscribe<PackageValidationResultMessage>(update_website, null, null);
             this.Log().Info(() => "{0} is now ready and waiting for PackageValidationResultMessage".format_with(GetType().Name));
         }
 
@@ -52,11 +55,14 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
         public event EventHandler<WebRequestEventArgs> SendingRequest = delegate { };
 
-        private const string SERVICE_ENDPOINT = "/api/v2/test";
+        //todo: update service endpoint.
+        private const string SERVICE_ENDPOINT = "/api/v2/nowhere";
 
         private void update_website(PackageValidationResultMessage message)
         {
-            this.Log().Info(() => "Updating website for {0} v{1} with results and changing submission status: {2}".format_with(message.PackageId, message.PackageVersion, message.FailedRequiredChecks));
+            var failedRequired = message.ValidationResults.Any(r => r.Validated == false && r.ValidationLevel == ValidationLevelType.Requirement);
+            
+            this.Log().Info(() => "Updating website for {0} v{1} with results (package {2} requirements).".format_with(message.PackageId, message.PackageVersion, failedRequired ? "failed" : "passed"));
 
             try
             {

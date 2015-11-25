@@ -2,6 +2,7 @@
 {
     using System.Net;
     using NuGet;
+    using configuration;
     using results;
 
     public interface INuGetService
@@ -21,5 +22,15 @@
         ///   should be retried.
         /// </returns>
         NuGetServiceGetClientResult ensure_successful_response(HttpClient client, HttpStatusCode? expectedStatusCode = null);
+
+        /// <summary>
+        /// Downloads a package to the specified folder and returns the package stream
+        /// </summary>
+        /// <param name="packageId">The package identifier.</param>
+        /// <param name="packageVersion">The package version.</param>
+        /// <param name="downloadLocation">The download location.</param>
+        /// <param name="configuration">The configuration.</param>
+        /// <returns></returns>
+        IPackage download_package(string packageId, string packageVersion, string downloadLocation, IConfigurationSettings configuration);
     }
 }

@@ -15,16 +15,17 @@
 
 namespace chocolatey.package.validator.infrastructure.app.registration
 {
+    using Reactive.EventAggregator;
+    using SimpleInjector;
     using commands;
     using configuration;
     using filesystem;
     using infrastructure.configuration;
+    using infrastructure.logging;
     using infrastructure.messaging;
     using infrastructure.services;
-    using logging;
-    using Reactive.EventAggregator;
+    using locators;
     using services;
-    using SimpleInjector;
 
     /// <summary>
     ///   The main inversion container registration for the application. Look for other container bindings in client projects.
@@ -57,6 +58,8 @@ namespace chocolatey.package.validator.infrastructure.app.registration
             container.Register<IFileSystem, DotNetFileSystem>(Lifestyle.Singleton);
             container.Register<IRegularExpressionService, RegularExpressionService>(Lifestyle.Singleton);
             container.Register<INuGetService, NuGetService>(Lifestyle.Singleton);
+            container.Register<IPackageValidationService, PackageValidationService>(Lifestyle.Singleton);
+            container.Register<ITypeLocator, TypeLocator>(Lifestyle.Singleton);
 
             RegisterOverrideableComponents(container, configuration);
         }

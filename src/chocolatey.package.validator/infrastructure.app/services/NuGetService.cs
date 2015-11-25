@@ -16,16 +16,28 @@
 namespace chocolatey.package.validator.infrastructure.app.services
 {
     using System;
+    using System.Collections.Generic;
+    using System.IO;
     using System.Net;
-    using infrastructure.results;
     using NuGet;
+    using configuration;
+    using infrastructure.results;
+    using logging;
     using registration;
     using results;
+    using IFileSystem = filesystem.IFileSystem;
 
     public class NuGetService : INuGetService
     {
+        private readonly IFileSystem _fileSystem;
         public const string API_KEY_HEADER = "X-NuGet-ApiKey";
         public const int MAX_REDIRECTION_COUNT = 20;
+        private const string DEFAULT_SERVICE_ENDPOINT = "/api/v2/";
+
+        public NuGetService(IFileSystem fileSystem)
+        {
+            _fileSystem = fileSystem;
+        }
 
         public string ApiKeyHeader { get { return API_KEY_HEADER; } }
 
@@ -36,7 +48,7 @@ namespace chocolatey.package.validator.infrastructure.app.services
 
         public HttpClient get_client(string baseUrl, string path, string method, string contentType)
         {
-            this.Log().Debug(() => "Getting httpclient for '{0}' with '{1}'".format_with(baseUrl,path));
+            this.Log().Debug(() => "Getting httpclient for '{0}' with '{1}'".format_with(baseUrl, path));
             Uri requestUri = get_service_endpoint_url(baseUrl, path);
 
             var client = new HttpClient(requestUri)
@@ -82,18 +94,10 @@ namespace chocolatey.package.validator.infrastructure.app.services
 
                 if (response != null &&
                     ((expectedStatusCode.HasValue && expectedStatusCode.Value != response.StatusCode) ||
-
                      // If expected status code isn't provided, just look for anything 400 (Client Errors) or higher (incl. 500-series, Server Errors)
                      // 100-series is protocol changes, 200-series is success, 300-series is redirect.
-                     (!expectedStatusCode.HasValue && (int)response.StatusCode >= 400)))
-
-                {
-                    Bootstrap.handle_exception(new InvalidOperationException("Failed to process request.{0} '{1}'".format_with(Environment.NewLine, response.StatusDescription)));
-                }
-                else
-                {
-                    result.Success = true;
-                }
+                     (!expectedStatusCode.HasValue && (int)response.StatusCode >= 400))) Bootstrap.handle_exception(new InvalidOperationException("Failed to process request.{0} '{1}'".format_with(Environment.NewLine, response.StatusDescription)));
+                else result.Success = true;
 
                 return result;
             }
@@ -133,14 +137,8 @@ namespace chocolatey.package.validator.infrastructure.app.services
                         Message = response.StatusDescription
                     });
 
-                if (expectedStatusCode != response.StatusCode)
-                {
-                    Bootstrap.handle_exception(new InvalidOperationException("Failed to process request.{0} '{1}':{0} {2}".format_with(Environment.NewLine, response.StatusDescription, e.Message), e));
-                }
-                else
-                {
-                    result.Success = true;
-                }
+                if (expectedStatusCode != response.StatusCode) Bootstrap.handle_exception(new InvalidOperationException("Failed to process request.{0} '{1}':{0} {2}".format_with(Environment.NewLine, response.StatusDescription, e.Message), e));
+                else result.Success = true;
 
                 return result;
             }
@@ -154,26 +152,84 @@ namespace chocolatey.package.validator.infrastructure.app.services
             }
         }
 
-        //private string get_response_text(HttpWebResponse response)
-        //{
-        //    if (response == null) return string.Empty;
+        public IPackage download_package(string packageId, string packageVersion, string downloadLocation, IConfigurationSettings configuration)
+        {
+            var version = new SemanticVersion(0, 0, 0, 0);
+            if (!string.IsNullOrWhiteSpace(packageVersion)) version = new SemanticVersion(packageVersion);
 
-        //    try
-        //    {
-        //        var encoding = Encoding.GetEncoding(response.CharacterSet);
-        //        using (var responseStream = response.GetResponseStream())
-        //        {
-        //            using (var reader = new StreamReader(responseStream, encoding))
-        //            {
-        //                return reader.ReadToEnd();
-        //            }
-        //        }
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        this.Log().Warn("Response text is empty: {0}".format_with(ex.Message));
-        //        return string.Empty;
-        //    }
-        //}
+            var packageManager = get_package_manager(downloadLocation, configuration);
+
+            this.Log().Debug(() => "Searching for {0} v{1} to install from {2}.".format_with(packageId, version.to_string(), packageManager.SourceRepository.Source));
+
+            IPackage availablePackage = packageManager.SourceRepository.FindPackage(packageId, version, allowPrereleaseVersions: true, allowUnlisted: true);
+            if (availablePackage == null)
+            {
+                //todo: do something here
+            }
+
+            this.Log().Debug(() => "Installing {0} v{1} from {2}.".format_with(packageId, version.to_string(), packageManager.SourceRepository.Source));
+
+            packageManager.InstallPackage(availablePackage, ignoreDependencies: true, allowPrereleaseVersions: true);
+
+            var cachePackage = _fileSystem.combine_paths(Environment.GetEnvironmentVariable("LocalAppData"), "NuGet", "Cache", "{0}.{1}.nupkg".format_with(packageId, version.to_string()));
+            if (_fileSystem.file_exists(cachePackage)) _fileSystem.delete_file(cachePackage);
+
+            this.Log().Debug(() => "Returning {0} v{1} package.".format_with(packageId, version.to_string()));
+
+            return packageManager.LocalRepository.FindPackage(packageId, version, allowPrereleaseVersions: true, allowUnlisted: true);
+        }
+
+        public IPackageManager get_package_manager(string localPackageDirectory, IConfigurationSettings configuration)
+        {
+            var nugetLogger = new ServiceNugetLogger();
+
+            NuGet.IFileSystem nugetPackagesFileSystem = get_nuget_file_system(nugetLogger, localPackageDirectory);
+            IPackagePathResolver pathResolver = get_path_resolver(nugetPackagesFileSystem);
+            var packageManager = new PackageManager(get_remote_repository(configuration, nugetLogger), pathResolver, nugetPackagesFileSystem, get_local_repository(pathResolver, nugetPackagesFileSystem))
+            {
+                DependencyVersion = DependencyVersion.Highest,
+            };
+
+            return packageManager;
+        }
+
+        public NuGet.IFileSystem get_nuget_file_system(ILogger nugetLogger, string rootDirectory)
+        {
+            return new PhysicalFileSystem(rootDirectory)
+            {
+                Logger = nugetLogger
+            };
+        }
+
+        public IPackagePathResolver get_path_resolver(NuGet.IFileSystem nugetPackagesFileSystem)
+        {
+            return new DefaultPackagePathResolver(nugetPackagesFileSystem)
+            {
+            };
+        }
+
+        public IPackageRepository get_local_repository(IPackagePathResolver pathResolver, NuGet.IFileSystem nugetPackagesFileSystem)
+        {
+            this.Log().Debug(() => "Setting up local repository at '{0}'".format_with(nugetPackagesFileSystem.Root));
+
+            IPackageRepository localRepository = new LocalPackageRepository(pathResolver, nugetPackagesFileSystem);
+            localRepository.PackageSaveMode = PackageSaveModes.Nupkg | PackageSaveModes.Nuspec;
+
+            return localRepository;
+        }
+
+        public IPackageRepository get_remote_repository(IConfigurationSettings configuration, ILogger nugetLogger)
+        {
+            this.Log().Debug(() => "Setting up redirected client for '{0}' with '{1}'".format_with(configuration.PackagesUrl, DEFAULT_SERVICE_ENDPOINT));
+
+            return new AggregateRepository(
+                new List<IPackageRepository>
+                {
+                    new DataServicePackageRepository(new RedirectedHttpClient(get_service_endpoint_url(configuration.PackagesUrl, DEFAULT_SERVICE_ENDPOINT)))
+                })
+            {
+                Logger = nugetLogger,
+            };
+        }
     }
 }

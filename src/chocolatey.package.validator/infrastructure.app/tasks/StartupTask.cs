@@ -15,6 +15,8 @@
 
 namespace chocolatey.package.validator.infrastructure.app.tasks
 {
+    using System;
+    using System.IO;
     using System.Timers;
     using infrastructure.messaging;
     using infrastructure.tasks;
@@ -31,6 +33,16 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             _timer.Elapsed += timer_elapsed;
             _timer.Start();
             this.Log().Info(() => "{0} will send startup message in {1} milliseconds".format_with(GetType().Name, TIMER_INTERVAL));
+
+            var tempInstalls = Path.Combine(Path.GetTempPath(), ApplicationParameters.Name);
+            try
+            {
+                if (Directory.Exists(tempInstalls)) Directory.Delete(tempInstalls, recursive: true);
+            }
+            catch (Exception)
+            {
+                //ignore
+            }
         }
 
         public void shutdown()

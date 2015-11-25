@@ -16,29 +16,28 @@
 namespace chocolatey.package.validator.infrastructure.app.messaging
 {
     using System;
+    using System.Collections.Generic;
     using infrastructure.messaging;
+    using infrastructure.rules;
 
     public class PackageValidationResultMessage : IMessage
     {
         public PackageValidationResultMessage(
             string packageId,
             string packageVersion,
-            bool failedRequiredChecks,
-            string message,
+            IEnumerable<PackageValidationResult> validationResults,
             DateTime? testDate
             )
         {
             PackageId = packageId;
             PackageVersion = packageVersion;
-            FailedRequiredChecks = failedRequiredChecks;
-            Message = message;
+            ValidationResults = validationResults;
             TestDate = testDate;
         }
 
         public string PackageId { get; private set; }
         public string PackageVersion { get; private set; }
-        public bool FailedRequiredChecks { get; private set; }
-        public string Message { get; private set; }
+        public IEnumerable<PackageValidationResult> ValidationResults { get; private set; }
         public DateTime? TestDate { get; private set; }
     }
 }

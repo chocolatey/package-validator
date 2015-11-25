@@ -20,6 +20,7 @@ namespace chocolatey.package.validator.host.infrastructure.registration
     using validator.infrastructure.app.configuration;
     using validator.infrastructure.app.services;
     using validator.infrastructure.app.tasks;
+    using validator.infrastructure.filesystem;
     using validator.infrastructure.tasks;
 
     /// <summary>
@@ -42,7 +43,11 @@ namespace chocolatey.package.validator.host.infrastructure.registration
                     {
                         new StartupTask(),
                         new CheckForSubmittedPackagesTask(container.GetInstance<IConfigurationSettings>()),
-                        new UpdateWebsiteInformationTask(container.GetInstance<IConfigurationSettings>(),container.GetInstance<INuGetService>())
+                        new DownloadSubmittedPackageTask(container.GetInstance<IConfigurationSettings>(), container.GetInstance<INuGetService>(), container.GetInstance<IFileSystem>()),
+                        new ValidatePackageTask(container.GetInstance<IPackageValidationService>()),
+                        new PrepareValidationResultsTask(),
+                        new CleanupDownloadedPackageTask(container.GetInstance<IFileSystem>()),
+                        new UpdateWebsiteInformationTask(container.GetInstance<IConfigurationSettings>(), container.GetInstance<INuGetService>())
                     };
 
                     return list.AsReadOnly();
