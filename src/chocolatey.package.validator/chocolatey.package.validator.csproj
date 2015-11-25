@@ -129,7 +129,7 @@
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
     <Compile Include="infrastructure.app\rules\BugTrackerUrlMissingSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightWordCountMinimum4Requirement.cs" />
-    <Compile Include="infrastructure.app\rules\DoscUrlMissingSuggestion.cs" />
+    <Compile Include="infrastructure.app\rules\DocsUrlMissingSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\InstallAutomationScriptNamedCorrectlyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlDoesNotMatchProjectUrlGuideline.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlMissingGuideline.cs" />
