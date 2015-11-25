@@ -29,7 +29,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
     public class CheckForSubmittedPackagesTask : ITask
     {
         private readonly IConfigurationSettings _configurationSettings;
-        private const double TIMER_INTERVAL = 300000;
+        private const double TIMER_INTERVAL = 120000;
         private const string SERVICE_ENDPOINT = "/api/v2/submitted/";
         private readonly Timer _timer = new Timer();
         private IDisposable _subscription;
