@@ -21,7 +21,6 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsDoNotContainChocoCommandsRequirement : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Requirement;
         private const string VALIDATION_FAILURE_MESSAGE =
             @"Your script contains a choco command. This is not allowed. Perhaps you should take a dependency on a package? This could also flag a comment or message with the following words:
   * choco install
@@ -30,7 +29,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
   ";
 
         public ScriptsDoNotContainChocoCommandsRequirement()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

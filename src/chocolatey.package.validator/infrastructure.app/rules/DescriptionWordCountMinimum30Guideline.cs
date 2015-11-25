@@ -21,11 +21,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class DescriptionWordCountMinimum30Guideline : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Guideline;
         private const string VALIDATION_FAILURE_MESSAGE = "Description should be sufficient to explain the software. Please fill in the description with more information about the software. Feel free to use use markdown.";
 
         public DescriptionWordCountMinimum30Guideline()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

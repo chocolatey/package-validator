@@ -20,11 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class SummaryNotEmptyGuideline : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Guideline;
         private const string VALIDATION_FAILURE_MESSAGE = "Summary (summary) is a short explanation of the software. Please include summary in the nuspec.";
 
         public SummaryNotEmptyGuideline()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

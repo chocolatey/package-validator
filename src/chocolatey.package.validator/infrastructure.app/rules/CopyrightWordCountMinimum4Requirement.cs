@@ -21,11 +21,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class CopyrightWordCountMinimum4Requirement : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Requirement;
         private const string VALIDATION_FAILURE_MESSAGE = "If you are going to fill in copyright, please use more than 4 characters.";
 
         public CopyrightWordCountMinimum4Requirement()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

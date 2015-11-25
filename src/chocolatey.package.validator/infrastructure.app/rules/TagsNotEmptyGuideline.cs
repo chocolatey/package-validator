@@ -20,11 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class TagsNotEmptyGuideline : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Guideline;
         private const string VALIDATION_FAILURE_MESSAGE = "Tags (tags) are space separated values for referencing categories for software. Please include tags in the nuspec as space separated values.";
 
         public TagsNotEmptyGuideline()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

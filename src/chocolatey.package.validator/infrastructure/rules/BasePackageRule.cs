@@ -22,10 +22,27 @@ namespace chocolatey.package.validator.infrastructure.rules
         public ValidationLevelType ValidationLevel { get; private set; }
         public string ValidationFailureMessage { get; private set; }
 
-        protected BasePackageRule(ValidationLevelType validationLevel, string validationFailureMessage)
+        protected BasePackageRule(string validationFailureMessage)
         {
-            ValidationLevel = validationLevel;
             ValidationFailureMessage = validationFailureMessage;
+            set_validation_level();
+        }
+
+        private void set_validation_level()
+        {
+            var name = this.GetType().Name.to_lower();
+            if (name.EndsWith("requirement"))
+            {
+                ValidationLevel = ValidationLevelType.Requirement;
+            }
+            else if (name.EndsWith("suggestion"))
+            {
+                ValidationLevel = ValidationLevelType.Suggestion;
+            }
+            else
+            {
+                ValidationLevel = ValidationLevelType.Guideline;
+            }
         }
 
         public PackageValidationResult validate(IPackage package)

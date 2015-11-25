@@ -20,11 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ProjectUrlRequirement : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Requirement;
         private const string VALIDATION_FAILURE_MESSAGE = "ProjectUrl (projectUrl) in the nuspec file is required.";
 
         public ProjectUrlRequirement()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

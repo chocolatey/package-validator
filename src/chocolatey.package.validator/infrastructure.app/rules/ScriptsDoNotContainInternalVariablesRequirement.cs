@@ -21,7 +21,6 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsDoNotContainInternalVariablesRequirement : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Requirement;
         private const string VALIDATION_FAILURE_MESSAGE =
             @"You have used one or more internal variables in your automation scripts. This is not allowed (even if you are declaring the same variable name in your package). Please find a different way to get what you need (or rename the variable). These are the unallowed variable names:
   * $nugetChocolateyPath
@@ -32,7 +31,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
   * $nugetExe";
 
         public ScriptsDoNotContainInternalVariablesRequirement()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

@@ -20,11 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class DescriptionRequirement : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Requirement;
         private const string VALIDATION_FAILURE_MESSAGE = "Description (description) in the nuspec file is required.";
 
         public DescriptionRequirement()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

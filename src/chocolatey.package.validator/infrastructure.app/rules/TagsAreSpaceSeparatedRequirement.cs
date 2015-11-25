@@ -20,11 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class TagsAreSpaceSeparatedRequirement : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Requirement;
         private const string VALIDATION_FAILURE_MESSAGE = "Tags (tags) are space separated values for referencing categories for software. Please don't use comma to separate tags.";
 
         public TagsAreSpaceSeparatedRequirement()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 

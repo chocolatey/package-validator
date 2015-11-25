@@ -21,12 +21,11 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class PortablePackageScriptsDoNotUseProgramFilesRequirement : BasePackageRule
     {
-        private const ValidationLevelType VALIDATION_LEVEL = ValidationLevelType.Requirement;
         private const string VALIDATION_FAILURE_MESSAGE =
             @"Your portable package is using Program Files or some derivative. This is not allowed as portable packages should not attempt to install into locations that require administrative access. Please let the package download into the package folder or use Get-BinRoot to find a suitable location for portables.";
 
         public PortablePackageScriptsDoNotUseProgramFilesRequirement()
-            : base(VALIDATION_LEVEL, VALIDATION_FAILURE_MESSAGE)
+            : base(VALIDATION_FAILURE_MESSAGE)
         {
         }
 
