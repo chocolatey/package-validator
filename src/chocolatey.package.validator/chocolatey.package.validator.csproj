@@ -129,7 +129,8 @@
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
     <Compile Include="infrastructure.app\rules\BugTrackerUrlMissingSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightWordCountMinimum4Requirement.cs" />
-    <Compile Include="infrastructure.app\rules\DoscUrlMissingSuggestion.cs" />
+    <Compile Include="infrastructure.app\rules\DocsUrlMissingSuggestion.cs" />
+    <Compile Include="infrastructure.app\rules\IconUrlMissingGuideline.cs" />
     <Compile Include="infrastructure.app\rules\InstallAutomationScriptNamedCorrectlyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlDoesNotMatchProjectUrlGuideline.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlMissingGuideline.cs" />
@@ -141,6 +142,7 @@
     <Compile Include="infrastructure.app\rules\PortablePackageScriptsDoNotUseProgramFilesRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ProjectSourceUrlDoesNotMatchProjectUrlGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ProjectSourceUrlMissingSuggestion.cs" />
+    <Compile Include="infrastructure.app\rules\ReleaseNotesNotEmptyGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainChocoCommandsRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainInternalVariablesRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionRequirement.cs" />
