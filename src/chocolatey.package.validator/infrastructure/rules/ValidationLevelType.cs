@@ -18,6 +18,7 @@ namespace chocolatey.package.validator.infrastructure.rules
     public enum ValidationLevelType
     {
         Note,
+        Suggestion,
         Guideline,
         Requirement,
     }
