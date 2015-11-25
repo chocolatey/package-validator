@@ -141,6 +141,7 @@
     <Compile Include="infrastructure.app\rules\PortablePackageScriptsDoNotUseProgramFilesRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ProjectSourceUrlDoesNotMatchProjectUrlGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ProjectSourceUrlMissingSuggestion.cs" />
+    <Compile Include="infrastructure.app\rules\ReleaseNotesNotEmptyGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainChocoCommandsRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainInternalVariablesRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionRequirement.cs" />
