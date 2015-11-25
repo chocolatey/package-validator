@@ -20,11 +20,10 @@ namespace chocolatey.package.validator.infrastructure.rules
     public abstract class BasePackageRule : IPackageRule
     {
         public ValidationLevelType ValidationLevel { get; private set; }
-        public string ValidationFailureMessage { get; private set; }
+        public abstract string ValidationFailureMessage { get; }
 
-        protected BasePackageRule(string validationFailureMessage)
+        protected BasePackageRule()
         {
-            ValidationFailureMessage = validationFailureMessage;
             set_validation_level();
         }
 

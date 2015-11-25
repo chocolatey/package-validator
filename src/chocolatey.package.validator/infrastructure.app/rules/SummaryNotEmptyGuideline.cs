@@ -20,12 +20,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class SummaryNotEmptyGuideline : BasePackageRule
     {
-        private const string VALIDATION_FAILURE_MESSAGE = "Summary (summary) is a short explanation of the software. Please include summary in the nuspec.";
-
-        public SummaryNotEmptyGuideline()
-            : base(VALIDATION_FAILURE_MESSAGE)
-        {
-        }
+        public override string ValidationFailureMessage { get { return "Summary (summary) is a short explanation of the software. Please include summary in the nuspec."; } }
 
         protected override PackageValidationOutput is_valid(IPackage package)
         {

@@ -21,12 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class DescriptionWordCountMinimum30Guideline : BasePackageRule
     {
-        private const string VALIDATION_FAILURE_MESSAGE = "Description should be sufficient to explain the software. Please fill in the description with more information about the software. Feel free to use use markdown.";
-
-        public DescriptionWordCountMinimum30Guideline()
-            : base(VALIDATION_FAILURE_MESSAGE)
-        {
-        }
+        public override string ValidationFailureMessage { get { return "Description should be sufficient to explain the software. Please fill in the description with more information about the software. Feel free to use use markdown."; } }
 
         protected override PackageValidationOutput is_valid(IPackage package)
         {
