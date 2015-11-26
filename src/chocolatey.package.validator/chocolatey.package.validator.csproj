@@ -153,6 +153,7 @@
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainImportOfChocolateyModuleRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightWordCountMinimum4Requirement.cs" />
     <Compile Include="infrastructure.app\rules\IconUrlMissingGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\IconUrlNotSameDomainAsProjectUrlDomainOrRawGitGuideline.cs" />
     <Compile Include="infrastructure.app\rules\InstallAutomationScriptNamedCorrectlyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseSourceforgeGuideline.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsWithGetBinRootShouldHaveUninstallScriptGuideline.cs" />
