@@ -130,6 +130,7 @@
     <Compile Include="infrastructure.app\rules\CopyrightWordCountMinimum4Requirement.cs" />
     <Compile Include="infrastructure.app\rules\IconUrlMissingGuideline.cs" />
     <Compile Include="infrastructure.app\rules\InstallAutomationScriptNamedCorrectlyRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\InstallScriptsWithInstallBinFileHaveUninstallScriptGuideline.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsWithUndoableActionsHaveUninstallScriptGuideline.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlDoesNotMatchProjectUrlGuideline.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlMissingGuideline.cs" />
