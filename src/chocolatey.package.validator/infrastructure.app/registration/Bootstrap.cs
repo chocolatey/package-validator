@@ -60,7 +60,7 @@ namespace chocolatey.package.validator.infrastructure.app.registration
             MailSettingsSmtpFolderConverter.convert_relative_to_absolute_pickup_directory_location();
 
             // todo: move this out to a config value
-            _timer.Value.Interval = TimeSpan.FromMinutes(5).TotalMilliseconds;
+            _timer.Value.Interval = TimeSpan.FromMinutes(15).TotalMilliseconds;
             _timer.Value.Elapsed += check_and_send_error_summary;
             _timer.Value.Start();
         }
