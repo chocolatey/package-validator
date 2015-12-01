@@ -17,9 +17,9 @@ namespace chocolatey.package.validator.infrastructure.app.messaging
 {
     using infrastructure.messaging;
 
-    public class SubmitPackageMessage : IMessage
+    public class ValidatePackageMessage : IMessage
     {
-        public SubmitPackageMessage(string packageId, string packageVersion)
+        public ValidatePackageMessage(string packageId, string packageVersion)
         {
             PackageId = packageId;
             PackageVersion = packageVersion;

@@ -39,8 +39,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
         public void initialize()
         {
-            _subscription = EventManager.subscribe<SubmitPackageMessage>(download_package, null, null);
-            this.Log().Info(() => "{0} is now ready and waiting for {1}".format_with(GetType().Name, typeof(SubmitPackageMessage).Name));
+            _subscription = EventManager.subscribe<ValidatePackageMessage>(download_package, null, null);
+            this.Log().Info(() => "{0} is now ready and waiting for {1}".format_with(GetType().Name, typeof(ValidatePackageMessage).Name));
         }
 
         public void shutdown()
@@ -48,7 +48,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (_subscription != null) _subscription.Dispose();
         }
 
-        private void download_package(SubmitPackageMessage message)
+        private void download_package(ValidatePackageMessage message)
         {
             var tempInstallLocation = _fileSystem.combine_paths(_fileSystem.get_temp_path(), ApplicationParameters.Name, "TempInstall_" + DateTime.Now.ToString("yyyyMMdd_HHmmss_ffff"));
             _fileSystem.create_directory_if_not_exists(tempInstallLocation);

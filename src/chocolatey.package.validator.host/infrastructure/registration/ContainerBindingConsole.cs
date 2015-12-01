@@ -42,7 +42,7 @@ namespace chocolatey.package.validator.host.infrastructure.registration
                     var list = new List<ITask>
                     {
                         new StartupTask(),
-                        new CheckForSubmittedPackagesTask(container.GetInstance<IConfigurationSettings>()),
+                        new CheckForPackagesTask(container.GetInstance<IConfigurationSettings>()),
                         new DownloadSubmittedPackageTask(container.GetInstance<IConfigurationSettings>(), container.GetInstance<INuGetService>(), container.GetInstance<IFileSystem>()),
                         new ValidatePackageTask(container.GetInstance<IPackageValidationService>()),
                         new PrepareValidationResultsTask(),

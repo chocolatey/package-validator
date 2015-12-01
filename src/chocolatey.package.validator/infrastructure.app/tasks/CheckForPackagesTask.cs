@@ -19,14 +19,14 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
     using System.Collections.Generic;
     using System.Linq;
     using System.Timers;
+    using NuGetGallery;
     using configuration;
     using infrastructure.messaging;
     using infrastructure.tasks;
     using messaging;
     using services;
-    using webservices;
 
-    public class CheckForSubmittedPackagesTask : ITask
+    public class CheckForPackagesTask : ITask
     {
         private readonly IConfigurationSettings _configurationSettings;
         private const double TIMER_INTERVAL = 120000;
@@ -34,7 +34,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
         private readonly Timer _timer = new Timer();
         private IDisposable _subscription;
 
-        public CheckForSubmittedPackagesTask(IConfigurationSettings configurationSettings)
+        public CheckForPackagesTask(IConfigurationSettings configurationSettings)
         {
             _configurationSettings = configurationSettings;
         }
@@ -45,7 +45,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             _timer.Interval = TIMER_INTERVAL;
             _timer.Elapsed += timer_elapsed;
             _timer.Start();
-            this.Log().Info(() => "{0} will check for new package submissions every {1} minutes".format_with(GetType().Name, TIMER_INTERVAL / 60000));
+            this.Log().Info(() => "{0} will check for packages to validate every {1} minutes".format_with(GetType().Name, TIMER_INTERVAL / 60000));
         }
 
         public void shutdown()
@@ -63,25 +63,33 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
         {
             _timer.Stop();
 
-            this.Log().Info(() => "Checking for submitted packages.");
+            this.Log().Info(() => "Checking for packages to validate.");
 
             var submittedPackagesUri = NuGetService.get_service_endpoint_url(_configurationSettings.PackagesUrl, SERVICE_ENDPOINT);
 
-            var service = new FeedContext_x0060_1(submittedPackagesUri);
+            var service = new FeedContext_x0060_1(submittedPackagesUri)
+            {
+                Timeout = 70
+            };
 
+            var cacheTimeout = DateTime.UtcNow.AddMinutes(-31);
             // this only returns 40 results at a time but at least we'll have something to start with
             //todo: This is going to only check where the flag automated validation is not true.
-            IList<V2FeedPackage> submittedPackages = service.Packages.Where(p => p.PackageTestResultStatus == null || p.PackageTestResultStatus == "Pending" || p.PackageTestResultStatus == "Unknown").or_empty_list_if_null().ToList();
+            IQueryable<V2FeedPackage> packageQuery =
+                service.Packages.Where(p => p.Created < cacheTimeout && (p.PackageTestResultStatus == null || p.PackageTestResultStatus == "Pending" || p.PackageTestResultStatus == "Unknown"));
 
-            this.Log().Info("Pulled {0} packages in submitted status for review.".format_with(submittedPackages.Count));
+            // let's specifically reduce the call to 30 results so we get back results faster from Chocolatey.org
+            IList<V2FeedPackage> packagesToValidate = packageQuery.Take(30).ToList();
+            if (packagesToValidate.Count == 0) this.Log().Info("No packages to validate.");
+            else this.Log().Info("Pulled in {0} packages for validation.".format_with(packagesToValidate.Count));
 
-            foreach (var package in submittedPackages)
+            foreach (var package in packagesToValidate.or_empty_list_if_null())
             {
-                this.Log().Info("{0} found in submitted state.".format_with(package.Title));
-                EventManager.publish(new SubmitPackageMessage(package.Id, package.Version));
+                this.Log().Info("{0} v{1} found for review.".format_with(package.Title, package.Version));
+                EventManager.publish(new ValidatePackageMessage(package.Id, package.Version));
             }
 
-            this.Log().Info(() => "Finished checking for submitted packages.");
+            this.Log().Info(() => "Finished checking for packages to validate. Sleeping for {0} minutes.".format_with(TIMER_INTERVAL / 60000));
 
             _timer.Start();
         }

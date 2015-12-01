@@ -9,8 +9,8 @@
 //------------------------------------------------------------------------------
 
 // Original file name: ChocolateySubmittedFeedService.cs
-// Generation date: 11/4/2015 11:03:29 PM
-namespace chocolatey.package.validator.infrastructure.app.webservices
+// Generation date: 11/30/2015 10:10:52 PM
+namespace NuGetGallery
 {
     
     /// <summary>
@@ -82,10 +82,11 @@ namespace chocolatey.package.validator.infrastructure.app.webservices
         /// <param name="lastUpdated">Initial value of LastUpdated.</param>
         /// <param name="published">Initial value of Published.</param>
         /// <param name="packageSize">Initial value of PackageSize.</param>
+        /// <param name="isApproved">Initial value of IsApproved.</param>
         /// <param name="requireLicenseAcceptance">Initial value of RequireLicenseAcceptance.</param>
         /// <param name="versionDownloadCount">Initial value of VersionDownloadCount.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public static V2FeedPackage CreateV2FeedPackage(string ID, string version, global::System.DateTime created, int downloadCount, bool isLatestVersion, bool isAbsoluteLatestVersion, bool isPrerelease, global::System.DateTime lastUpdated, global::System.DateTime published, long packageSize, bool requireLicenseAcceptance, int versionDownloadCount)
+        public static V2FeedPackage CreateV2FeedPackage(string ID, string version, global::System.DateTime created, int downloadCount, bool isLatestVersion, bool isAbsoluteLatestVersion, bool isPrerelease, global::System.DateTime lastUpdated, global::System.DateTime published, long packageSize, bool isApproved, bool requireLicenseAcceptance, int versionDownloadCount)
         {
             V2FeedPackage v2FeedPackage = new V2FeedPackage();
             v2FeedPackage.Id = ID;
@@ -98,6 +99,7 @@ namespace chocolatey.package.validator.infrastructure.app.webservices
             v2FeedPackage.LastUpdated = lastUpdated;
             v2FeedPackage.Published = published;
             v2FeedPackage.PackageSize = packageSize;
+            v2FeedPackage.IsApproved = isApproved;
             v2FeedPackage.RequireLicenseAcceptance = requireLicenseAcceptance;
             v2FeedPackage.VersionDownloadCount = versionDownloadCount;
             return v2FeedPackage;
@@ -691,6 +693,27 @@ namespace chocolatey.package.validator.infrastructure.app.webservices
         partial void OnReleaseNotesChanging(string value);
         partial void OnReleaseNotesChanged();
         /// <summary>
+        /// There are no comments for Property IsApproved in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public bool IsApproved
+        {
+            get
+            {
+                return this._IsApproved;
+            }
+            set
+            {
+                this.OnIsApprovedChanging(value);
+                this._IsApproved = value;
+                this.OnIsApprovedChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private bool _IsApproved;
+        partial void OnIsApprovedChanging(bool value);
+        partial void OnIsApprovedChanged();
+        /// <summary>
         /// There are no comments for Property PackageStatus in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -753,6 +776,69 @@ namespace chocolatey.package.validator.infrastructure.app.webservices
         private string _PackageTestResultStatus;
         partial void OnPackageTestResultStatusChanging(string value);
         partial void OnPackageTestResultStatusChanged();
+        /// <summary>
+        /// There are no comments for Property PackageReviewedDate in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Nullable<global::System.DateTime> PackageReviewedDate
+        {
+            get
+            {
+                return this._PackageReviewedDate;
+            }
+            set
+            {
+                this.OnPackageReviewedDateChanging(value);
+                this._PackageReviewedDate = value;
+                this.OnPackageReviewedDateChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Nullable<global::System.DateTime> _PackageReviewedDate;
+        partial void OnPackageReviewedDateChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnPackageReviewedDateChanged();
+        /// <summary>
+        /// There are no comments for Property PackageApprovedDate in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Nullable<global::System.DateTime> PackageApprovedDate
+        {
+            get
+            {
+                return this._PackageApprovedDate;
+            }
+            set
+            {
+                this.OnPackageApprovedDateChanging(value);
+                this._PackageApprovedDate = value;
+                this.OnPackageApprovedDateChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Nullable<global::System.DateTime> _PackageApprovedDate;
+        partial void OnPackageApprovedDateChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnPackageApprovedDateChanged();
+        /// <summary>
+        /// There are no comments for Property PackageReviewer in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string PackageReviewer
+        {
+            get
+            {
+                return this._PackageReviewer;
+            }
+            set
+            {
+                this.OnPackageReviewerChanging(value);
+                this._PackageReviewer = value;
+                this.OnPackageReviewerChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _PackageReviewer;
+        partial void OnPackageReviewerChanging(string value);
+        partial void OnPackageReviewerChanged();
         /// <summary>
         /// There are no comments for Property RequireLicenseAcceptance in the schema.
         /// </summary>
