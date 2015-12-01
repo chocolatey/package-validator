@@ -15,6 +15,7 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
+    using System.Linq;
     using System.Text.RegularExpressions;
     using infrastructure.rules;
     using NuGet;
@@ -23,7 +24,40 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "The package IconUrl should ideally come from the same domain name as the Project Url, or hosted on the RawGit CDN.  **NOTE:** For further information on how to setup your icon with a RawGit CDN URL, please visit this [article](https://github.com/chocolatey/choco/wiki/CreatePackages#package-icon-guidelines)."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public string get_domain_from_host(string host)
+        {
+            // Use Regular Expression to extract the Domain Name, from the Uri Host
+            // Taken from example shown here http://stackoverflow.com/a/17091145/671491
+            var match = Regex.Match(host, @"(([a-zA-Z]{1})|([a-zA-Z]{1}[a-zA-Z]{1})|([a-zA-Z]{1}[0-9]{1})|([0-9]{1}[a-zA-Z]{1})|([a-zA-Z0-9][a-zA-Z0-9-_]{1,61}[a-zA-Z0-9]))\.([a-zA-Z]{2,6}|[a-zA-Z0-9-]{2,30}\.[a-zA-Z]{2,3})");
+            return match.Groups[1].Success ? match.Groups[1].Value : string.Empty;
+        }
+
+        public bool is_icon_from_same_domain_as_project_or_rawgit(string iconHost, string projectHost)
+        {
+            if (iconHost == "cdn.rawgit.com") return true;
+
+            if (iconHost == projectHost) return true;
+
+            if (projectHost.EndsWith(iconHost)) return true;
+
+            if (iconHost.EndsWith(projectHost)) return true;
+
+            // let's start taking potential subdomains from the icon host, but only do this if parts > 2
+            var parts = iconHost.Split('.').ToList();
+
+            if (parts.Count > 2)
+            {
+                parts.RemoveAt(0);
+
+                var strippedIconHost = string.Join(".", parts);
+
+                if (projectHost.EndsWith(strippedIconHost)) return true;
+            }
+
+            return false;
+        }
+
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             if (package.IconUrl == null) return true;
 
@@ -35,15 +69,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
             var projectUrlDomain = this.get_domain_from_host(package.ProjectUrl.Host);
 
-            return iconUrlDomain == projectUrlDomain || iconUrlDomain == "rawgit.com";
-        }
-
-        private string get_domain_from_host(string host)
-        {
-            // Use Regular Expression to extract the Domain Name, from the Uri Host
-            // Taken from example shown here http://stackoverflow.com/a/17091145/671491
-            var match = Regex.Match(host, "([^.]+\\.[^.]{1,3}(\\.[^.]{1,3})?)$");
-            return match.Groups[1].Success ? match.Groups[1].Value : string.Empty;
+            return is_icon_from_same_domain_as_project_or_rawgit(iconUrlDomain, projectUrlDomain);
         }
     }
 }
