@@ -32,7 +32,11 @@ namespace chocolatey.package.validator.infrastructure.app.rules
   * $nugetExePath
   * $nugetLibPath
   * $chocoInstallVariableName
-  * $nugetExe";
+  * $nugetExe
+  * $extensionsPath
+  * $badLibPath
+  * $ShimGen
+  * $checksumExe";
             }
         }
 
@@ -48,9 +52,12 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
                 var contents = packageFile.GetStream().ReadToEnd().to_lower();
 
-                if (contents.Contains("$nugetChocolateyPath") || contents.Contains("$nugetPath")
-                    || contents.Contains("$nugetExePath") || contents.Contains("$nugetLibPath")
-                    || contents.Contains("$chocoInstallVariableName") || contents.Contains("$nugetExe")) valid = false;
+                if (contents.Contains("$nugetchocolateypath") || contents.Contains("$nugetpath")
+                    || contents.Contains("$nugetexepath") || contents.Contains("$nugetlibpath")
+                    || contents.Contains("$chocoinstallvariablename") || contents.Contains("$nugetexe")
+                    || contents.Contains("$extensionspath") || contents.Contains("$badlibpath")
+                    || contents.Contains("$shimgen") || contents.Contains("$checksumexe")
+                    ) valid = false;
             }
 
             return valid;
