@@ -130,6 +130,7 @@
     <Compile Include="infrastructure.app\rules\CopyrightWordCountMinimum4Requirement.cs" />
     <Compile Include="infrastructure.app\rules\IconUrlMissingGuideline.cs" />
     <Compile Include="infrastructure.app\rules\InstallAutomationScriptNamedCorrectlyRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\InstallScriptsWithUndoableActionsHaveUninstallScriptGuideline.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlDoesNotMatchProjectUrlGuideline.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlMissingGuideline.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlMissingWhenLicenseAcceptanceTrueRequirement.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="infrastructure.app\rules\ReleaseNotesNotEmptyGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsContainTooManyLinesGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainChocoCommandsRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\ScriptsDoNotContainDeprecatedInstallChocolateyDesktopLinkGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainInternalVariablesRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionWordCountMinimum30Guideline.cs" />
