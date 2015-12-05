@@ -19,7 +19,7 @@ namespace chocolatey.package.validator.infrastructure.app.messaging
     using System.Collections.Generic;
     using infrastructure.messaging;
     using infrastructure.rules;
-
+    
     public class PackageValidationResultMessage : IMessage
     {
         public PackageValidationResultMessage(

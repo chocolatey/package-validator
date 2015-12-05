@@ -36,7 +36,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
         public void initialize()
         {
             _subscription = EventManager.subscribe<ImportFilesCompleteMessage>(set_timer, null, null);
-            this.Log().Info(() => "{0} is now ready and waiting for ImportFilesCompleteMessage".format_with(GetType().Name));
+            this.Log().Info(() => "{0} is now ready and waiting for {1}".format_with(GetType().Name, typeof(ImportFilesCompleteMessage).Name));
         }
 
         /// <summary>
@@ -58,7 +58,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
                 }
 
                 this.Log().Info("Still waiting on the following tasks: {0}".format_with(activeTasks.ToString()));
-            } else
+            }
+            else
             {
                 this.Log().Info("Signalling for shutdown... all tasks have completed.");
                 EventManager.publish(new ShutdownMessage());
