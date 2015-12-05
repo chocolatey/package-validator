@@ -118,6 +118,7 @@
     <Compile Include="infrastructure.app\ApplicationFileType.cs" />
     <Compile Include="infrastructure.app\FileInformation.cs" />
     <Compile Include="infrastructure.app\messaging\ImportFilesCompleteMessage.cs" />
+    <Compile Include="infrastructure.app\messaging\FinalPackageValidationResultMessage.cs" />
     <Compile Include="infrastructure.app\messaging\PackageFinishedValidationMessage.cs" />
     <Compile Include="infrastructure.app\messaging\PackageReadyForValidationMessage.cs" />
     <Compile Include="infrastructure.app\messaging\ValidatePackageMessage.cs" />
