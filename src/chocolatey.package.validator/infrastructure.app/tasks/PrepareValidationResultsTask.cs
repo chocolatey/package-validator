@@ -89,13 +89,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             var validationMessages = resultsMessage.ToString();
             if (!string.IsNullOrWhiteSpace(validationMessages))
             {
-                var messageToSend = validationMessages;
-                // send the message
+                EventManager.publish(new FinalPackageValidationResultMessage(message.PackageId, message.PackageVersion, validationMessages, !failedRequirements.Any()));
             }
-
-            //todo if you find any that failed validation, it's time to update the website
-            //create a message for updating the website with the validation set
-            //EventManager.publish(new PackageValidationResultMessage(message.PackageId, message.PackageVersion, validationResults, DateTime.UtcNow));
         }
     }
 }
