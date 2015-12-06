@@ -42,6 +42,10 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.0.10827\lib\NET40\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="NuGet.Core, Version=1.6.30117.9648, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\Nuget-Chocolatey\NuGet.Core.dll</HintPath>
+    </Reference>
     <Reference Include="nunit.framework">
       <HintPath>..\packages\NUnit.2.5.10.11092\lib\nunit.framework.dll</HintPath>
     </Reference>
@@ -78,6 +82,7 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>Properties\SolutionVersion.cs</Link>
     </Compile>
+    <Compile Include="infrastructure.app\IncludesChocolateyDependencyNoteSpecs.cs" />
     <Compile Include="infrastructure\events\context\FakeMessage.cs" />
     <Compile Include="infrastructure\events\context\FakeSubscriber.cs" />
     <Compile Include="infrastructure\events\EventSubscriptionManagerSpecs.cs" />
