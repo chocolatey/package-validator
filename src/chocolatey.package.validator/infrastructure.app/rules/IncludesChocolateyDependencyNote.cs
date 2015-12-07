@@ -23,14 +23,9 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Package takes a dependency on Chocolatey, which should only be required if package uses a specific Chocolatey feature.  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/ChocolateyDependency) for further information and guidance."; } }
 
-        public bool inspect_dependencies_for_chocolatey(IPackage package)
-        {
-            return package.DependencySets.All(dependencySet => dependencySet.Dependencies.All(dependency => dependency.Id.ToLower() != "chocolatey"));
-        }
-
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            return inspect_dependencies_for_chocolatey(package);
+            return package.DependencySets.All(dependencySet => dependencySet.Dependencies.All(dependency => dependency.Id.ToLower() != "chocolatey"));
         }
     }
 }
