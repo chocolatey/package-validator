@@ -168,6 +168,7 @@
     <Compile Include="infrastructure.app\rules\TitleNotSameAsPackageIdGuideline.cs" />
     <Compile Include="infrastructure.app\rules\TooManyInstallationScriptsGuideline.cs" />
     <Compile Include="infrastructure.app\rules\UninstallAutomationScriptNamedCorrectlyRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\UsePngOrSvgForIconSuggestion.cs" />
     <Compile Include="infrastructure.app\services\IPackageValidationService.cs" />
     <Compile Include="infrastructure.app\services\PackageValidationService.cs" />
     <Compile Include="infrastructure.app\tasks\PrepareValidationResultsTask.cs" />
