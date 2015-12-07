@@ -115,17 +115,6 @@ namespace chocolatey.package.validator.tests.infrastructure.app
     {
         private PackageValidationOutput result;
 
-        public override void Context()
-        {
-            base.Context();
-            var packageDependencies = new List<PackageDependency>
-            {
-                chocolateyPackageDependency
-            };
-            var packageDependencySet = new PackageDependencySet(new FrameworkName(".NETFramework, Version = 4.0"), packageDependencies);
-            //package.Setup(p => p.DependencySets).Returns(new List<PackageDependencySet> { packageDependencySet });
-        }
-
         public override void Because()
         {
             result = rule.is_valid(package.Object);
