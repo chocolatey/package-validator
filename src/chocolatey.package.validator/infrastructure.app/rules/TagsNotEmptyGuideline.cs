@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Tags (tags) are space separated values for referencing categories for software. Please include tags in the nuspec as space separated values."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !string.IsNullOrWhiteSpace(package.Tags);
         }

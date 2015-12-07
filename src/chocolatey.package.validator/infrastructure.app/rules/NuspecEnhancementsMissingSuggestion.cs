@@ -28,7 +28,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         }
         }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !string.IsNullOrWhiteSpace(package.DocsUrl.to_string())
                 || !string.IsNullOrWhiteSpace(package.BugTrackerUrl.to_string()) 

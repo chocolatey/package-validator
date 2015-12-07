@@ -28,7 +28,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             }
         }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return package.IconUrl.to_string().EndsWith(".png") || package.IconUrl.to_string().EndsWith(".svg");
         }

@@ -27,7 +27,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
   * choco upgrade
   "; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 

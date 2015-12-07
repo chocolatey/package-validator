@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "The iconUrl should be added if there is one. Please correct this in the nuspec, if applicable.  **NOTE:** We really want to see the IconUrl being used, and some moderators want to see it being used properly, using the rawgit CDN. For further information on how to setup your icon with a Rawgit CDN URL, please visit this [article](https://github.com/chocolatey/choco/wiki/CreatePackages#package-icon-guidelines)."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return package.IconUrl != null;
         }

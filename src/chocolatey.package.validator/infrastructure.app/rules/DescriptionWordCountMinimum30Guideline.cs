@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Description should be sufficient to explain the software. Please fill in the description with more information about the software. Feel free to use use markdown."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return package.Description.to_string().Count() > 30;
         }

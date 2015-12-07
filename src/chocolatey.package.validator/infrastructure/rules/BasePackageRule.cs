@@ -61,6 +61,6 @@ namespace chocolatey.package.validator.infrastructure.rules
                 );
         }
 
-        protected abstract PackageValidationOutput is_valid(IPackage package);
+        public abstract PackageValidationOutput is_valid(IPackage package);
     }
 }

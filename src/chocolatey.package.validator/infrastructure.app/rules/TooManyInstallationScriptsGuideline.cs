@@ -24,7 +24,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "There are more than 3 installation scripts in this package, which is not recommended.  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/MoreThan3InstallationScripts) for further information and guidance."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 

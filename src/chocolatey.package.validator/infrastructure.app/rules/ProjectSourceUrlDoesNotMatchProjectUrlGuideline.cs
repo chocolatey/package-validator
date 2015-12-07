@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "ProjectUrl and ProjectSourceUrl are typically different, but not always. Please ensure that projectSourceUrl is pointing to software source code or remove this field from the nuspec."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !package.ProjectUrl.to_string().is_equal_to(package.ProjectSourceUrl.to_string());
         }

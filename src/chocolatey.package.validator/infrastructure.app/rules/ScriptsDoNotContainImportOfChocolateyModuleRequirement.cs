@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return @"Directly importing the Chocolatey PowerShell Module is not allowed in automation scripts. Please remove it. This can flag also based on the use of the word 'chocolateyInstaller.psm1' in comments."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 

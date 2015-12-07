@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Installation Scripts should avoid using Get-WmiObject for finding what packages are installed.  Please see [here](https://github.com/chocolatey/package-validator/wiki/DontUseGetWmiObjectForFindingInstalledPackages) for further information and guidance."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 

@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Chocolatey Packages are meant to be thin wrappers on top of the native installation packages, as a result, there is an expectation that the installation scripts will be less than 100 lines.  Can this script be simplified?"; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 

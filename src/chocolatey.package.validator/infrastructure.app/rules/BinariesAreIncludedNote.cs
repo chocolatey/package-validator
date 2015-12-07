@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Binary files (.exe) have been included. The reviewer will ensure you have distribution rights."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !package.GetFiles().or_empty_list_if_null().Any(f => f.Path.to_lower().EndsWith(".exe"));
         }

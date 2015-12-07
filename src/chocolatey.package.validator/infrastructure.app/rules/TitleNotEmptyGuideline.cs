@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Title (title) is missing. Please consider including title in the nuspec."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !string.IsNullOrWhiteSpace(package.Title.to_string());
         }

@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return @"The install script should be named chocolateyInstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var files = package.GetFiles().or_empty_list_if_null();
             var hasBadInstallScripts = files.Any(f => f.Path.to_lower().Contains("install.ps1")) && !files.Any(f => f.Path.to_lower().Contains("chocolateyinstall.ps1"));

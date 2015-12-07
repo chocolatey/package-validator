@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "If you set requireLicenseAcceptance to true, you must also ensure licenseUrl is properly added to the nuspec as well. Please correct this in the nuspec, if applicable."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = package.RequireLicenseAcceptance && package.LicenseUrl == null;
 

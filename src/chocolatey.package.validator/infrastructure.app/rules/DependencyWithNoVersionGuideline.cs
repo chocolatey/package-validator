@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Package contains dependencies with no specified version, which is not recommended..  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/DependencyWithNoVersion) for further information and guidance."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !package.DependencySets.Any(dependencySet => dependencySet.Dependencies.Any(dependency => dependency.VersionSpec.MaxVersion == null || dependency.VersionSpec.MinVersion == null));
         }

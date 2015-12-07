@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Title (title) matches id exactly. Please consider using something slightly more descriptive for the title in the nuspec."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !package.Id.to_string().is_equal_to(package.Title.to_string());
         }

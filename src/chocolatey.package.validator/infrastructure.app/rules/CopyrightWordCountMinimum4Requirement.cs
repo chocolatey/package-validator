@@ -22,8 +22,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class CopyrightWordCountMinimum4Requirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return "If you are going to fill in copyright, please use more than 4 characters."; } }
-        
-        protected override PackageValidationOutput is_valid(IPackage package)
+
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             if (string.IsNullOrWhiteSpace(package.Copyright)) return true;
 

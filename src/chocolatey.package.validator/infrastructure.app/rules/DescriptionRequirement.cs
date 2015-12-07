@@ -21,8 +21,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class DescriptionRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return "Description (description) in the nuspec file is required."; } }
-        
-        protected override PackageValidationOutput is_valid(IPackage package)
+
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !string.IsNullOrWhiteSpace(package.Description);
         }

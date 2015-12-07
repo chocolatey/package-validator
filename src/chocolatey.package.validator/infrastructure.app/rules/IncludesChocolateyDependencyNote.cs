@@ -28,7 +28,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             return package.DependencySets.All(dependencySet => dependencySet.Dependencies.All(dependency => dependency.Id.ToLower() != "chocolatey"));
         }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return inspect_dependencies_for_chocolatey(package);
         }

@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return @"You've packaged either a .git, .hg, or .svn folder. Please remove it from the package."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var files = package.GetFiles().or_empty_list_if_null();
             return !files.Any(

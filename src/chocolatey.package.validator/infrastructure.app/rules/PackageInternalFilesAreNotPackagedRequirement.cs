@@ -28,7 +28,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
   * *.rels
 "; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var files = package.GetFiles().or_empty_list_if_null();
             return !files.Any(

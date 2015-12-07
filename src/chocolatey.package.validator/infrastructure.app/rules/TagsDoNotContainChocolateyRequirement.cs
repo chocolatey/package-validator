@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "Tags (tags) should not contain chocolatey. Please remove that."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             if (string.IsNullOrWhiteSpace(package.Tags)) return true;
             if (package.Id.to_lower().Contains("chocolatey")) return true;

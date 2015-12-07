@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
   * Start-Process
   ";} }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 

@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "The licenseUrl should not usually be an exact match to softwareUrl. Please correct this in the nuspec, if applicable."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             if (package.LicenseUrl == null) return true;
 

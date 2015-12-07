@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return "The nuspec has been enhanced to allow you to put in packageSourceUrl, pointing to the url where this package source resides. Consider adding it to the nuspec."; } }
 
-        protected override PackageValidationOutput is_valid(IPackage package)
+        public override PackageValidationOutput is_valid(IPackage package)
         {
             return !string.IsNullOrWhiteSpace(package.PackageSourceUrl.to_string());
         }
