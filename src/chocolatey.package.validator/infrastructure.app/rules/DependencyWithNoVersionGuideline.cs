@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            return !package.DependencySets.Any(dependencySet => dependencySet.Dependencies.Any(dependency => dependency.VersionSpec.MaxVersion == null || dependency.VersionSpec.MinVersion == null));
+            return !package.DependencySets.Any(dependencySet => dependencySet.Dependencies.Any(dependency => dependency.VersionSpec == null || dependency.VersionSpec.MaxVersion == null || dependency.VersionSpec.MinVersion == null));
         }
     }
 }
