@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name: ChocolateySubmittedFeedService.cs
-// Generation date: 11/30/2015 10:10:52 PM
+// Generation date: 12/8/2015 1:13:34 PM
 namespace NuGetGallery
 {
     
@@ -776,6 +776,69 @@ namespace NuGetGallery
         private string _PackageTestResultStatus;
         partial void OnPackageTestResultStatusChanging(string value);
         partial void OnPackageTestResultStatusChanged();
+        /// <summary>
+        /// There are no comments for Property PackageTestResultStatusDate in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Nullable<global::System.DateTime> PackageTestResultStatusDate
+        {
+            get
+            {
+                return this._PackageTestResultStatusDate;
+            }
+            set
+            {
+                this.OnPackageTestResultStatusDateChanging(value);
+                this._PackageTestResultStatusDate = value;
+                this.OnPackageTestResultStatusDateChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Nullable<global::System.DateTime> _PackageTestResultStatusDate;
+        partial void OnPackageTestResultStatusDateChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnPackageTestResultStatusDateChanged();
+        /// <summary>
+        /// There are no comments for Property PackageValidationResultStatus in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string PackageValidationResultStatus
+        {
+            get
+            {
+                return this._PackageValidationResultStatus;
+            }
+            set
+            {
+                this.OnPackageValidationResultStatusChanging(value);
+                this._PackageValidationResultStatus = value;
+                this.OnPackageValidationResultStatusChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _PackageValidationResultStatus;
+        partial void OnPackageValidationResultStatusChanging(string value);
+        partial void OnPackageValidationResultStatusChanged();
+        /// <summary>
+        /// There are no comments for Property PackageValidationResultDate in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Nullable<global::System.DateTime> PackageValidationResultDate
+        {
+            get
+            {
+                return this._PackageValidationResultDate;
+            }
+            set
+            {
+                this.OnPackageValidationResultDateChanging(value);
+                this._PackageValidationResultDate = value;
+                this.OnPackageValidationResultDateChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Nullable<global::System.DateTime> _PackageValidationResultDate;
+        partial void OnPackageValidationResultDateChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnPackageValidationResultDateChanged();
         /// <summary>
         /// There are no comments for Property PackageReviewedDate in the schema.
         /// </summary>
