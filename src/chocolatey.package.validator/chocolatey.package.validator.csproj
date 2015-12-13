@@ -130,6 +130,7 @@
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
     <Compile Include="infrastructure.app\rules\DependencyWithNoVersionGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackagesShouldHaveDependencyRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\DeprecatedPackageTitleGuideline.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseCreateShortcutNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseGetWmiObjectSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\IncludesChocolateyDependencyNote.cs" />
