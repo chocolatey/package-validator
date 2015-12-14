@@ -133,6 +133,7 @@
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseCreateShortcutNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseGetWmiObjectSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\IncludesChocolateyDependencyNote.cs" />
+    <Compile Include="infrastructure.app\rules\InstallScriptsUseMsiexecNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsUseWscriptNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseInstallArgumentsRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainImportOfChocolateyModuleRequirement.cs" />
