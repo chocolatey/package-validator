@@ -30,28 +30,22 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
             var files = package.GetFiles().or_empty_list_if_null();
 
-            if (files.Any(f => f.Path.to_lower().Contains("chocolateyuninstall.ps1"))) return true;
-
-            foreach (var packageFile in files)
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
                 string extension = Path.GetExtension(packageFile.Path).to_lower();
                 if (extension != ".ps1" && extension != ".psm1") continue;
 
                 var contents = packageFile.GetStream().ReadToEnd().to_lower();
 
-                if (!(contents.Contains("install-chocolateypackage") ||
+                if (contents.Contains("install-chocolateypackage") ||
                     contents.Contains("start-chocolateyprocessasadmin") ||
                     contents.Contains("install-chocolateyinstallpackage") ||
                     contents.Contains("install-chocolateyenvironmentvariable") ||
                     contents.Contains("install-chocolateyexplorermenuitem") ||
-                    contents.Contains("install-chocolateyfileassociation")))
+                    contents.Contains("install-chocolateyfileassociation"))
                 {
-                    return true;
+                    valid = package.Tags.Split(' ').Any(tag => tag.ToLower() == "admin");
                 }
-
-                var result = package.Tags.Split(' ').Any(tag => tag.ToLower() == "admin");
-
-                return result;
             }
 
             return valid;
