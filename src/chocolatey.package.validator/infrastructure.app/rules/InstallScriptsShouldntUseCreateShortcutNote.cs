@@ -27,14 +27,12 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
-            foreach (var packageFile in files)
+            foreach (var file in package.GetFiles().or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
+                string extension = Path.GetExtension(file.Path).to_lower();
                 if (extension != ".ps1" && extension != ".psm1") continue;
 
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
+                var contents = file.GetStream().ReadToEnd().to_lower();
 
                 if (contents.Contains(".createshortcut")) valid = false;
             }
