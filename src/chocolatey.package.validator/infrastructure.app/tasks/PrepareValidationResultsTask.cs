@@ -89,8 +89,10 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             var validationMessages = resultsMessage.ToString();
             if (!string.IsNullOrWhiteSpace(validationMessages))
             {
-                EventManager.publish(new FinalPackageValidationResultMessage(message.PackageId, message.PackageVersion, validationMessages, !failedRequirements.Any()));
+                validationMessages = "Congratulations! This package passed automatic validation review without flagging on any issues the validator currently checks. A human review could still turn up issues a computer may not easily find.";
             }
+
+            EventManager.publish(new FinalPackageValidationResultMessage(message.PackageId, message.PackageVersion, validationMessages, !failedRequirements.Any()));
         }
     }
 }
