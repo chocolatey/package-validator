@@ -27,7 +27,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            return !package.ProjectUrl.to_string().is_equal_to(package.ProjectSourceUrl.to_string());
+            return !package.ProjectUrl.to_string().is_equal_to(package.ProjectSourceUrl.to_string()) && !string.IsNullOrWhiteSpace(package.ProjectUrl.to_string());
         }
     }
 }
