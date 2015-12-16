@@ -23,15 +23,13 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class TooManyAutomationScriptsGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return 
-@"There are more than 3 installation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
+@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 
             var files = package.GetFiles().or_empty_list_if_null();
-
-            if (files.Any(f => f.Path.to_lower().Contains("chocolateyuninstall.ps1"))) return true;
 
             var numberOfInstallationScripts = 0;
 
@@ -43,7 +41,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
                 numberOfInstallationScripts += 1;
             }
 
-            return numberOfInstallationScripts > 3;
+            return numberOfInstallationScripts <= 3;
         }
     }
 }
