@@ -86,8 +86,15 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
                 resultsMessage.Append("* " + flaggedNote.ValidationFailureMessage + Environment.NewLine);
             }
 
-            var validationMessages = resultsMessage.ToString();
-            if (!string.IsNullOrWhiteSpace(validationMessages))
+
+            var validationMessages = string.Empty;
+            if (failedRequirements.Count() == 0)
+            {
+                validationMessages = "**NOTE**: No [required changes](https://github.com/chocolatey/package-validator/wiki#requirements) that the validator checks have been flagged! It is appreciated if you fix other items, but only Requirements will hold up a package version from approval. A human review could still turn up issues a computer may not easily find.{0}{0}".format_with(Environment.NewLine);
+            }
+
+            validationMessages += resultsMessage.ToString();
+            if (string.IsNullOrWhiteSpace(resultsMessage.ToString()))
             {
                 validationMessages = "Congratulations! This package passed automatic validation review without flagging on any issues the validator currently checks. A human review could still turn up issues a computer may not easily find.";
             }
