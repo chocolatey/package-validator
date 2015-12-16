@@ -74,9 +74,11 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
             var cacheTimeout = DateTime.UtcNow.AddMinutes(-31);
             // this only returns 40 results at a time but at least we'll have something to start with
-            //todo: This is going to only check where the flag automated validation is not true.
             IQueryable<V2FeedPackage> packageQuery =
-                service.Packages.Where(p => p.Created < cacheTimeout && (p.PackageTestResultStatus == null || p.PackageTestResultStatus == "Pending" || p.PackageTestResultStatus == "Unknown"));
+                service.Packages.Where(p => p.Created < cacheTimeout 
+                    && (p.PackageTestResultStatus == null || p.PackageTestResultStatus == "Pending" || p.PackageTestResultStatus == "Unknown")
+                    && p.PackageValidationResultDate == null
+                    );
 
             // let's specifically reduce the call to 30 results so we get back results faster from Chocolatey.org
             IList<V2FeedPackage> packagesToValidate = packageQuery.Take(30).ToList();
