@@ -46,7 +46,6 @@ namespace chocolatey.package.validator.infrastructure.app.rules
                     contents.Contains("install-chocolateyexplorermenuitem") ||
                     contents.Contains("install-chocolateyfileassociation"))
                 {
-
                     valid = package.Tags.to_string().Split(' ').Any(tag => tag.ToLower() == "admin");
                 }
             }
