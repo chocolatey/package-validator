@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class PackageSourceUrlMissingGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "The nuspec has been enhanced to allow you to put in packageSourceUrl, pointing to the url where this package source resides. Consider adding it to the nuspec."; } }
+        public override string ValidationFailureMessage { get { return
+@"The nuspec has been enhanced to allow `packageSourceUrl`, pointing to the url where the package source resides. This is a strong guideline because it simplifies collaboration. Please add it to the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/PackageSourceUrlMissing)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

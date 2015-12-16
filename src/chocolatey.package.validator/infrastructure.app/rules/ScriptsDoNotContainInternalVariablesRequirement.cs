@@ -26,7 +26,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-                    @"You have used one or more internal variables in your automation scripts. This is not allowed (even if you are declaring the same variable name in your package). Please find a different way to get what you need (or rename the variable). These are the unallowed variable names:
+                    @"You have used one or more internal variables in your automation scripts. This is not allowed (even if you are declaring the same variable name in your package). Please find a different way to get what you need (or rename the variable). [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainInternalVariables) These are the unallowed variable names:
   * $nugetChocolateyPath
   * $nugetPath
   * $nugetExePath

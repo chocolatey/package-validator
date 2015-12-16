@@ -20,7 +20,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class NuspecEnhancementsMissingSuggestion : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return @"The nuspec has been enhanced to allow you to put in more information related to the software. Please consider adding one or more of the following to the nuspec, if available:
+        public override string ValidationFailureMessage { get { return
+@"The nuspec has been enhanced to allow more information related to the software. [More...](https://github.com/chocolatey/package-validator/wiki/NuspecEnhancementsMissing) Please consider adding one or more of the following to the nuspec, if available:
   * docsUrl - points to the location of the wiki or docs of the software
   * mailingListUrl - points to the forum or email list group for the software
   * bugTrackerUrl - points to the location where issues and tickets can be accessed

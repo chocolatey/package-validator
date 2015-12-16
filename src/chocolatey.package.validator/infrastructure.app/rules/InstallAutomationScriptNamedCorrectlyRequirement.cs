@@ -21,7 +21,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class InstallAutomationScriptNamedCorrectlyRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return @"The install script should be named chocolateyInstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed."; } }
+        public override string ValidationFailureMessage { get { return
+@"The install script should be named chocolateyInstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptNamedCorrectly)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

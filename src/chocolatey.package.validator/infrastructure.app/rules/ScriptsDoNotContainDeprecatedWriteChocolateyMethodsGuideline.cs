@@ -21,12 +21,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsDoNotContainDeprecatedWriteChocolateyMethodsGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage
-        {
-            get
-            {
-                return
-                    @"Write-ChocolateySuccess/Write-ChocolateyFailure have been deprecated, but have been found in your automation scripts. Remove the usage of those two functions. If you have an error, throw the error. This can also give a false positive for commented code with the words:
+        public override string ValidationFailureMessage { get { return
+                    @"Write-ChocolateySuccess/Write-ChocolateyFailure have been deprecated, but have been found in the package's automation scripts. Remove the usage of those two functions. If there is an error, throw the error. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainDeprecatedWriteChocolateyMethods) This can also give a false positive for commented code with the words:
   * Write-ChocolateySuccess
   * Write-ChocolateyFailure";
             }

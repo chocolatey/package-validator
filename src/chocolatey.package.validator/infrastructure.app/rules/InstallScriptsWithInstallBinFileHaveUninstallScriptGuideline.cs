@@ -21,12 +21,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class InstallScriptsWithInstallBinFileHaveUninstallScriptGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage
-        {
-            get
-            {
-                return
-                    @"You have used Install/Generate/Add-BinFile without also adding a Uninstall/Remove-BinFile to the chocolateyUninstall.ps1. Please add it to the uninstall.";
+        public override string ValidationFailureMessage { get { return
+@"This package uses Install/Generate/Add-BinFile without also calling Uninstall/Remove-BinFile in the chocolateyUninstall.ps1. Please correct this issue. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptWithInstallBinFileNeedsRemove)";
             }
         }
 

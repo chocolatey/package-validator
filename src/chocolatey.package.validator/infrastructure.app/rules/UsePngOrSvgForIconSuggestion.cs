@@ -20,11 +20,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class UsePngOrSvgForIconSuggestion : BasePackageRule
     {
-        public override string ValidationFailureMessage
-        {
-            get
-            {
-                return "As per the [packaging guidelines](https://github.com/chocolatey/choco/wiki/CreatePackages#package-icon-guidelines) icons should be either a png or svg file.  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/UsePngOrSvgForPackageIcons) for further information and guidance.";
+        public override string ValidationFailureMessage { get { return 
+@"As per the [packaging guidelines](https://github.com/chocolatey/choco/wiki/CreatePackages#package-icon-guidelines) icons should be either a png or svg file. [More](https://github.com/chocolatey/package-validator/wiki/UsePngOrSvgForPackageIcons)";
             }
         }
 

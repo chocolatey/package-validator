@@ -46,7 +46,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (failedRequirements.Count() != 0)
             {
                 resultsMessage.Append("##### Requirements{0}".format_with(Environment.NewLine));
-                resultsMessage.Append("When a package version has failed requirements, the package version requires fixing or response by the maintainer. If items are flagged correctly, they must be fixed before the package version can be approved. The exact same version should be uploaded during moderation review.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("Requirements represent the minimum quality of a package that is acceptable. When a package version has failed requirements, the package version requires fixing and/or response by the maintainer. Provided a Requirement has flagged correctly, it ***must*** be fixed before the package version can be approved. The exact same version should be uploaded during moderation review.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var failedRequirement in failedRequirements.or_empty_list_if_null())
             {
@@ -57,7 +57,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (flaggedGuidelines.Count() != 0)
             {
                 resultsMessage.Append("{0}##### Guidelines{1}".format_with(resultsMessage.Length ==0 ? string.Empty : Environment.NewLine, Environment.NewLine));
-                resultsMessage.Append("Guidelines are strong suggestions that improve the quality of a package version. These are considered something to fix for next time to increase the quality of the package. Over time guidelines can become requirements. A package version can be approved without addressing guideline comments but will reduce the quality of the package.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("Guidelines are strong suggestions that improve the quality of a package version. These are considered something to fix for next time to increase the quality of the package. Over time Guidelines can become Requirements. A package version can be approved without addressing Guideline comments but will reduce the quality of the package.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var flaggedGuideline in flaggedGuidelines.or_empty_list_if_null())
             {
@@ -68,7 +68,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (flaggedSuggestions.Count() != 0)
             {
                 resultsMessage.Append("{0}##### Suggestions{1}".format_with(resultsMessage.Length == 0 ? string.Empty : Environment.NewLine, Environment.NewLine));
-                resultsMessage.Append("Suggestions are newly introduced items that should be considered. A package version can be approved without addressing suggestion comments.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("Suggestions are either newly introduced items that will later become Guidelines or items that are don't carry enough weight to become a Guideline. Either way they should be considered. A package version can be approved without addressing Suggestion comments.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var flaggedSuggestion in flaggedSuggestions.or_empty_list_if_null())
             {
@@ -79,7 +79,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (flaggedNotes.Count() != 0)
             {
                 resultsMessage.Append("{0}##### Notes{1}".format_with(resultsMessage.Length == 0 ? string.Empty : Environment.NewLine, Environment.NewLine));
-                resultsMessage.Append("Notes typically flag things for both you and the reviewer.{0}{0}".format_with(Environment.NewLine));
+                resultsMessage.Append("Notes typically flag things for both you and the reviewer to go over. Sometimes this is the use of things that may or may not be necessary given the constraints of what you are trying to do and/or are harder for automation to flag for other reasons. Items found in Notes might be Requirements depending on the context. A package version can be approved without addressing Note comments.{0}{0}".format_with(Environment.NewLine));
             }
             foreach (var flaggedNote in flaggedNotes.or_empty_list_if_null())
             {

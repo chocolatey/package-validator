@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class TitleNotEmptyGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Title (title) is missing. Please consider including title in the nuspec."; } }
+        public override string ValidationFailureMessage { get { return
+@"Title (title) is missing. Please consider including title in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/TitleNotEmpty)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

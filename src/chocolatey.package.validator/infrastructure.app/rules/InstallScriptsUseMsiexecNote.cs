@@ -22,7 +22,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class InstallScriptsUseMsiexecNote : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Package installation scripts make use of msiexec.  Confirm with the package maintainer that this is actually required.  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/UsageOfMsiexec) for further information and guidance."; } }
+        public override string ValidationFailureMessage { get { return 
+@"Package automation scripts make use of msiexec. The reviewer will ensure there is a valid reason the package has not used the built-in helpers. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfMsiexec)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

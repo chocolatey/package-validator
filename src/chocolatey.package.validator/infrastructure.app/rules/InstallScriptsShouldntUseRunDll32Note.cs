@@ -21,7 +21,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class InstallScriptsShouldntUseRunDll32Note : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Package installation scripts make use of Rundll32.  Confirm with the package maintainer that this is actually required.  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/UsageOfRundll32) for further information and guidance."; } }
+        public override string ValidationFailureMessage { get { return 
+@"Package installation scripts make use of Rundll32. The reviewer will ensure this is actually necessary. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfRundll32)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

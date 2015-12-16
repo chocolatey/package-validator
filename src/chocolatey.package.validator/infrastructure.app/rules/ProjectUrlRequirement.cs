@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ProjectUrlRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "ProjectUrl (projectUrl) in the nuspec file is required."; } }
+        public override string ValidationFailureMessage { get { return
+@"ProjectUrl (projectUrl) in the nuspec file is required. Please add it to the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/ProjectUrl)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

@@ -21,7 +21,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class DependencyWithNoVersionGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Package contains dependencies with no specified version, which is not recommended..  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/DependencyWithNoVersion) for further information and guidance."; } }
+        public override string ValidationFailureMessage { get { return 
+@"Package contains dependencies with no specified version. You should at least specify a minimum version of a dependency. [More...](https://github.com/chocolatey/package-validator/wiki/DependencyWithNoVersion)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

@@ -21,7 +21,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsDoNotContainImportOfChocolateyModuleRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return @"Directly importing the Chocolatey PowerShell Module is not allowed in automation scripts. Please remove it. This can flag also based on the use of the word 'chocolateyInstaller.psm1' in comments."; } }
+        public override string ValidationFailureMessage { get { return
+@"Directly importing the Chocolatey PowerShell Module is not allowed in automation scripts. Please remove it. This can flag also based on the use of the word 'chocolateyInstaller.psm1' in comments. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainImportOfChocolateyModule)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

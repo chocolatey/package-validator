@@ -20,9 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using NuGet;
     using infrastructure.rules;
 
-    public class TooManyInstallationScriptsGuideline : BasePackageRule
+    public class TooManyAutomationScriptsGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "There are more than 3 installation scripts in this package, which is not recommended.  Please see [wiki article](https://github.com/chocolatey/package-validator/wiki/MoreThan3InstallationScripts) for further information and guidance."; } }
+        public override string ValidationFailureMessage { get { return 
+@"There are more than 3 installation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

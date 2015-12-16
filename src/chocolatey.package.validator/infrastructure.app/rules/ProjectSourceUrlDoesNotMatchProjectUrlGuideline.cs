@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ProjectSourceUrlDoesNotMatchProjectUrlGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "ProjectUrl and ProjectSourceUrl are typically different, but not always. Please ensure that projectSourceUrl is pointing to software source code or remove this field from the nuspec."; } }
+        public override string ValidationFailureMessage { get { return
+@"ProjectUrl and ProjectSourceUrl are typically different, but not always. Please ensure that projectSourceUrl is pointing to software source code or remove the field from the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/ProjectSourceUrlDoesNotMatchProjectUrl)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class TagsDoNotContainChocolateyRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Tags (tags) should not contain chocolatey. Please remove that."; } }
+        public override string ValidationFailureMessage { get { return
+@"Tags (tags) should not contain 'chocolatey' as a tag. Please remove that in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/TagsDoNotContainChocolatey)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

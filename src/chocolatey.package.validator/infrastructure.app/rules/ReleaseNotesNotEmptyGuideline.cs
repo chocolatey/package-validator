@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ReleaseNotesNotEmptyGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Release Notes (releaseNotes) are a short description of changes in each version of a package. Please include releasenotes in the nuspec. **NOTE:** To prevent the need to continually update this field, providing a URL to an external list of Release Notes is perfectly acceptable."; } }
+        public override string ValidationFailureMessage { get { return
+@"Release Notes (releaseNotes) are a short description of changes in each version of a package. Please include releasenotes in the nuspec. **NOTE:** To prevent the need to continually update this field, providing a URL to an external list of Release Notes is perfectly acceptable. [More...](https://github.com/chocolatey/package-validator/wiki/ReleaseNotesNotEmpty)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

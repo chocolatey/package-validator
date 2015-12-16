@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class PackageIdUsesDotsNote : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "The package id includes dots (.). Usually the package id is separated by '-' instead of dots (except in the case of *.install and *.portable). The reviewer will ensure this is not a new package."; } }
+        public override string ValidationFailureMessage { get { return
+@"The package id includes dots (.). Usually the package id is separated by '-' instead of dots (except in the case of *.install and *.portable). The reviewer will ensure this is not a new package. [More...](https://github.com/chocolatey/package-validator/wiki/PackageIdUsesDots)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

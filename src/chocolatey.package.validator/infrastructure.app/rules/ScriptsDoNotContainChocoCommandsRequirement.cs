@@ -21,11 +21,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsDoNotContainChocoCommandsRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return @"Your script contains a choco command. This is not allowed. Perhaps you should take a dependency on a package? This could also flag a comment or message with the following words:
-  * choco install
-  * cinst
-  * choco upgrade
-  "; } }
+        public override string ValidationFailureMessage { get { return
+@"The package script contains a choco command. This is not allowed. Perhaps there should be a dependency on a package? [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainChocoCommands)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

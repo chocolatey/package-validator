@@ -21,7 +21,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class SourceControlInternalFilesAreNotPackagedRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return @"You've packaged either a .git, .hg, or .svn folder. Please remove it from the package."; } }
+        public override string ValidationFailureMessage { get { return
+@"The package contains internal .git, .hg, or .svn folder. Please remove all version control items from the package. [More...](https://github.com/chocolatey/package-validator/wiki/SourceControlInternalFilesIncluded)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

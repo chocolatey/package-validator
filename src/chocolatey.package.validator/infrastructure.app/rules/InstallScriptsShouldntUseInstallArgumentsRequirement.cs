@@ -11,7 +11,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class InstallScriptsShouldntUseInstallArgumentsRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Do not use the environment variables for accessing the Chocolatey Installation Arguments  Instead, use the passed in Package Parameters.  Please see [here](https://github.com/chocolatey/package-validator/wiki/ScriptContainsUsageOfInstallationArguments) for further information and guidance."; } }
+        public override string ValidationFailureMessage { get { return 
+@"Do not use the environment variables for accessing the Chocolatey Installation Arguments  Instead, use the passed in Package Parameters. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptContainsUsageOfInstallationArguments)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

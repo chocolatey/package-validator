@@ -22,17 +22,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class InstallScriptsWithUndoableActionsHaveUninstallScriptGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage
-        {
-            get
-            {
-                return
-                    @"You have used a function that doesn't have an automatic undo on uninstall, so you need an uninstall script. Please consider correcting that by adding a chocolateyUninstall.ps1 to the package to undo the action. You've used one of the following:
-  * Install-ChocolateyPath / Install-ChocolateyEnvironmentVariable
-  * Install-ChocolateyExplorerMenuItem / Install-ChocolateyShortcut
-  * Install-ChocolateyFileAssociation
-  * Install-BinFile / Generate-BinFile / Add-BinFile
-";
+        public override string ValidationFailureMessage { get { return
+@"This packages has used a function that doesn't have an automatic undo on uninstall, so it will also need an uninstall script. Please correcting that by adding a chocolateyUninstall.ps1 to the package to undo the action. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptWithUndoableActionsNeedsUninstallScript)";
             }
         }
 

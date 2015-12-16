@@ -20,7 +20,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class TitleNotSameAsPackageIdGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return "Title (title) matches id exactly. Please consider using something slightly more descriptive for the title in the nuspec."; } }
+        public override string ValidationFailureMessage { get { return
+@"Title (title) matches id exactly. Please consider using something slightly more descriptive for the title in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/TitleNotSameAsPackageId)";
+        }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
