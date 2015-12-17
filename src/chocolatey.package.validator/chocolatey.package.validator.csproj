@@ -141,6 +141,7 @@
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseRunDll32Note.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsUseWscriptNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseInstallArgumentsRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\NotSilentTagIsBeingUsedNote.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainImportOfChocolateyModuleRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightWordCountMinimum4Requirement.cs" />
     <Compile Include="infrastructure.app\rules\IconUrlMissingGuideline.cs" />
