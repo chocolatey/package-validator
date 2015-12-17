@@ -142,6 +142,7 @@
     <Compile Include="infrastructure.app\rules\InstallScriptsUseWscriptNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseInstallArgumentsRequirement.cs" />
     <Compile Include="infrastructure.app\rules\NotSilentTagIsBeingUsedNote.cs" />
+    <Compile Include="infrastructure.app\rules\NuspecFileShouldBeUtf8Guideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainImportOfChocolateyModuleRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightWordCountMinimum4Requirement.cs" />
     <Compile Include="infrastructure.app\rules\IconUrlMissingGuideline.cs" />
@@ -181,6 +182,7 @@
     <Compile Include="infrastructure.app\rules\UsePngOrSvgForIconSuggestion.cs" />
     <Compile Include="infrastructure.app\services\IPackageValidationService.cs" />
     <Compile Include="infrastructure.app\services\PackageValidationService.cs" />
+    <Compile Include="StreamExtensions.cs" />
     <Compile Include="infrastructure.app\tasks\PrepareValidationResultsTask.cs" />
     <Compile Include="infrastructure\locators\ITypeLocator.cs" />
     <Compile Include="infrastructure\locators\TypeLocator.cs" />
