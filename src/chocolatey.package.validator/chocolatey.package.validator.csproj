@@ -129,6 +129,7 @@
     <Compile Include="infrastructure.app\messaging\PackageValidationResultMessage.cs" />
     <Compile Include="infrastructure.app\rules\AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline.cs" />
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
+    <Compile Include="infrastructure.app\rules\ChocoInstallShouldntCallChocoUninstallRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CommentsShouldBeCleanedUpGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DependencyWithNoVersionGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackagesShouldHaveDependencyRequirement.cs" />
