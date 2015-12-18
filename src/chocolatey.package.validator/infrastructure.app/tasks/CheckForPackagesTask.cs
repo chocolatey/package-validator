@@ -81,8 +81,14 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
             // let's specifically reduce the call to 30 results so we get back results faster from Chocolatey.org
             IList<V2FeedPackage> packagesToValidate = packageQuery.Take(30).ToList();
-            if (packagesToValidate.Count == 0) this.Log().Info("No packages to validate.");
-            else this.Log().Info("Pulled in {0} packages for validation.".format_with(packagesToValidate.Count));
+            if (packagesToValidate.Count == 0)
+            {
+                this.Log().Info("No packages to validate.");
+            }
+            else
+            {
+                this.Log().Info("Pulled in {0} packages for validation.".format_with(packagesToValidate.Count));
+            }
 
             foreach (var package in packagesToValidate.or_empty_list_if_null())
             {
