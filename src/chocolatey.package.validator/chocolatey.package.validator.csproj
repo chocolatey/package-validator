@@ -169,6 +169,7 @@
     <Compile Include="infrastructure.app\rules\DescriptionWordCountMinimum30Guideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainStartProcessGuideline.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainDeprecatedWriteChocolateyMethodsGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\ScriptsDoNotUseDownloadersGuideline.cs" />
     <Compile Include="infrastructure.app\rules\SourceControlInternalFilesAreNotPackagedRequirement.cs" />
     <Compile Include="infrastructure.app\rules\SummaryNotEmptyGuideline.cs" />
     <Compile Include="infrastructure.app\rules\TagsAreSpaceSeparatedRequirement.cs" />
