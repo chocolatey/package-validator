@@ -58,6 +58,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
         {
             this.Log().Info(() => "Updating website for {0} v{1} with results (package {2} requirements).".format_with(message.PackageId, message.PackageVersion, message.Success ? "failed" : "passed"));
 
+            if (string.IsNullOrWhiteSpace(_configurationSettings.PackagesApiKey)) return;
+
             try
             {
                 var url = string.Join("/", SERVICE_ENDPOINT, message.PackageId, message.PackageVersion);
