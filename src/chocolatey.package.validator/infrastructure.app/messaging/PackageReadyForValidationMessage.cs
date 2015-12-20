@@ -20,12 +20,16 @@ namespace chocolatey.package.validator.infrastructure.app.messaging
 
     public class PackageReadyForValidationMessage : IMessage
     {
-        public PackageReadyForValidationMessage(IPackage package, string tempDownloadLocation)
+        public PackageReadyForValidationMessage(string packageId, string packageVersion, IPackage package, string tempDownloadLocation)
         {
+            PackageId = packageId;
+            PackageVersion = packageVersion;
             Package = package;
             TempDownloadLocation = tempDownloadLocation;
         }
 
+        public string PackageId { get; private set; }
+        public string PackageVersion { get; private set; }
         public IPackage Package { get; private set; }
         public string TempDownloadLocation { get; private set; }
     }

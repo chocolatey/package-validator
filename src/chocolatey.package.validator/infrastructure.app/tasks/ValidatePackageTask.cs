@@ -48,8 +48,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
         {
             this.Log().Info("Running validation rules...");
             IEnumerable<PackageValidationResult> validationResults = _packageValidationService.validate_package(message.Package);
-
-            EventManager.publish(new PackageValidationResultMessage(message.Package.Id, message.Package.Version.to_string(), validationResults, DateTime.UtcNow));
+           
+            EventManager.publish(new PackageValidationResultMessage(message.PackageId, message.PackageVersion, validationResults, DateTime.UtcNow));
             EventManager.publish(new PackageFinishedValidationMessage(message.TempDownloadLocation));
         }
     }
