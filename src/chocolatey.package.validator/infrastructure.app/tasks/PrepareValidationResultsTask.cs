@@ -45,7 +45,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             var failedRequirements = message.ValidationResults.Where(r => r.Validated == false && r.ValidationLevel == ValidationLevelType.Requirement);
             if (failedRequirements.Count() != 0)
             {
-                this.Log().Info("{0} v{1} failed validation.".format_with(message.PackageId,message.PackageVersion));
+                this.Log().Info("{0} v{1} FAILED validation.".format_with(message.PackageId,message.PackageVersion));
                 resultsMessage.Append("##### Requirements{0}".format_with(Environment.NewLine));
                 resultsMessage.Append("Requirements represent the minimum quality of a package that is acceptable. When a package version has failed requirements, the package version requires fixing and/or response by the maintainer. Provided a Requirement has flagged correctly, it ***must*** be fixed before the package version can be approved. The exact same version should be uploaded during moderation review.{0}{0}".format_with(Environment.NewLine));
             }
