@@ -29,7 +29,8 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
     public class CheckForPackagesTask : ITask
     {
         private readonly IConfigurationSettings _configurationSettings;
-        private const double TIMER_INTERVAL = 120000;
+        //private const double TIMER_INTERVAL = 120000;
+        private const double TIMER_INTERVAL = 60000;
         private const string SERVICE_ENDPOINT = "/api/v2/submitted/";
         private readonly Timer _timer = new Timer();
         private IDisposable _subscription;
@@ -45,7 +46,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             _timer.Interval = TIMER_INTERVAL;
             _timer.Elapsed += timer_elapsed;
             _timer.Start();
-            this.Log().Info(() => "{0} will check for packages to validate every {1} minutes".format_with(GetType().Name, TIMER_INTERVAL / 60000));
+            this.Log().Info(() => "{0} will check for packages to validate every {1} minute(s).".format_with(GetType().Name, TIMER_INTERVAL / 60000));
         }
 
         public void shutdown()
@@ -96,7 +97,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
                 EventManager.publish(new ValidatePackageMessage(package.Id, package.Version));
             }
 
-            this.Log().Info(() => "Finished checking for packages to validate. Sleeping for {0} minutes.".format_with(TIMER_INTERVAL / 60000));
+            this.Log().Info(() => "Finished checking for packages to validate. Sleeping for {0} minute(s).".format_with(TIMER_INTERVAL / 60000));
 
             _timer.Start();
         }
