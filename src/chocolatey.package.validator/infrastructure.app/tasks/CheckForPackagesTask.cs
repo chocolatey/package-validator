@@ -29,8 +29,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
     public class CheckForPackagesTask : ITask
     {
         private readonly IConfigurationSettings _configurationSettings;
-        //private const double TIMER_INTERVAL = 120000;
-        private const double TIMER_INTERVAL = 60000;
+        private const double TIMER_INTERVAL = 300000;
         private const string SERVICE_ENDPOINT = "/api/v2/submitted/";
         private readonly Timer _timer = new Timer();
         private IDisposable _subscription;
@@ -80,7 +79,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
                     && (p.PackageValidationResultStatus == null || p.PackageValidationResultStatus == "Pending" || p.PackageValidationResultStatus == "Unknown")
                     );
 
-            // let's specifically reduce the call to 30 results so we get back results faster from Chocolatey.org
+            // specifically reduce the call to 30 results so we get back results faster from Chocolatey.org
             IList<V2FeedPackage> packagesToValidate = packageQuery.Take(30).ToList();
             if (packagesToValidate.Count == 0)
             {
