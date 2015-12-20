@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.services
     public class PackageValidationService : IPackageValidationService
     {
         private readonly ITypeLocator _typeLocator;
-        private IList<IPackageRule> _rules = new List<IPackageRule>(); 
+        private IList<IPackageRule> _rules = new List<IPackageRule>();
 
         public PackageValidationService(ITypeLocator typeLocator)
         {
@@ -53,9 +53,16 @@ namespace chocolatey.package.validator.infrastructure.app.services
         {
             IList<PackageValidationResult> results = new List<PackageValidationResult>();
 
-            foreach (var rule in Rules.or_empty_list_if_null())
+            if (package == null)
             {
-                results.Add(rule.validate(package));
+                results.Add(new PackageValidationResult(false, "Something went very wrong. There is no package to validate. Please contact the site admins for next steps.", ValidationLevelType.Requirement));
+            }
+            else
+            {
+                foreach (var rule in Rules.or_empty_list_if_null())
+                {
+                    results.Add(rule.validate(package));
+                }
             }
 
             return results;
