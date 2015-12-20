@@ -57,7 +57,10 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
             var package = _nugetService.download_package(message.PackageId, message.PackageVersion, tempInstallLocation, _configurationSettings);
 
-            EventManager.publish(new PackageReadyForValidationMessage(package, tempInstallLocation));
+            if (package != null)
+            {
+                EventManager.publish(new PackageReadyForValidationMessage(package, tempInstallLocation));
+            }
         }
     }
 }

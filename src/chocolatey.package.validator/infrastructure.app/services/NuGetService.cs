@@ -169,8 +169,16 @@ namespace chocolatey.package.validator.infrastructure.app.services
 
             this.Log().Debug(() => "Installing {0} v{1} from {2}.".format_with(packageId, version.to_string(), packageManager.SourceRepository.Source));
 
-            packageManager.InstallPackage(availablePackage, ignoreDependencies: true, allowPrereleaseVersions: true);
-
+            try
+            {
+                packageManager.InstallPackage(availablePackage, ignoreDependencies: true, allowPrereleaseVersions: true);
+            }
+            catch (Exception ex)
+            {
+                Bootstrap.handle_exception(new System.ApplicationException("Encountered error downloading package {0} v{1}:{2}{3}".format_with(packageId,packageVersion,Environment.NewLine, ex.to_string()),ex));
+                return null;
+            }
+            
             var cachePackage = _fileSystem.combine_paths(Environment.GetEnvironmentVariable("LocalAppData"), "NuGet", "Cache", "{0}.{1}.nupkg".format_with(packageId, version.to_string()));
             if (_fileSystem.file_exists(cachePackage)) _fileSystem.delete_file(cachePackage);
 
