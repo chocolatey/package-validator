@@ -93,6 +93,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
             foreach (var package in packagesToValidate.or_empty_list_if_null())
             {
+                this.Log().Info(() => "========== {0} v{1} ==========".format_with(package.Id, package.Version));
                 this.Log().Info("{0} v{1} found for review.".format_with(package.Title, package.Version));
                 EventManager.publish(new ValidatePackageMessage(package.Id, package.Version));
             }

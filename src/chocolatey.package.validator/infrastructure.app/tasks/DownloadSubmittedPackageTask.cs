@@ -50,7 +50,6 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
         private void download_package(ValidatePackageMessage message)
         {
-            this.Log().Info(() => "========== {0} v{1} ==========".format_with(message.PackageId, message.PackageVersion));
             this.Log().Info(() => "Validating Package: {0} Version: {1}".format_with(message.PackageId, message.PackageVersion));
 
             var tempInstallLocation = _fileSystem.combine_paths(_fileSystem.get_temp_path(), ApplicationParameters.Name, "TempInstall_" + DateTime.Now.ToString("yyyyMMdd_HHmmss_ffff"));
