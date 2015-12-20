@@ -45,6 +45,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             var failedRequirements = message.ValidationResults.Where(r => r.Validated == false && r.ValidationLevel == ValidationLevelType.Requirement);
             if (failedRequirements.Count() != 0)
             {
+                this.Log().Info("{0} v{1} failed validation.".format_with(message.PackageId,message.PackageVersion));
                 resultsMessage.Append("##### Requirements{0}".format_with(Environment.NewLine));
                 resultsMessage.Append("Requirements represent the minimum quality of a package that is acceptable. When a package version has failed requirements, the package version requires fixing and/or response by the maintainer. Provided a Requirement has flagged correctly, it ***must*** be fixed before the package version can be approved. The exact same version should be uploaded during moderation review.{0}{0}".format_with(Environment.NewLine));
             }
@@ -90,12 +91,14 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             var validationMessages = string.Empty;
             if (failedRequirements.Count() == 0)
             {
+                this.Log().Info("{0} v{1} passed validation.".format_with(message.PackageId, message.PackageVersion));
                 validationMessages = "**NOTE**: No [required changes](https://github.com/chocolatey/package-validator/wiki#requirements) that the validator checks have been flagged! It is appreciated if you fix other items, but only Requirements will hold up a package version from approval. A human review could still turn up issues a computer may not easily find.{0}{0}".format_with(Environment.NewLine);
             }
 
             validationMessages += resultsMessage.ToString();
             if (string.IsNullOrWhiteSpace(resultsMessage.ToString()))
             {
+                this.Log().Info("{0} v{1} had no findings!".format_with(message.PackageId, message.PackageVersion));
                 validationMessages = "Congratulations! This package passed automatic validation review without flagging on any issues the validator currently checks. A human review could still turn up issues a computer may not easily find.";
             }
 

@@ -46,6 +46,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
         private void validate_package(PackageReadyForValidationMessage message)
         {
+            this.Log().Info("Running validation rules...");
             IEnumerable<PackageValidationResult> validationResults = _packageValidationService.validate_package(message.Package);
 
             EventManager.publish(new PackageValidationResultMessage(message.Package.Id, message.Package.Version.to_string(), validationResults, DateTime.UtcNow));
