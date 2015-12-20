@@ -19,12 +19,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using NuGet;
     using infrastructure.rules;
 
-    //todo:Guideline to Requirement
-    public class CopyrightWordCountMinimum4Guideline : BasePackageRule
+    public class CopyrightWordCountMinimum4Requirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"If you are going to use copyright in the nuspec, please use more than 4 characters. [More...](https://github.com/chocolatey/package-validator/wiki/CopyrightCharacterCountMinimum)
-  * This will become a requirement immediately after the backlog run has completed.";
+@"If you are going to use copyright in the nuspec, please use more than 4 characters. [More...](https://github.com/chocolatey/package-validator/wiki/CopyrightCharacterCountMinimum)";
         }
         }
 
