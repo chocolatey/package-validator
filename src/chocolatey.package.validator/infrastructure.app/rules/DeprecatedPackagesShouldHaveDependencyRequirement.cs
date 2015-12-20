@@ -28,7 +28,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             if (!package.Title.to_lower().Contains("deprecated")) return true;
 
-            return !package.DependencySets.Any();
+            return package.DependencySets.Any();
         }
     }
 }
