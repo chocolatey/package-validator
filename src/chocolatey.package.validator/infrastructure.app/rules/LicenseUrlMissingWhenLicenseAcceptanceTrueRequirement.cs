@@ -18,10 +18,12 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using NuGet;
     using infrastructure.rules;
 
-    public class LicenseUrlMissingWhenLicenseAcceptanceTrueRequirement : BasePackageRule
+    //todo:Guideline to Requirement
+    public class LicenseUrlMissingWhenLicenseAcceptanceTrueGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"If the package sets requireLicenseAcceptance to true, it must also ensure licenseUrl is properly added to the nuspec as well. Please correct this in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/LicenseUrlMissingWhenLicenseAcceptanceTrue)";
+@"If the package sets requireLicenseAcceptance to true, it must also ensure licenseUrl is properly added to the nuspec as well. Please correct this in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/LicenseUrlMissingWhenLicenseAcceptanceTrue)
+  * This will become a requirement immediately after the backlog run has completed.";
         }
         }
 
