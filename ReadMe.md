@@ -2,13 +2,15 @@
 
 Validates the contents of a package against the package review process parts that can be validated by a machine. See https://github.com/chocolatey/choco/wiki/Moderation for more details.
 
+The validator is a service that checks the quality of a package based on requirements, guidelines and suggestions for creating packages for Chocolatey’s community feed. We like to think of the validator as unit testing. It is validating that everything is as it should be and meets the minimum requirements for a package on the community feed.
+
+What does the validator check? See https://github.com/chocolatey/package-validator/wiki
+
 ![Chocolatey Logo](https://github.com/chocolatey/chocolatey/raw/master/docs/logo/chocolateyicon.gif "Chocolatey")
 
 ## Chat Room
 
-Come join in the conversation about Chocolatey in our Gitter Chat Room
-
-[![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/chocolatey/choco?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+Want quick feedback to your questions? [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/chocolatey/choco?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 ### Requirements
 * .NET Framework 4.0
