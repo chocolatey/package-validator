@@ -24,6 +24,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
     using infrastructure.messaging;
     using infrastructure.tasks;
     using messaging;
+    using registration;
     using services;
 
     public class CheckForPackagesTask : ITask
@@ -64,41 +65,45 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             _timer.Stop();
 
             this.Log().Info(() => "Checking for packages to validate.");
-
-            var submittedPackagesUri = NuGetService.get_service_endpoint_url(_configurationSettings.PackagesUrl, SERVICE_ENDPOINT);
-
-            var service = new FeedContext_x0060_1(submittedPackagesUri)
+            
+            try
             {
-                Timeout = 70
-            };
+                var submittedPackagesUri = NuGetService.get_service_endpoint_url(_configurationSettings.PackagesUrl, SERVICE_ENDPOINT);
 
-            var cdnCacheTimeout = DateTime.UtcNow.AddMinutes(-31);
-            // this only returns 30-40 results at a time but at least we'll have something to start with
-            IQueryable<V2FeedPackage> packageQuery =
-                service.Packages.Where(p => p.Created < cdnCacheTimeout
-                    && (p.PackageValidationResultStatus == null || p.PackageValidationResultStatus == "Pending" || p.PackageValidationResultStatus == "Unknown")
-                    );
+                // such a fun, dynamically generated name
+                var service = new FeedContext_x0060_1(submittedPackagesUri)
+                {
+                    Timeout = 70
+                };
 
-            // specifically reduce the call to 30 results so we get back results faster from Chocolatey.org
-            IList<V2FeedPackage> packagesToValidate = packageQuery.Take(30).ToList();
-            if (packagesToValidate.Count == 0)
-            {
-                this.Log().Info("No packages to validate.");
+                var cdnCacheTimeout = DateTime.UtcNow.AddMinutes(-31);
+                // this only returns 30-40 results at a time but at least we'll have something to start with
+                IQueryable<V2FeedPackage> packageQuery =
+                    service.Packages.Where(
+                        p => p.Created < cdnCacheTimeout
+                             && (p.PackageValidationResultStatus == null || p.PackageValidationResultStatus == "Pending" || p.PackageValidationResultStatus == "Unknown")
+                        );
+
+                // specifically reduce the call to 30 results so we get back results faster from Chocolatey.org
+                IList<V2FeedPackage> packagesToValidate = packageQuery.Take(30).ToList();
+                if (packagesToValidate.Count == 0) this.Log().Info("No packages to validate.");
+                else this.Log().Info("Pulled in {0} packages for validation.".format_with(packagesToValidate.Count));
+
+                foreach (var package in packagesToValidate.or_empty_list_if_null())
+                {
+                    this.Log().Info(() => "========== {0} v{1} ==========".format_with(package.Id, package.Version));
+                    this.Log().Info("{0} v{1} found for review.".format_with(package.Title, package.Version));
+                    EventManager.publish(new ValidatePackageMessage(package.Id, package.Version));
+                }
             }
-            else
+            catch (Exception ex)
             {
-                this.Log().Info("Pulled in {0} packages for validation.".format_with(packagesToValidate.Count));
-            }
-
-            foreach (var package in packagesToValidate.or_empty_list_if_null())
-            {
-                this.Log().Info(() => "========== {0} v{1} ==========".format_with(package.Id, package.Version));
-                this.Log().Info("{0} v{1} found for review.".format_with(package.Title, package.Version));
-                EventManager.publish(new ValidatePackageMessage(package.Id, package.Version));
+                Bootstrap.handle_exception(ex);
+                return;
             }
 
             this.Log().Info(() => "Finished checking for packages to validate. Sleeping for {0} minute(s).".format_with(TIMER_INTERVAL / 60000));
-
+            
             _timer.Start();
         }
     }
