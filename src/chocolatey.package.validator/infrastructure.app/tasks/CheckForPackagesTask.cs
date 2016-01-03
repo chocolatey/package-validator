@@ -99,7 +99,6 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             catch (Exception ex)
             {
                 Bootstrap.handle_exception(ex);
-                return;
             }
 
             this.Log().Info(() => "Finished checking for packages to validate. Sleeping for {0} minute(s).".format_with(TIMER_INTERVAL / 60000));
