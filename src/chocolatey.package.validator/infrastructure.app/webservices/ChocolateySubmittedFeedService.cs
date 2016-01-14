@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name: ChocolateySubmittedFeedService.cs
-// Generation date: 12/14/2015 11:54:13 PM
+// Generation date: 1/13/2016 11:06:04 PM
 namespace NuGetGallery
 {
     
@@ -944,6 +944,27 @@ namespace NuGetGallery
         private global::System.Nullable<global::System.DateTime> _PackageValidationResultDate;
         partial void OnPackageValidationResultDateChanging(global::System.Nullable<global::System.DateTime> value);
         partial void OnPackageValidationResultDateChanged();
+        /// <summary>
+        /// There are no comments for Property PackageCleanupResultDate in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Nullable<global::System.DateTime> PackageCleanupResultDate
+        {
+            get
+            {
+                return this._PackageCleanupResultDate;
+            }
+            set
+            {
+                this.OnPackageCleanupResultDateChanging(value);
+                this._PackageCleanupResultDate = value;
+                this.OnPackageCleanupResultDateChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Nullable<global::System.DateTime> _PackageCleanupResultDate;
+        partial void OnPackageCleanupResultDateChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnPackageCleanupResultDateChanged();
         /// <summary>
         /// There are no comments for Property PackageReviewedDate in the schema.
         /// </summary>
