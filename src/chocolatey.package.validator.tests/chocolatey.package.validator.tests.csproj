@@ -83,6 +83,7 @@
       <Link>Properties\SolutionVersion.cs</Link>
     </Compile>
     <Compile Include="infrastructure.app\AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecs.cs" />
+    <Compile Include="infrastructure.app\CopyrightAndAuthorFieldsShouldntContainEmailRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\IncludesChocolateyDependencyNoteSpecs.cs" />
     <Compile Include="infrastructure\events\context\FakeMessage.cs" />
