@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name: ChocolateySubmittedFeedService.cs
-// Generation date: 1/13/2016 11:06:04 PM
+// Generation date: 1/21/2016 5:57:33 PM
 namespace NuGetGallery
 {
     
@@ -85,8 +85,9 @@ namespace NuGetGallery
         /// <param name="requireLicenseAcceptance">Initial value of RequireLicenseAcceptance.</param>
         /// <param name="packageSize">Initial value of PackageSize.</param>
         /// <param name="isApproved">Initial value of IsApproved.</param>
+        /// <param name="isDownloadCacheAvailable">Initial value of IsDownloadCacheAvailable.</param>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
-        public static V2FeedPackage CreateV2FeedPackage(string ID, string version, global::System.DateTime created, int downloadCount, int versionDownloadCount, bool isLatestVersion, bool isAbsoluteLatestVersion, bool isPrerelease, global::System.DateTime lastUpdated, global::System.DateTime published, bool requireLicenseAcceptance, long packageSize, bool isApproved)
+        public static V2FeedPackage CreateV2FeedPackage(string ID, string version, global::System.DateTime created, int downloadCount, int versionDownloadCount, bool isLatestVersion, bool isAbsoluteLatestVersion, bool isPrerelease, global::System.DateTime lastUpdated, global::System.DateTime published, bool requireLicenseAcceptance, long packageSize, bool isApproved, bool isDownloadCacheAvailable)
         {
             V2FeedPackage v2FeedPackage = new V2FeedPackage();
             v2FeedPackage.Id = ID;
@@ -102,6 +103,7 @@ namespace NuGetGallery
             v2FeedPackage.RequireLicenseAcceptance = requireLicenseAcceptance;
             v2FeedPackage.PackageSize = packageSize;
             v2FeedPackage.IsApproved = isApproved;
+            v2FeedPackage.IsDownloadCacheAvailable = isDownloadCacheAvailable;
             return v2FeedPackage;
         }
         /// <summary>
@@ -861,6 +863,27 @@ namespace NuGetGallery
         partial void OnPackageSubmittedStatusChanging(string value);
         partial void OnPackageSubmittedStatusChanged();
         /// <summary>
+        /// There are no comments for Property PackageTestResultUrl in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string PackageTestResultUrl
+        {
+            get
+            {
+                return this._PackageTestResultUrl;
+            }
+            set
+            {
+                this.OnPackageTestResultUrlChanging(value);
+                this._PackageTestResultUrl = value;
+                this.OnPackageTestResultUrlChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _PackageTestResultUrl;
+        partial void OnPackageTestResultUrlChanging(string value);
+        partial void OnPackageTestResultUrlChanged();
+        /// <summary>
         /// There are no comments for Property PackageTestResultStatus in the schema.
         /// </summary>
         [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
@@ -1028,5 +1051,89 @@ namespace NuGetGallery
         private string _PackageReviewer;
         partial void OnPackageReviewerChanging(string value);
         partial void OnPackageReviewerChanged();
+        /// <summary>
+        /// There are no comments for Property IsDownloadCacheAvailable in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public bool IsDownloadCacheAvailable
+        {
+            get
+            {
+                return this._IsDownloadCacheAvailable;
+            }
+            set
+            {
+                this.OnIsDownloadCacheAvailableChanging(value);
+                this._IsDownloadCacheAvailable = value;
+                this.OnIsDownloadCacheAvailableChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private bool _IsDownloadCacheAvailable;
+        partial void OnIsDownloadCacheAvailableChanging(bool value);
+        partial void OnIsDownloadCacheAvailableChanged();
+        /// <summary>
+        /// There are no comments for Property DownloadCacheStatus in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string DownloadCacheStatus
+        {
+            get
+            {
+                return this._DownloadCacheStatus;
+            }
+            set
+            {
+                this.OnDownloadCacheStatusChanging(value);
+                this._DownloadCacheStatus = value;
+                this.OnDownloadCacheStatusChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _DownloadCacheStatus;
+        partial void OnDownloadCacheStatusChanging(string value);
+        partial void OnDownloadCacheStatusChanged();
+        /// <summary>
+        /// There are no comments for Property DownloadCacheDate in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Nullable<global::System.DateTime> DownloadCacheDate
+        {
+            get
+            {
+                return this._DownloadCacheDate;
+            }
+            set
+            {
+                this.OnDownloadCacheDateChanging(value);
+                this._DownloadCacheDate = value;
+                this.OnDownloadCacheDateChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Nullable<global::System.DateTime> _DownloadCacheDate;
+        partial void OnDownloadCacheDateChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnDownloadCacheDateChanged();
+        /// <summary>
+        /// There are no comments for Property DownloadCache in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string DownloadCache
+        {
+            get
+            {
+                return this._DownloadCache;
+            }
+            set
+            {
+                this.OnDownloadCacheChanging(value);
+                this._DownloadCache = value;
+                this.OnDownloadCacheChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _DownloadCache;
+        partial void OnDownloadCacheChanging(string value);
+        partial void OnDownloadCacheChanged();
     }
 }
