@@ -85,6 +85,7 @@
     <Compile Include="infrastructure.app\AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\IncludesChocolateyDependencyNoteSpecs.cs" />
+    <Compile Include="infrastructure.app\TagsDoNotContainChocolateyRequirementSpecs.cs" />
     <Compile Include="infrastructure\events\context\FakeMessage.cs" />
     <Compile Include="infrastructure\events\context\FakeSubscriber.cs" />
     <Compile Include="infrastructure\events\EventSubscriptionManagerSpecs.cs" />

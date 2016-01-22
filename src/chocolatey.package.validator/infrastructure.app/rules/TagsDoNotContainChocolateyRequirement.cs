@@ -1,12 +1,12 @@
 ﻿// Copyright © 2015 - Present RealDimensions Software, LLC
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// 
+//
 // You may obtain a copy of the License at
-// 
+//
 // 	http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -15,8 +15,9 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using NuGet;
+    using System.Linq;
     using infrastructure.rules;
+    using NuGet;
 
     public class TagsDoNotContainChocolateyRequirement : BasePackageRule
     {
@@ -28,9 +29,11 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         public override PackageValidationOutput is_valid(IPackage package)
         {
             if (string.IsNullOrWhiteSpace(package.Tags)) return true;
-            if (package.Id.to_lower().Contains("chocolatey")) return true;
+            if (package.Id.to_lower().Equals("chocolatey")) return true;
 
-            return !package.Tags.to_lower().Contains("chocolatey");
+            var tags = package.Tags.Split(' ');
+
+            return tags.All(tag => !tag.to_lower().Equals("chocolatey"));
         }
     }
 }
