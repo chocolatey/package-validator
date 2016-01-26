@@ -131,7 +131,7 @@
     <Compile Include="infrastructure.app\rules\AuthorDoesNotMatchMaintainerNote.cs" />
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
     <Compile Include="infrastructure.app\rules\ChocoInstallShouldntCallChocoUninstallRequirement.cs" />
-    <Compile Include="infrastructure.app\rules\CommentsShouldBeCleanedUpGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\CommentsShouldBeCleanedUpRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightAndAuthorFieldsShouldntContainEmailRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DependencyWithNoVersionGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackagesShouldHaveDependencyRequirement.cs" />
