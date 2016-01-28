@@ -179,7 +179,7 @@
     <Compile Include="infrastructure.app\rules\SummaryNotEmptyGuideline.cs" />
     <Compile Include="infrastructure.app\rules\TagsAreSpaceSeparatedRequirement.cs" />
     <Compile Include="infrastructure.app\rules\TagsDoNotContainChocolateyRequirement.cs" />
-    <Compile Include="infrastructure.app\rules\TagsNotEmptyGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\TagsNotEmptyRequirement.cs" />
     <Compile Include="infrastructure.app\logging\ServiceNugetLogger.cs" />
     <Compile Include="infrastructure.app\rules\TitleNotEmptyGuideline.cs" />
     <Compile Include="infrastructure.app\rules\TitleNotSameAsPackageIdGuideline.cs" />
