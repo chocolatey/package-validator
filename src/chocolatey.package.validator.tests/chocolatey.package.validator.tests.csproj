@@ -88,6 +88,7 @@
     <Compile Include="infrastructure.app\IncludesChocolateyDependencyNoteSpecs.cs" />
     <Compile Include="infrastructure.app\PrereleaseVersionAsPartOfPackageIdRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\PackageIdTooLongWithNoDashesNoteSpecs.cs" />
+    <Compile Include="infrastructure.app\TagsDoNotContainChocolateyRequirementSpecs.cs" />
     <Compile Include="infrastructure\events\context\FakeMessage.cs" />
     <Compile Include="infrastructure\events\context\FakeSubscriber.cs" />
     <Compile Include="infrastructure\events\EventSubscriptionManagerSpecs.cs" />
@@ -109,7 +110,7 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
   </Target>
