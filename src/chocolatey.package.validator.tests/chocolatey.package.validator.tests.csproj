@@ -87,6 +87,7 @@
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\IncludesChocolateyDependencyNoteSpecs.cs" />
     <Compile Include="infrastructure.app\PackageIdUsesDotsNoteSpecs.cs" />
+    <Compile Include="infrastructure.app\InstallScriptsShouldntUseCreateShortcutNoteSpecs.cs" />
     <Compile Include="infrastructure.app\PackageIdUsesUnderscoresNoteSpecs.cs" />
     <Compile Include="infrastructure.app\PrereleaseVersionAsPartOfPackageIdRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\PackageIdTooLongWithNoDashesNoteSpecs.cs" />
