@@ -83,6 +83,10 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Management.Automation, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\..\lib\PowerShell\System.Management.Automation.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Reactive.Core">
       <HintPath>..\packages\Rx-Core.2.2.5\lib\net40\System.Reactive.Core.dll</HintPath>
@@ -136,6 +140,7 @@
     <Compile Include="infrastructure.app\rules\DependencyWithNoVersionGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackagesShouldHaveDependencyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackageTitleGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\InstallScriptsShouldContainValidPowerShellRequirement.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseCreateShortcutNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseGetWmiObjectSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\IncludesChocolateyDependencyNote.cs" />
