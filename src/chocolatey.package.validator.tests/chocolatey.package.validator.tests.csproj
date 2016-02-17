@@ -86,6 +86,7 @@
     <Compile Include="infrastructure.app\CopyrightAndAuthorFieldsShouldntContainEmailRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\IncludesChocolateyDependencyNoteSpecs.cs" />
+    <Compile Include="infrastructure.app\InstallScriptsShouldContainValidPowerShellRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\PrereleaseVersionAsPartOfPackageIdRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\PackageIdTooLongWithNoDashesNoteSpecs.cs" />
     <Compile Include="infrastructure.app\TagsDoNotContainChocolateyRequirementSpecs.cs" />
