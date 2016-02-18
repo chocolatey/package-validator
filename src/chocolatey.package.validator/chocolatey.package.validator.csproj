@@ -147,6 +147,7 @@
     <Compile Include="infrastructure.app\rules\NuspecFileShouldBeUtf8Guideline.cs" />
     <Compile Include="infrastructure.app\rules\NuspecDoesNotContainTemplatedValuesRequirement.cs" />
     <Compile Include="infrastructure.app\rules\OperatingSystemIndexFilesAreNotPackagedRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\PackageIdUsesUnderscoresNote.cs" />
     <Compile Include="infrastructure.app\rules\PrereleaseVersionAsPartOfPackageIdRequirement.cs" />
     <Compile Include="infrastructure.app\rules\PackageIdTooLongWithNoDashesNote.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotContainImportOfChocolateyModuleRequirement.cs" />
