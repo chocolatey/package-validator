@@ -127,6 +127,7 @@
     <Compile Include="infrastructure.app\results\NuGetServiceGetClientResult.cs" />
     <Compile Include="infrastructure.app\results\PackageTestResult.cs" />
     <Compile Include="infrastructure.app\messaging\PackageValidationResultMessage.cs" />
+    <Compile Include="infrastructure.app\rules\AdminHelpersShouldBeIncludedWhenUsingAdminTagGuideline.cs" />
     <Compile Include="infrastructure.app\rules\AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline.cs" />
     <Compile Include="infrastructure.app\rules\AuthorDoesNotMatchMaintainerNote.cs" />
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
