@@ -9,7 +9,7 @@
 //------------------------------------------------------------------------------
 
 // Original file name: ChocolateySubmittedFeedService.cs
-// Generation date: 1/21/2016 5:57:33 PM
+// Generation date: 2/29/2016 2:13:36 AM
 namespace NuGetGallery
 {
     
@@ -1135,5 +1135,47 @@ namespace NuGetGallery
         private string _DownloadCache;
         partial void OnDownloadCacheChanging(string value);
         partial void OnDownloadCacheChanged();
+        /// <summary>
+        /// There are no comments for Property PackageScanStatus in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public string PackageScanStatus
+        {
+            get
+            {
+                return this._PackageScanStatus;
+            }
+            set
+            {
+                this.OnPackageScanStatusChanging(value);
+                this._PackageScanStatus = value;
+                this.OnPackageScanStatusChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private string _PackageScanStatus;
+        partial void OnPackageScanStatusChanging(string value);
+        partial void OnPackageScanStatusChanged();
+        /// <summary>
+        /// There are no comments for Property PackageScanResultDate in the schema.
+        /// </summary>
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        public global::System.Nullable<global::System.DateTime> PackageScanResultDate
+        {
+            get
+            {
+                return this._PackageScanResultDate;
+            }
+            set
+            {
+                this.OnPackageScanResultDateChanging(value);
+                this._PackageScanResultDate = value;
+                this.OnPackageScanResultDateChanged();
+            }
+        }
+        [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Services.Design", "1.0.0")]
+        private global::System.Nullable<global::System.DateTime> _PackageScanResultDate;
+        partial void OnPackageScanResultDateChanging(global::System.Nullable<global::System.DateTime> value);
+        partial void OnPackageScanResultDateChanged();
     }
 }
