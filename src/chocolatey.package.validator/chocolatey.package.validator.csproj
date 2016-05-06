@@ -136,6 +136,7 @@
     <Compile Include="infrastructure.app\rules\DependencyWithNoVersionGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackagesShouldHaveDependencyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackageTitleGuideline.cs" />
+    <Compile Include="infrastructure.app\rules\DescriptionWordCountMaximum4000Requirement.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseCreateShortcutNote.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptsShouldntUseGetWmiObjectSuggestion.cs" />
     <Compile Include="infrastructure.app\rules\IncludesChocolateyDependencyNote.cs" />
