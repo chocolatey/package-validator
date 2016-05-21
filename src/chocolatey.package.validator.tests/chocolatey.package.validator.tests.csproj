@@ -83,7 +83,7 @@
       <Link>Properties\SolutionVersion.cs</Link>
     </Compile>
     <Compile Include="infrastructure.app\AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecs.cs" />
-    <Compile Include="infrastructure.app\CopyrightAndAuthorFieldsShouldntContainEmailRequirementSpecs.cs" />
+    <Compile Include="infrastructure.app\NuspecDoesNotContainEmailRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionWordCountMinimum30GuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionWordCountMaximum4000RequirementSpecs.cs" />
