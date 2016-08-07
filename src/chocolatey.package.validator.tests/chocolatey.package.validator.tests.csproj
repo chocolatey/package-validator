@@ -85,6 +85,7 @@
     <Compile Include="infrastructure.app\AdminHelpersShouldBeIncludedWhenUsingAdminTagGuideline.cs" />
     <Compile Include="infrastructure.app\AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\BinariesAreIncludedNoteSpecs.cs" />
+    <Compile Include="infrastructure.app\ChecksumShouldBeUsedRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\CopyrightAndAuthorFieldsShouldntContainEmailRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionWordCountMinimum30GuidelineSpecs.cs" />
