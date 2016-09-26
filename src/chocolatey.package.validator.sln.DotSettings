@@ -2,6 +2,7 @@
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/GeneratedFilesAndFolders/=6FFB1930_002D80C3_002D4B7E_002DB4C8_002D8A610583E496_002Fd_003AService_0020References_002Fd_003AChocolateySubmittedFeedService_002Ff_003AReference_002Ecs/@EntryIndexedValue">6FFB1930-80C3-4B7E-B4C8-8A610583E496/d:Service References/d:ChocolateySubmittedFeedService/f:Reference.cs</s:String>
 	<s:String x:Key="/Default/CodeInspection/ExcludedFiles/GeneratedFilesAndFolders/=EF68EBF7_002D4521_002D4997_002DA839_002D8A1E3C53FE19_002Ff_003ATinySpec_002Ecs/@EntryIndexedValue">EF68EBF7-4521-4997-A839-8A1E3C53FE19/f:TinySpec.cs</s:String>
 	<s:String x:Key="/Default/CodeInspection/GeneratedCode/GeneratedFileMasks/=SolutionVersion_002Ecs/@EntryIndexedValue">SolutionVersion.cs</s:String>
+	<s:String x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/FORCE_IFELSE_BRACES_STYLE/@EntryValue">DO_NOT_CHANGE</s:String>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_CATCH_ON_NEW_LINE/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_ELSE_ON_NEW_LINE/@EntryValue">True</s:Boolean>
 	<s:Boolean x:Key="/Default/CodeStyle/CodeFormatting/CSharpFormat/PLACE_FINALLY_ON_NEW_LINE/@EntryValue">True</s:Boolean>
