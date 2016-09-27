@@ -55,7 +55,7 @@ namespace chocolatey.package.validator.infrastructure.app.services
 
             if (package == null)
             {
-                results.Add(new PackageValidationResult(false, "Something went very wrong. There is no package to validate. Please contact the site admins for next steps.", ValidationLevelType.Requirement));
+                results.Add(new PackageValidationResult(false, "Something went very wrong. There is no package to validate. Please repush package. If you receive this message again, contact the site admins.", ValidationLevelType.Requirement));
             }
             else if (package.Id.is_equal_to("chocolatey"))
             {
