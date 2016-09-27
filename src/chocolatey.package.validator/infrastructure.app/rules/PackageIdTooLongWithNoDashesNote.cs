@@ -33,7 +33,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var packageId = package.Id.to_lower();
 
-            if (packageId.Length < 15) return true;
+            if (packageId.Length < 20) return true;
 
             return packageId.Contains("-");
         }
