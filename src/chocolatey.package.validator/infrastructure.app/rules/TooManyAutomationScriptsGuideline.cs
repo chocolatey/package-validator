@@ -19,6 +19,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.Linq;
     using NuGet;
     using infrastructure.rules;
+    using utility;
 
     public class TooManyAutomationScriptsGuideline : BasePackageRule
     {
@@ -29,18 +30,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
-            var numberOfInstallationScripts = 0;
-
-            foreach (var packageFile in files)
-            {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                numberOfInstallationScripts += 1;
-            }
-
+            var numberOfInstallationScripts = Utility.get_chocolatey_automation_scripts(package).Count();
+            
             return numberOfInstallationScripts <= 3;
         }
     }

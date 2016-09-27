@@ -18,24 +18,23 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.IO;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
-    public class InstallScriptsShouldntUseCreateShortcutNote : BasePackageRule
+    public class ScriptsShouldntUseGetWmiObjectSuggestion : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return 
-@"Installation Scripts are using .CreateShortcut. The reviewer will ensure that there is a valid reason for not using a built-in Chocolatey Helper for creating shortcuts. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfCreateShortcut)"; } }
+@"Installation Scripts should avoid using Get-WmiObject for finding software install information. [More...](https://github.com/chocolatey/package-validator/wiki/DontUseGetWmiObjectForFindingInstalledPackages)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 
-            foreach (var file in package.GetFiles().or_empty_list_if_null())
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(file.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
+                var contents = packageFile.Value.to_lower();
 
-                var contents = file.GetStream().ReadToEnd().to_lower();
-
-                if (contents.Contains(".createshortcut")) valid = false;
+                if (contents.Contains("get-wmiobject -class win32_product")) valid = false;
             }
 
             return valid;

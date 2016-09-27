@@ -16,13 +16,17 @@
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
     using System.IO;
-    using NuGet;
     using infrastructure.rules;
+    using NuGet;
+    using utility;
 
-    public class InstallScriptsShouldntUseSourceforgeGuideline : BasePackageRule
+    public class InstallScriptShouldNotCallUninstallScriptsRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get{ return
-@"Using SourceForge as the download source of installers is not recommended. Please consider an alternative, official distribution location if one is available. [More...](https://github.com/chocolatey/package-validator/wiki/UseOfSourceForge)";
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return @"The install script should not directly call the uninstall script.  Your script does this, and it will need to be changed. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptShouldntCallUninstallScript)";
             }
         }
 
@@ -30,16 +34,15 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
-            foreach (var packageFile in files)
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var file in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
+                string extension = Path.GetExtension(file.Key.Path).to_lower();
+                if (extension != "chocolateyinstall.ps1") continue;
 
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
+                var contents = file.Value.to_lower();
 
-                if (contents.Contains("sourceforge")) valid = false;
+                if (contents.Contains("chocolateyuninstall.ps1")) valid = false;
             }
 
             return valid;

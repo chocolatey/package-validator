@@ -15,23 +15,30 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.Linq;
     using NuGet;
     using infrastructure.rules;
+    using utility;
 
-    public class InstallAutomationScriptNamedCorrectlyRequirement : BasePackageRule
+    public class ScriptsShouldNotUseSourceforgeGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return
-@"The install script should be named chocolateyInstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptNamedCorrectly)";
-        }
+        public override string ValidationFailureMessage { get{ return
+@"Using SourceForge as the download source of installers is not recommended. Please consider an alternative, official distribution location if one is available. [More...](https://github.com/chocolatey/package-validator/wiki/UseOfSourceForge)";
+            }
         }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            var files = package.GetFiles().or_empty_list_if_null();
-            var hasBadInstallScripts = files.Any(f => f.Path.to_lower().Contains("install.ps1")) && !files.Any(f => f.Path.to_lower().Contains("chocolateyinstall.ps1"));
+            var valid = true;
 
-            return !hasBadInstallScripts;
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
+            {
+                var contents = packageFile.Value.to_lower();
+
+                if (contents.Contains("sourceforge")) valid = false;
+            }
+
+            return valid;
         }
     }
 }

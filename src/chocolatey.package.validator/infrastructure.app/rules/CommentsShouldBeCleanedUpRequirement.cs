@@ -18,6 +18,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.IO;
     using NuGet;
     using infrastructure.rules;
+    using utility;
 
     public class CommentsShouldBeCleanedUpRequirement : BasePackageRule
     {
@@ -30,14 +31,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
+            var files = Utility.get_chocolatey_automation_scripts(package);
             foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
+                var contents = packageFile.Value.to_lower();
 
                 // covers both older template and newer template
                 if (contents.Contains("# main helper")) valid = false;

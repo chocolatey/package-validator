@@ -18,6 +18,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.IO;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
     public class ScriptsDoNotContainImportOfChocolateyModuleRequirement : BasePackageRule
     {
@@ -30,13 +31,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-            foreach (var packageFile in files)
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
+                var contents = packageFile.Value.to_lower();
 
                 if (contents.Contains("chocolateyinstaller.psm1")) valid = false;
             }

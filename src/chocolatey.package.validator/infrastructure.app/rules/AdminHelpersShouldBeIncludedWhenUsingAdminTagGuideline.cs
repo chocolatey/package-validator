@@ -19,6 +19,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.Linq;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
     public class AdminHelpersShouldBeIncludedWhenUsingAdminTagGuideline : BasePackageRule
     {
@@ -36,15 +37,11 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
+            var files = Utility.get_chocolatey_automation_scripts(package);
             foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
-
+                var contents = packageFile.Value.to_lower();
+               
                 if (package.Tags.to_string().Split(' ').Any(tag => tag.ToLower() == "admin"))
                 {
                     valid = contents.Contains("install-chocolateypackage") ||

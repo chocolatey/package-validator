@@ -15,9 +15,11 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
+    using System;
     using System.IO;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
     public class ScriptsContainTooManyLinesGuideline : BasePackageRule
     {
@@ -30,18 +32,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-            foreach (var packageFile in files)
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                var numberOfLines = 0;
-
-                using (var streamReader = new StreamReader(packageFile.GetStream()))
-                {
-                    while (streamReader.ReadLine() != null) numberOfLines++;
-                }
+                var numberOfLines = packageFile.Value.Split(new []{Environment.NewLine}, StringSplitOptions.None).Length;
 
                 valid = numberOfLines < 100;
             }

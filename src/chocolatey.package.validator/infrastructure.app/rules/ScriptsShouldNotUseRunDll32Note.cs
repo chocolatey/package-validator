@@ -18,26 +18,23 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.IO;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
-    public class InstallScriptsUseWscriptNote : BasePackageRule
+    public class ScriptsShouldNotUseRunDll32Note : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return 
-@"Package installation scripts make use of WScript. The reviewer will ensure this is actually required. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfWScript)"; } }
+@"Package installation scripts make use of Rundll32. The reviewer will ensure this is actually necessary. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfRundll32)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
-            foreach (var packageFile in files)
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
+                var contents = packageFile.Value.to_lower();
 
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
-
-                if (contents.Contains("wscript")) valid = false;
+                if (contents.Contains("rundll32")) valid = false;
             }
 
             return valid;
