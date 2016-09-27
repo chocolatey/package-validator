@@ -24,7 +24,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage { get { return
 @"This package uses a helper function that requires administrative permissions, the tag 'admin' should also be in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/AdminTagShouldBeUsedWhenUsingAdminHelper) 
-  * **NOTE:** We're extending converting this to a requirement to 01 May 2016 to give folks plenty of time to prepare and make changes."; } }
+  * **NOTE:** This may become a requirement at some point."; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
