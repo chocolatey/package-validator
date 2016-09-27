@@ -82,7 +82,7 @@
     <Compile Include="..\SolutionVersion.cs">
       <Link>Properties\SolutionVersion.cs</Link>
     </Compile>
-    <Compile Include="infrastructure.app\AdminHelpersShouldBeIncludedWhenUsingAdminTagGuideline.cs" />
+    <Compile Include="infrastructure.app\AdminHelpersShouldBeIncludedWhenUsingAdminTagGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\BinariesAreIncludedNoteSpecs.cs" />
     <Compile Include="infrastructure.app\CopyrightAndAuthorFieldsShouldntContainEmailRequirementSpecs.cs" />

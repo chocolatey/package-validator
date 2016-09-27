@@ -42,7 +42,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
                 base.Context();
 
                 packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("test.ps1");
+                packageFile.Setup(f => f.Path).Returns("chocolateyinstall.ps1");
 
                 package.Setup(p => p.Tags).Returns(
     "test noadmin");

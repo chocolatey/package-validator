@@ -42,10 +42,8 @@ namespace chocolatey.package.validator.tests.infrastructure.app
                 base.Context();
 
                 packageFile.Setup(f => f.GetStream()).Returns("Write-Host Test".to_stream());
-                packageFile.Setup(f => f.Path).Returns("test.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test admin");
+                packageFile.Setup(f => f.Path).Returns("chocolateyInstall.ps1");
+                package.Setup(p => p.Tags).Returns("test admin");
 
                 package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
             }
@@ -77,10 +75,8 @@ namespace chocolatey.package.validator.tests.infrastructure.app
                 base.Context();
 
                 packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("test.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test admin");
+                packageFile.Setup(f => f.Path).Returns("chocolateyInstall.ps1");
+                package.Setup(p => p.Tags).Returns("test admin");
 
                 package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
             }
