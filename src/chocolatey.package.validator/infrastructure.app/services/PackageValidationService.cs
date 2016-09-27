@@ -59,7 +59,7 @@ namespace chocolatey.package.validator.infrastructure.app.services
             }
             else if (package.Id.is_equal_to("chocolatey"))
             {
-                results.Add(new PackageValidationResult(true, "The chocolatey package skips the validation as it should be doing most things that would fail validation.",ValidationLevelType.Note));
+                results.Add(new PackageValidationResult(true, "The chocolatey package skips the validation as it should be doing most things that would fail validation.", ValidationLevelType.Note));
             }
             else
             {
