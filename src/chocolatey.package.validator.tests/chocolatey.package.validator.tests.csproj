@@ -95,7 +95,7 @@
     <Compile Include="infrastructure.app\PrereleaseVersionAsPartOfPackageIdRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\PackageIdTooLongWithNoDashesNoteSpecs.cs" />
     <Compile Include="infrastructure.app\SourceControlIgnoreFilesAreNotPackagedRequirementSpecs.cs" />
-    <Compile Include="infrastructure.app\TagsDoNotContainChocolateyRequirementSpecs.cs" />
+    <Compile Include="infrastructure.app\TagsDoNotContainChocolateySpecs.cs" />
     <Compile Include="infrastructure\events\context\FakeMessage.cs" />
     <Compile Include="infrastructure\events\context\FakeSubscriber.cs" />
     <Compile Include="infrastructure\events\EventSubscriptionManagerSpecs.cs" />

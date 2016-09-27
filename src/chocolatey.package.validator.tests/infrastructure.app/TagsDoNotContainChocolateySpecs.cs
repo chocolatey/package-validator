@@ -22,17 +22,17 @@ namespace chocolatey.package.validator.tests.infrastructure.app
     using NuGet;
     using Should;
 
-    public abstract class TagsDoNotContainChocolateyRequirementSpecsBase : TinySpec
+    public abstract class TagsDoNotContainChocolateySpecsBase : TinySpec
     {
-        protected TagsDoNotContainChocolateyRequirement requirement;
+        protected TagsDoNotContainChocolateyGuideline validationCheck;
         protected Mock<IPackage> package = new Mock<IPackage>();
 
         public override void Context()
         {
-            requirement = new TagsDoNotContainChocolateyRequirement();
+            validationCheck = new TagsDoNotContainChocolateyGuideline();
         }
 
-        public class when_inspecting_package_with_chocolatey_as_first_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_chocolatey_as_first_tag : TagsDoNotContainChocolateySpecsBase
         {
             private PackageValidationOutput result;
 
@@ -45,7 +45,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = validationCheck.is_valid(package.Object);
             }
 
             [Fact]
@@ -61,7 +61,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_middle_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_chocolatey_as_middle_tag : TagsDoNotContainChocolateySpecsBase
         {
             private PackageValidationOutput result;
 
@@ -74,7 +74,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = validationCheck.is_valid(package.Object);
             }
 
             [Fact]
@@ -90,7 +90,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_last_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_chocolatey_as_last_tag : TagsDoNotContainChocolateySpecsBase
         {
             private PackageValidationOutput result;
 
@@ -103,7 +103,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = validationCheck.is_valid(package.Object);
             }
 
             [Fact]
@@ -119,7 +119,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_part_of_first_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_chocolatey_as_part_of_first_tag : TagsDoNotContainChocolateySpecsBase
         {
             private PackageValidationOutput result;
 
@@ -132,7 +132,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = validationCheck.is_valid(package.Object);
             }
 
             [Fact]
@@ -148,7 +148,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_part_of_middle_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_chocolatey_as_part_of_middle_tag : TagsDoNotContainChocolateySpecsBase
         {
             private PackageValidationOutput result;
 
@@ -161,7 +161,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = validationCheck.is_valid(package.Object);
             }
 
             [Fact]
@@ -177,7 +177,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_part_of_last_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_chocolatey_as_part_of_last_tag : TagsDoNotContainChocolateySpecsBase
         {
             private PackageValidationOutput result;
 
@@ -190,7 +190,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = validationCheck.is_valid(package.Object);
             }
 
             [Fact]
@@ -206,7 +206,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_tag_and_part_of_another_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_chocolatey_as_tag_and_part_of_another_tag : TagsDoNotContainChocolateySpecsBase
         {
             private PackageValidationOutput result;
 
@@ -219,7 +219,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = validationCheck.is_valid(package.Object);
             }
 
             [Fact]
