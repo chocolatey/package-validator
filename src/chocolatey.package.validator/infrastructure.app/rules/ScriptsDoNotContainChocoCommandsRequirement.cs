@@ -15,30 +15,39 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
-    using NuGet;
+    using System.Linq;
+    using System.Management.Automation;
     using infrastructure.rules;
+    using NuGet;
     using utility;
 
     public class ScriptsDoNotContainChocoCommandsRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return
-@"The package script contains a choco command. This is not allowed. Perhaps there should be a dependency on a package? [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainChocoCommands)";
-        }
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return @"The package script contains a choco command. This is not allowed. Perhaps there should be a dependency on a package? [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainChocoCommands)";
+            }
         }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 
-            var files = Utility.get_chocolatey_automation_scripts(package);
+            var files = Utility.get_chocolatey_scripts_tokens(package);
             foreach (var packageFile in files.or_empty_list_if_null())
             {
-                var contents = packageFile.Value.to_lower();
+                var tokens = packageFile.Value;
+                var flaggingCalls = tokens.Where(
+                    p => p.Type == PSTokenType.Command && (
+                        p.Content.to_lower().is_equal_to("choco") ||
+                        p.Content.to_lower().is_equal_to("cinst") ||
+                        p.Content.to_lower().is_equal_to("chocolatey")
+                        )
+                    );
 
-                // leaving out choco uninstall - this is usually found in messages when uninstalling meta packages (especially with dtgm).
-                if (contents.Contains("choco install") || contents.Contains("cinst")
-                    || contents.Contains("choco upgrade")) valid = false;
+                if (flaggingCalls.Count() != 0) valid = false;
             }
 
             return valid;
