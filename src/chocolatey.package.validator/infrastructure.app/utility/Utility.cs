@@ -17,7 +17,9 @@ namespace chocolatey.package.validator.infrastructure.app.utility
 {
     using System;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.Linq;
+    using System.Management.Automation;
     using System.Text.RegularExpressions;
     using NuGet;
 
@@ -60,6 +62,20 @@ namespace chocolatey.package.validator.infrastructure.app.utility
             }
 
             return automationScripts;
+        }
+
+        public static IDictionary<IPackageFile, ICollection<PSToken>> get_chocolatey_scripts_tokens(IPackage package)
+        {
+            var scriptsAsTokens = new Dictionary<IPackageFile, ICollection<PSToken>>();
+            var scripts = get_chocolatey_automation_scripts(package);
+            foreach (var script in scripts.or_empty_list_if_null())
+            {
+                Collection<PSParseError> errors = null;
+                ICollection<PSToken> tokens = PSParser.Tokenize(script.Value, out errors);
+                scriptsAsTokens.Add(script.Key, tokens);
+            }
+
+            return scriptsAsTokens;
         }
     }
 }
