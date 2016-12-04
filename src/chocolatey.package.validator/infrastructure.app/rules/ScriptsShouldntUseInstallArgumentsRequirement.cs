@@ -15,17 +15,17 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
-    using NuGet;
     using infrastructure.rules;
+    using NuGet;
     using utility;
 
-    public class ScriptsDoNotContainDeprecatedWriteChocolateyMethodsGuideline : BasePackageRule
+    public class ScriptsShouldntUseInstallArgumentsRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return
-                    @"Write-ChocolateySuccess/Write-ChocolateyFailure have been deprecated, but have been found in the package's automation scripts. Remove the usage of those two functions. If there is an error, throw the error. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainDeprecatedWriteChocolateyMethods) This can also give a false positive for commented code with the words:
-  * Write-ChocolateySuccess
-  * Write-ChocolateyFailure";
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return @"Do not use the environment variables for accessing the Chocolatey Installation Arguments  Instead, use the passed in Package Parameters. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptContainsUsageOfInstallationArguments)";
             }
         }
 
@@ -38,7 +38,12 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             {
                 var contents = packageFile.Value.to_lower();
 
-                if (contents.Contains("write-chocolateysuccess") || contents.Contains("write-chocolateyfailure")) valid = false;
+                if (contents.Contains("installarguments") ||
+                    contents.Contains("installerarguments") ||
+                    contents.Contains("chocolateyinstallarguments"))
+                {
+                    valid = false;
+                }
             }
 
             return valid;

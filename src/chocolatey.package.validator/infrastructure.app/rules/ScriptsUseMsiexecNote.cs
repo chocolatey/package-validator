@@ -19,8 +19,9 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.IO;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
-    public class InstallScriptsUseMsiexecNote : BasePackageRule
+    public class ScriptsUseMsiexecNote : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return 
 @"Package automation scripts make use of msiexec. The reviewer will ensure there is a valid reason the package has not used the built-in helpers. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfMsiexec)"; } }
@@ -29,14 +30,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
-            foreach (var packageFile in files)
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
+                var contents = packageFile.Value.to_lower();
 
                 if (contents.Contains("msiexec")) valid = false;
             }

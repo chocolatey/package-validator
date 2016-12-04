@@ -15,25 +15,23 @@
 
 namespace chocolatey.package.validator.tests.infrastructure.app
 {
-    using System.Collections.Generic;
     using chocolatey.package.validator.infrastructure.app.rules;
     using chocolatey.package.validator.infrastructure.rules;
     using Moq;
     using NuGet;
     using Should;
 
-    public abstract class AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase : TinySpec
+    public abstract class PackageIdTooLongWithNoDashesNoteSpecsBase : TinySpec
     {
-        protected AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline guideline;
+        protected PackageIdTooLongWithNoDashesNote note;
         protected Mock<IPackage> package = new Mock<IPackage>();
-        protected Mock<IPackageFile> packageFile = new Mock<IPackageFile>();
 
         public override void Context()
         {
-            guideline = new AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline();
+            note = new PackageIdTooLongWithNoDashesNote();
         }
 
-        public class when_inspecting_package_with_admin_helpers_with_no_admin_tag : AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase
+        public class when_inspecting_package_with_too_long_id_and_no_dashes : PackageIdTooLongWithNoDashesNoteSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -41,18 +39,12 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("chocolateyinstall.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test noadmin");
-
-                package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
+                package.Setup(p => p.Id).Returns("verylongpackageidwithnodashes");
             }
 
             public override void Because()
             {
-                result = guideline.is_valid(package.Object);
+                result = note.is_valid(package.Object);
             }
 
             [Fact]
@@ -68,7 +60,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_admin_helpers_with_admin_tag : AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase
+        public class when_inspecting_package_with_too_long_id_and_dashes : PackageIdTooLongWithNoDashesNoteSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -76,18 +68,12 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("test.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test admin");
-
-                package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
+                package.Setup(p => p.Id).Returns("very-long-package-id-with-dashes");
             }
 
             public override void Because()
             {
-                result = guideline.is_valid(package.Object);
+                result = note.is_valid(package.Object);
             }
 
             [Fact]

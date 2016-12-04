@@ -15,24 +15,28 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
     using System.Linq;
-    using NuGet;
     using infrastructure.rules;
-    using utility;
+    using NuGet;
 
-    public class TooManyAutomationScriptsGuideline : BasePackageRule
+    public class SourceControlIgnoreFilesAreNotPackagedRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return
+@"The package contains source control ignore files (.gitignore, .hgignore). Please remove all source control ignore files from the package. [More...](https://github.com/chocolatey/package-validator/wiki/SourceControlIgnoreFilesIncluded)";
+            }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            var valid = true;
-
-            var numberOfInstallationScripts = Utility.get_chocolatey_automation_scripts(package).Count();
-            
-            return numberOfInstallationScripts <= 3;
+            var files = package.GetFiles().or_empty_list_if_null();
+            return !files.Any(
+                f => f.Path.to_lower().Contains(".gitignore")
+                     || f.Path.to_lower().Contains(".hgignore")
+                        );
         }
     }
 }

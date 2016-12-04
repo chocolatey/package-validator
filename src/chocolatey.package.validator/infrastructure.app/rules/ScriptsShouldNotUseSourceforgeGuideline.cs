@@ -15,14 +15,14 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
     using NuGet;
     using infrastructure.rules;
+    using utility;
 
-    public class CommentsShouldBeCleanedUpGuideline : BasePackageRule
+    public class ScriptsShouldNotUseSourceforgeGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return
-@"Comments from template should be cleaned up and removed. [More...](https://github.com/chocolatey/package-validator/wiki/CommentsAreNotCleanedUp)";
+        public override string ValidationFailureMessage { get{ return
+@"Using SourceForge as the download source of installers is not recommended. Please consider an alternative, official distribution location if one is available. [More...](https://github.com/chocolatey/package-validator/wiki/UseOfSourceForge)";
             }
         }
 
@@ -30,17 +30,12 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
+            var files = Utility.get_chocolatey_automation_scripts(package);
             foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
+                var contents = packageFile.Value.to_lower();
 
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
-
-                // covers both older template and newer template
-                if (contents.Contains("# main helper")) valid = false;
+                if (contents.Contains("sourceforge")) valid = false;
             }
 
             return valid;

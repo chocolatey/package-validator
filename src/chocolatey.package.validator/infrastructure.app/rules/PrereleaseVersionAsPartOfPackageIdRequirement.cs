@@ -15,24 +15,27 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
-    using System.Linq;
-    using NuGet;
     using infrastructure.rules;
-    using utility;
+    using NuGet;
 
-    public class TooManyAutomationScriptsGuideline : BasePackageRule
+    public class PrereleaseVersionAsPartOfPackageIdRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return
+@"The package id includes a prerelease version name which should be included only in the version of the package. [More...](https://github.com/chocolatey/package-validator/wiki/PrereleaseVersionAsPartOfPackageId)";
+            }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            var valid = true;
+            var packageId = package.Id.to_lower();
 
-            var numberOfInstallationScripts = Utility.get_chocolatey_automation_scripts(package).Count();
-            
-            return numberOfInstallationScripts <= 3;
+            return !(packageId.Contains("alpha")
+                || packageId.Contains("beta")
+                || packageId.Contains("prerelease"));
         }
     }
 }

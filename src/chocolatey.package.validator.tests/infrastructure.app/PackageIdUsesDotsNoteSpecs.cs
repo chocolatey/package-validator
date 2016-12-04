@@ -15,24 +15,23 @@
 
 namespace chocolatey.package.validator.tests.infrastructure.app
 {
-    using System.Collections.Generic;
     using chocolatey.package.validator.infrastructure.app.rules;
     using chocolatey.package.validator.infrastructure.rules;
     using Moq;
     using NuGet;
     using Should;
 
-    public abstract class TagsDoNotContainChocolateyRequirementSpecsBase : TinySpec
+    public abstract class PackageIdUsesDotsNoteSpecsBase : TinySpec
     {
-        protected TagsDoNotContainChocolateyRequirement requirement;
+        protected PackageIdUsesDotsNote note;
         protected Mock<IPackage> package = new Mock<IPackage>();
 
         public override void Context()
         {
-            requirement = new TagsDoNotContainChocolateyRequirement();
+            note = new PackageIdUsesDotsNote();
         }
 
-        public class when_inspecting_package_with_chocolatey_as_first_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_dot_in_id : PackageIdUsesDotsNoteSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -40,12 +39,12 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                package.Setup(p => p.Tags).Returns("chocolatey another andAnother");
+                package.Setup(p => p.Id).Returns("package.A");
             }
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = note.is_valid(package.Object);
             }
 
             [Fact]
@@ -61,7 +60,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_middle_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_without_dot_in_id : PackageIdUsesDotsNoteSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -69,70 +68,12 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                package.Setup(p => p.Tags).Returns("another chocolatey andAnother");
+                package.Setup(p => p.Id).Returns("packageA");
             }
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
-            }
-
-            [Fact]
-            public void should_not_be_valid()
-            {
-                result.Validated.ShouldBeFalse();
-            }
-
-            [Fact]
-            public void should_not_override_the_base_message()
-            {
-                result.ValidationFailureMessageOverride.ShouldBeNull();
-            }
-        }
-
-        public class when_inspecting_package_with_chocolatey_as_last_tag : TagsDoNotContainChocolateyRequirementSpecsBase
-        {
-            private PackageValidationOutput result;
-
-            public override void Context()
-            {
-                base.Context();
-
-                package.Setup(p => p.Tags).Returns("another andAnother chocolatey");
-            }
-
-            public override void Because()
-            {
-                result = requirement.is_valid(package.Object);
-            }
-
-            [Fact]
-            public void should_not_be_valid()
-            {
-                result.Validated.ShouldBeFalse();
-            }
-
-            [Fact]
-            public void should_not_override_the_base_message()
-            {
-                result.ValidationFailureMessageOverride.ShouldBeNull();
-            }
-        }
-
-        public class when_inspecting_package_with_chocolatey_as_part_of_first_tag : TagsDoNotContainChocolateyRequirementSpecsBase
-        {
-            private PackageValidationOutput result;
-
-            public override void Context()
-            {
-                base.Context();
-
-                package.Setup(p => p.Tags).Returns("chocolateyhotkey another andAnother");
-            }
-
-            public override void Because()
-            {
-                result = requirement.is_valid(package.Object);
+                result = note.is_valid(package.Object);
             }
 
             [Fact]
@@ -148,7 +89,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_part_of_middle_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_dot_in_id_but_portable : PackageIdUsesDotsNoteSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -156,12 +97,12 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                package.Setup(p => p.Tags).Returns("another chocolateyhotkey andAnother");
+                package.Setup(p => p.Id).Returns("package.portable");
             }
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = note.is_valid(package.Object);
             }
 
             [Fact]
@@ -177,7 +118,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_part_of_last_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_dot_in_id_but_install : PackageIdUsesDotsNoteSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -185,12 +126,12 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                package.Setup(p => p.Tags).Returns("another andAnother chocolateyhotkey");
+                package.Setup(p => p.Id).Returns("package.install");
             }
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = note.is_valid(package.Object);
             }
 
             [Fact]
@@ -206,7 +147,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_chocolatey_as_tag_and_part_of_another_tag : TagsDoNotContainChocolateyRequirementSpecsBase
+        public class when_inspecting_package_with_dot_in_id_but_commandline : PackageIdUsesDotsNoteSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -214,18 +155,18 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                package.Setup(p => p.Tags).Returns("another chocolatey chocolateyhotkey");
+                package.Setup(p => p.Id).Returns("package.commandline");
             }
 
             public override void Because()
             {
-                result = requirement.is_valid(package.Object);
+                result = note.is_valid(package.Object);
             }
 
             [Fact]
-            public void should_not_be_valid()
+            public void should_be_valid()
             {
-                result.Validated.ShouldBeFalse();
+                result.Validated.ShouldBeTrue();
             }
 
             [Fact]

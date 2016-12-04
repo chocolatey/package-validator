@@ -12,34 +12,22 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
-    using chocolatey.package.validator.infrastructure.rules;
     using NuGet;
+    using infrastructure.rules;
 
-    public class ChocoInstallShouldntCallChocoUninstallRequirement : BasePackageRule
+    public class TagsNotEmptyRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The install script should not directly call the uninstall script.  Your script does this, and it will need to be changed. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptShouldntCallUninstallScript)";
+@"Tags (tags) are space separated values for referencing categories for software. Please include tags in the nuspec as space separated values. [More...](https://github.com/chocolatey/package-validator/wiki/TagsNotEmpty)";
         }
         }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            var valid = true;
-
-            foreach (var file in package.GetFiles().or_empty_list_if_null())
-            {
-                string extension = Path.GetExtension(file.Path).to_lower();
-                if (extension != "chocolateyinstall.ps1") continue;
-
-                var contents = file.GetStream().ReadToEnd().to_lower();
-
-                if (contents.Contains("chocolateyuninstall.ps1")) valid = false;
-            }
-
-            return valid;
+            return !string.IsNullOrWhiteSpace(package.Tags);
         }
     }
 }

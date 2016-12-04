@@ -15,24 +15,28 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
     using System.Linq;
-    using NuGet;
     using infrastructure.rules;
-    using utility;
+    using NuGet;
 
-    public class TooManyAutomationScriptsGuideline : BasePackageRule
+    public class OperatingSystemIndexFilesAreNotPackagedRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return
+@"The package contains Operating System index files, .ds_store or thumbs.db. Please remove all index files from the package. [More...](https://github.com/chocolatey/package-validator/wiki/OperatingSystemIndexFilesIncluded)";
+            }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            var valid = true;
-
-            var numberOfInstallationScripts = Utility.get_chocolatey_automation_scripts(package).Count();
-            
-            return numberOfInstallationScripts <= 3;
+            var files = package.GetFiles().or_empty_list_if_null();
+            return !files.Any(
+                f => f.Path.to_lower().Contains("thumbs.db")
+                     || f.Path.to_lower().Contains(".ds_store")
+                        );
         }
     }
 }

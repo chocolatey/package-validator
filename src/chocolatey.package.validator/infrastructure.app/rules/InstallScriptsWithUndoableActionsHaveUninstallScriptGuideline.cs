@@ -19,6 +19,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.Linq;
     using NuGet;
     using infrastructure.rules;
+    using utility;
 
     public class InstallScriptsWithUndoableActionsHaveUninstallScriptGuideline : BasePackageRule
     {
@@ -31,16 +32,13 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
+            var files = Utility.get_chocolatey_automation_scripts(package);
 
-            if (files.Any(f => f.Path.to_lower().Contains("chocolateyuninstall.ps1"))) return true;
+            if (files.Any(f => f.Key.Path.to_lower().Contains("chocolateyuninstall.ps1"))) return true;
 
-            foreach (var packageFile in files)
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
+                var contents = packageFile.Value.to_lower();
 
                 if (contents.Contains("install-chocolateypath") || contents.Contains("install-chocolateyenvironmentvariable")
                     || contents.Contains("install-chocolateyexplorermenuitem") || contents.Contains("install-chocolateyshortcut")

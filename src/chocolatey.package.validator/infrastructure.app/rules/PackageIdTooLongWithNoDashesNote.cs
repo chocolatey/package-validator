@@ -15,24 +15,27 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
-    using System.Linq;
     using NuGet;
     using infrastructure.rules;
-    using utility;
 
-    public class TooManyAutomationScriptsGuideline : BasePackageRule
+    public class PackageIdTooLongWithNoDashesNote : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return
+@"If this is a brand new package that has never went through approval before, the reviewer will suggest a change to the package id. [More...](https://github.com/chocolatey/package-validator/wiki/PackageIdTooLongWithNoDashes)";
+            }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            var valid = true;
+            var packageId = package.Id.to_lower();
 
-            var numberOfInstallationScripts = Utility.get_chocolatey_automation_scripts(package).Count();
-            
-            return numberOfInstallationScripts <= 3;
+            if (packageId.Length < 20) return true;
+
+            return packageId.Contains("-");
         }
     }
 }

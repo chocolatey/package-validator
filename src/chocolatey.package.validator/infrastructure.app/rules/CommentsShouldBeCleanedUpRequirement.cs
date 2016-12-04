@@ -16,26 +16,28 @@
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
     using System.IO;
-    using infrastructure.rules;
     using NuGet;
+    using infrastructure.rules;
+    using utility;
 
-    public class InstallScriptsShouldntUseCreateShortcutNote : BasePackageRule
+    public class CommentsShouldBeCleanedUpRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"Installation Scripts are using .CreateShortcut. The reviewer will ensure that there is a valid reason for not using a built-in Chocolatey Helper for creating shortcuts. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfCreateShortcut)"; } }
+        public override string ValidationFailureMessage { get { return
+@"Comments from template should be cleaned up and removed. [More...](https://github.com/chocolatey/package-validator/wiki/CommentsAreNotCleanedUp)";
+            }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 
-            foreach (var file in package.GetFiles().or_empty_list_if_null())
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(file.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
+                var contents = packageFile.Value.to_lower();
 
-                var contents = file.GetStream().ReadToEnd().to_lower();
-
-                if (contents.Contains(".createshortcut")) valid = false;
+                // covers both older template and newer template
+                if (contents.Contains("# main helper")) valid = false;
             }
 
             return valid;

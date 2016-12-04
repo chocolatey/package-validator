@@ -22,18 +22,18 @@ namespace chocolatey.package.validator.tests.infrastructure.app
     using NuGet;
     using Should;
 
-    public abstract class AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase : TinySpec
+    public abstract class SourceControlIgnoreFilesAreNotPackagedRequirementSpecsBase : TinySpec
     {
-        protected AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline guideline;
+        protected SourceControlIgnoreFilesAreNotPackagedRequirement requirement;
         protected Mock<IPackage> package = new Mock<IPackage>();
         protected Mock<IPackageFile> packageFile = new Mock<IPackageFile>();
 
         public override void Context()
         {
-            guideline = new AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline();
+            requirement = new SourceControlIgnoreFilesAreNotPackagedRequirement();
         }
 
-        public class when_inspecting_package_with_admin_helpers_with_no_admin_tag : AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase
+        public class when_inspecting_package_with_gitignore_file : SourceControlIgnoreFilesAreNotPackagedRequirementSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -41,18 +41,14 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("chocolateyinstall.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test noadmin");
+                packageFile.Setup(f => f.Path).Returns(".gitignore");
 
                 package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
             }
 
             public override void Because()
             {
-                result = guideline.is_valid(package.Object);
+                result = this.requirement.is_valid(package.Object);
             }
 
             [Fact]
@@ -68,7 +64,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             }
         }
 
-        public class when_inspecting_package_with_admin_helpers_with_admin_tag : AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase
+        public class when_inspecting_package_with_hgignore_file : SourceControlIgnoreFilesAreNotPackagedRequirementSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -76,18 +72,45 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("test.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test admin");
+                packageFile.Setup(f => f.Path).Returns(".hgignore");
 
                 package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
             }
 
             public override void Because()
             {
-                result = guideline.is_valid(package.Object);
+                result = this.requirement.is_valid(package.Object);
+            }
+
+            [Fact]
+            public void should_not_be_valid()
+            {
+                result.Validated.ShouldBeFalse();
+            }
+
+            [Fact]
+            public void should_not_override_the_base_message()
+            {
+                result.ValidationFailureMessageOverride.ShouldBeNull();
+            }
+        }
+
+        public class when_inspecting_package_without_an_ignore_file : SourceControlIgnoreFilesAreNotPackagedRequirementSpecsBase
+        {
+            private PackageValidationOutput result;
+
+            public override void Context()
+            {
+                base.Context();
+
+                packageFile.Setup(f => f.Path).Returns("chocolateyInstall.ps1");
+
+                package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
+            }
+
+            public override void Because()
+            {
+                result = this.requirement.is_valid(package.Object);
             }
 
             [Fact]

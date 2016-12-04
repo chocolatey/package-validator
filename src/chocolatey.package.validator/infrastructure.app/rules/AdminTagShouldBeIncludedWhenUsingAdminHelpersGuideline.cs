@@ -19,25 +19,22 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.Linq;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
     public class AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
 @"This package uses a helper function that requires administrative permissions, the tag 'admin' should also be in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/AdminTagShouldBeUsedWhenUsingAdminHelper) 
-  * **NOTE:** We're extending converting this to a requirement to 01 May 2016 to give folks plenty of time to prepare and make changes."; } }
+  * **NOTE:** This may become a requirement at some point."; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 
-            var files = package.GetFiles().or_empty_list_if_null();
-
+            var files = Utility.get_chocolatey_automation_scripts(package);
             foreach (var packageFile in files.or_empty_list_if_null())
             {
-                string extension = Path.GetExtension(packageFile.Path).to_lower();
-                if (extension != ".ps1" && extension != ".psm1") continue;
-
-                var contents = packageFile.GetStream().ReadToEnd().to_lower();
+                var contents = packageFile.Value.to_lower();
 
                 if (contents.Contains("install-chocolateypackage") ||
                     contents.Contains("start-chocolateyprocessasadmin") ||

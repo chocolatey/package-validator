@@ -16,23 +16,28 @@
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
     using System.IO;
-    using System.Linq;
-    using NuGet;
     using infrastructure.rules;
+    using NuGet;
     using utility;
 
-    public class TooManyAutomationScriptsGuideline : BasePackageRule
+    public class ScriptsShouldntUseGetWmiObjectSuggestion : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return 
-@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
+@"Installation Scripts should avoid using Get-WmiObject for finding software install information. [More...](https://github.com/chocolatey/package-validator/wiki/DontUseGetWmiObjectForFindingInstalledPackages)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var valid = true;
 
-            var numberOfInstallationScripts = Utility.get_chocolatey_automation_scripts(package).Count();
-            
-            return numberOfInstallationScripts <= 3;
+            var files = Utility.get_chocolatey_automation_scripts(package);
+            foreach (var packageFile in files.or_empty_list_if_null())
+            {
+                var contents = packageFile.Value.to_lower();
+
+                if (contents.Contains("get-wmiobject -class win32_product")) valid = false;
+            }
+
+            return valid;
         }
     }
 }

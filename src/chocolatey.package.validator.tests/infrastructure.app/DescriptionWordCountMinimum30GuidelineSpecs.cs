@@ -15,25 +15,23 @@
 
 namespace chocolatey.package.validator.tests.infrastructure.app
 {
-    using System.Collections.Generic;
     using chocolatey.package.validator.infrastructure.app.rules;
     using chocolatey.package.validator.infrastructure.rules;
     using Moq;
     using NuGet;
     using Should;
 
-    public abstract class AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase : TinySpec
+    public abstract class DescriptionWordCountMinimum30GuidelineSpecsBase : TinySpec
     {
-        protected AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline guideline;
+        protected DescriptionWordCountMinimum30Guideline guideline;
         protected Mock<IPackage> package = new Mock<IPackage>();
-        protected Mock<IPackageFile> packageFile = new Mock<IPackageFile>();
 
         public override void Context()
         {
-            guideline = new AdminTagShouldBeIncludedWhenUsingAdminHelpersGuideline();
+            this.guideline = new DescriptionWordCountMinimum30Guideline();
         }
 
-        public class when_inspecting_package_with_admin_helpers_with_no_admin_tag : AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase
+        public class when_inspecting_package_with_description_character_count_greater_than_30 : DescriptionWordCountMinimum30GuidelineSpecsBase
         {
             private PackageValidationOutput result;
 
@@ -41,48 +39,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             {
                 base.Context();
 
-                packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("chocolateyinstall.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test noadmin");
-
-                package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
-            }
-
-            public override void Because()
-            {
-                result = guideline.is_valid(package.Object);
-            }
-
-            [Fact]
-            public void should_not_be_valid()
-            {
-                result.Validated.ShouldBeFalse();
-            }
-
-            [Fact]
-            public void should_not_override_the_base_message()
-            {
-                result.ValidationFailureMessageOverride.ShouldBeNull();
-            }
-        }
-
-        public class when_inspecting_package_with_admin_helpers_with_admin_tag : AdminTagShouldBeIncludedWhenUsingAdminHelpersGuidelineSpecsBase
-        {
-            private PackageValidationOutput result;
-
-            public override void Context()
-            {
-                base.Context();
-
-                packageFile.Setup(f => f.GetStream()).Returns("install-chocolateypackage".to_stream());
-                packageFile.Setup(f => f.Path).Returns("test.ps1");
-
-                package.Setup(p => p.Tags).Returns(
-    "test admin");
-
-                package.Setup(p => p.GetFiles()).Returns(new List<IPackageFile>() { packageFile.Object });
+                package.Setup(p => p.Description).Returns("This is a perfectly valid description");
             }
 
             public override void Because()
@@ -94,6 +51,35 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             public void should_be_valid()
             {
                 result.Validated.ShouldBeTrue();
+            }
+
+            [Fact]
+            public void should_not_override_the_base_message()
+            {
+                result.ValidationFailureMessageOverride.ShouldBeNull();
+            }
+        }
+
+        public class when_inspecting_package_with_description_character_count_less_than_30 : DescriptionWordCountMinimum30GuidelineSpecsBase
+        {
+            private PackageValidationOutput result;
+
+            public override void Context()
+            {
+                base.Context();
+
+                package.Setup(p => p.Description).Returns("Not so good!");
+            }
+
+            public override void Because()
+            {
+                result = guideline.is_valid(package.Object);
+            }
+
+            [Fact]
+            public void should_not_be_valid()
+            {
+                result.Validated.ShouldBeFalse();
             }
 
             [Fact]

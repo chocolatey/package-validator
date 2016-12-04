@@ -15,24 +15,23 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
-    using System.IO;
-    using System.Linq;
-    using NuGet;
     using infrastructure.rules;
-    using utility;
+    using NuGet;
 
-    public class TooManyAutomationScriptsGuideline : BasePackageRule
+    public class PackageIdUsesUnderscoresNote : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
+        public override string ValidationFailureMessage
+        {
+            get
+            {
+                return
+@"The package id includes underscorse (_). Usually the package id is separated by '-' instead of underscores.  The reviewer will ensure this is not a new package. [More...](https://github.com/chocolatey/package-validator/wiki/PackageIdUsesUnderscores)";
+            }
+        }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            var valid = true;
-
-            var numberOfInstallationScripts = Utility.get_chocolatey_automation_scripts(package).Count();
-            
-            return numberOfInstallationScripts <= 3;
+            return !package.Id.Contains("_");
         }
     }
 }
