@@ -38,6 +38,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     var contents = packageFile.GetStream().ReadToEnd();
                     automationScripts.Add(packageFile, contents);
                    
+                    // add any PowerShell scripts that were referenced
                     try
                     {
                         var matches = _powerShellScriptRegex.Matches(contents);
