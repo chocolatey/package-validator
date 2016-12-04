@@ -15,7 +15,6 @@
 
 namespace chocolatey.package.validator.tests.infrastructure.app
 {
-    using System.Collections.Generic;
     using chocolatey.package.validator.infrastructure.app.rules;
     using chocolatey.package.validator.infrastructure.rules;
     using Moq;
