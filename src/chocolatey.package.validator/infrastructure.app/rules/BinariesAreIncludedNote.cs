@@ -32,6 +32,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
                 f =>
                 f.Path.to_lower().EndsWith(".exe") ||
                 f.Path.to_lower().EndsWith(".msi") ||
+                f.Path.to_lower().EndsWith(".dll") ||
                 f.Path.to_lower().EndsWith(".zip")
                 );
         }
