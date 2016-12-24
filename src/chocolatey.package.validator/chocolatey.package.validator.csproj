@@ -142,6 +142,7 @@
     <Compile Include="infrastructure.app\rules\DeprecatedPackagesShouldHaveDependencyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\DeprecatedPackageTitleGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionWordCountMaximum4000Requirement.cs" />
+    <Compile Include="infrastructure.app\rules\PackageIdDoesNotEndWithConfigRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotDownloadFromFossHubRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsShouldntUseCreateShortcutNote.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsShouldntUseGetWmiObjectSuggestion.cs" />
