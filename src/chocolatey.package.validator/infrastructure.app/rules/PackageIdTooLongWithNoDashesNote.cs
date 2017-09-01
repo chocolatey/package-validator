@@ -33,6 +33,13 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             var packageId = package.Id.to_lower();
 
+            packageId = packageId.Replace(".extension", string.Empty)
+                                 .Replace(".template", string.Empty)
+                                 .Replace(".install", string.Empty)
+                                 .Replace(".portable", string.Empty)
+                                 .Replace(".powershell", string.Empty)
+                                 ;
+
             if (packageId.Length < 20) return true;
 
             return packageId.Contains("-");
