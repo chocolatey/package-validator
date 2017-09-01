@@ -141,7 +141,7 @@
     <Compile Include="infrastructure.app\rules\DeprecatedPackageTitleGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionWordCountMaximum4000Requirement.cs" />
     <Compile Include="infrastructure.app\rules\PackageIdDoesNotEndWithConfigRequirement.cs" />
-    <Compile Include="infrastructure.app\rules\LicenseFileMissingWhenBinariesAreIncludedRequired.cs" />
+    <Compile Include="infrastructure.app\rules\LicenseFileMissingWhenBinariesAreIncludedRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsDoNotDownloadFromFossHubRequirement.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsShouldntUseCreateShortcutNote.cs" />
     <Compile Include="infrastructure.app\rules\ScriptsShouldntUseGetWmiObjectSuggestion.cs" />
@@ -196,7 +196,7 @@
     <Compile Include="infrastructure.app\rules\TooManyAutomationScriptsGuideline.cs" />
     <Compile Include="infrastructure.app\rules\UninstallAutomationScriptNamedCorrectlyRequirement.cs" />
     <Compile Include="infrastructure.app\rules\IconUrlUsePngOrSvgSuggestion.cs" />
-    <Compile Include="infrastructure.app\rules\VerficationFileMissingWhenBinariesAreIncludedRequired.cs" />
+    <Compile Include="infrastructure.app\rules\VerficationFileMissingWhenBinariesAreIncludedRequirement.cs" />
     <Compile Include="infrastructure.app\services\IPackageValidationService.cs" />
     <Compile Include="infrastructure.app\services\PackageValidationService.cs" />
     <Compile Include="infrastructure.app\utility\Utility.cs" />

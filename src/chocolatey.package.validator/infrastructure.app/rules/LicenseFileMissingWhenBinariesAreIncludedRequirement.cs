@@ -15,29 +15,33 @@
 
 namespace chocolatey.package.validator.infrastructure.app.rules
 {
+    using System;
     using System.Linq;
     using infrastructure.rules;
     using NuGet;
     using utility;
 
-    public class VerficationFileMissingWhenBinariesAreIncludedRequired : BasePackageRule
+    public class LicenseFileMissingWhenBinariesAreIncludedRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage
         {
-            get { return @"Binary files (.exe, .msi, .zip) have been included without including a VERFICATION.txt file. This file is required when including binaries  [More...](https://github.com/chocolatey/package-validator/wiki/VerificationFileMissing)"; }
+            get { return @"Binary files (.exe, .msi, .zip, etc) have been included without including a LICENSE.txt file. This file is required when including binaries  [More...](https://github.com/chocolatey/package-validator/wiki/LicenseFileMissing)"; }
         }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            //search for VERIFICATION, VERIFICATION.txt, VERIFICATION.md
+            //search for LICENSE, LICENSE.txt, LICENSE.md
             var packageFiles = package.GetFiles().or_empty_list_if_null().ToList();
 
             if (packageFiles.Any(
                 f =>
-                    StringExtensions.to_lower(f.Path).EndsWith("verification.txt") ||
-                    StringExtensions.to_lower(f.Path).EndsWith("verification") ||
-                    StringExtensions.to_lower(f.Path).EndsWith("verification.md")
-            ))
+                    StringExtensions.to_lower(f.Path).EndsWith("license.txt") ||
+                    StringExtensions.to_lower(f.Path).EndsWith("license")     ||
+                    StringExtensions.to_lower(f.Path).EndsWith("license.md")  ||       
+                    StringExtensions.to_lower(f.Path).EndsWith("notice.txt")  ||
+                    StringExtensions.to_lower(f.Path).EndsWith("notice")      ||
+                    StringExtensions.to_lower(f.Path).EndsWith("notice.md") 
+             ))
             {
                 return true;
             }
