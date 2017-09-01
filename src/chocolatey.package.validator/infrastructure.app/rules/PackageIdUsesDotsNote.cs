@@ -28,9 +28,14 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         public override PackageValidationOutput is_valid(IPackage package)
         {
             var packageId = package.Id.to_lower();
-            if (packageId.Contains(".portable")
+            if (
+                   packageId.Contains(".portable")
                 || packageId.Contains(".commandline")
-                || packageId.Contains(".install")) return true;
+                || packageId.Contains(".install")
+                || packageId.Contains(".extension")
+                || packageId.Contains(".template")
+                || packageId.Contains(".powershell")
+            ) return true;
 
             return !package.Id.Contains(".");
         }
