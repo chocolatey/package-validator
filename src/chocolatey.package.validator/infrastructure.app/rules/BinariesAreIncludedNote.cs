@@ -18,6 +18,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using System.Linq;
     using infrastructure.rules;
     using NuGet;
+    using utility;
 
     public class BinariesAreIncludedNote : BasePackageRule
     {
@@ -28,13 +29,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
         public override PackageValidationOutput is_valid(IPackage package)
         {
-            return !package.GetFiles().or_empty_list_if_null().Any(
-                f =>
-                f.Path.to_lower().EndsWith(".exe") ||
-                f.Path.to_lower().EndsWith(".msi") ||
-                f.Path.to_lower().EndsWith(".dll") ||
-                f.Path.to_lower().EndsWith(".zip")
-                );
+            return !Utility.package_has_binaries(package.GetFiles().or_empty_list_if_null().ToList());
         }
     }
 }

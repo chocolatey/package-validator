@@ -77,5 +77,28 @@ namespace chocolatey.package.validator.infrastructure.app.utility
 
             return scriptsAsTokens;
         }
+
+        public static bool package_has_binaries(IEnumerable<IPackageFile> packageFiles)
+        {
+            return packageFiles.Any(
+                f =>
+                    StringExtensions.to_lower(f.Path).EndsWith(".exe") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".msi") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".msu") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".msp") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".dll") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".7z")  ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".zip") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".gz")  ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".tar") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".rar") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".sfx") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".iso") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".dmg") ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".so")  ||
+                    StringExtensions.to_lower(f.Path).EndsWith(".jar") 
+
+            );
+        }
     }
 }
