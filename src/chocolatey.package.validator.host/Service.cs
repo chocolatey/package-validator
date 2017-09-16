@@ -16,6 +16,7 @@
 namespace chocolatey.package.validator.host
 {
     using System;
+    using System.IO;
     using System.ServiceProcess;
     using System.Threading;
     using infrastructure.registration;
@@ -47,6 +48,7 @@ namespace chocolatey.package.validator.host
             Bootstrap.initialize();
             _logger = LogManager.GetLogger(typeof(Service));
             Bootstrap.startup();
+            SecurityProtocol.set_protocol();
         }
 
         /// <summary>
