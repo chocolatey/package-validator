@@ -1,4 +1,4 @@
-// Copyright © 2015 - Present RealDimensions Software, LLC
+// Copyright ï¿½ 2015 - Present RealDimensions Software, LLC
 // 
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -20,11 +20,11 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using NuGet;
     using utility;
 
-    public class VerficationFileMissingWhenBinariesAreIncludedRequirement : BasePackageRule
+    public class VerificationFileMissingWhenBinariesAreIncludedRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage
         {
-            get { return @"Binary files (.exe, .msi, .zip) have been included without including a VERFICATION.txt file. This file is required when including binaries  [More...](https://github.com/chocolatey/package-validator/wiki/VerificationFileMissing)"; }
+            get { return @"Binary files (.exe, .msi, .zip) have been included without including a VERIFICATION.txt file. This file is required when including binaries  [More...](https://github.com/chocolatey/package-validator/wiki/VerificationFileMissing)"; }
         }
 
         public override PackageValidationOutput is_valid(IPackage package)
