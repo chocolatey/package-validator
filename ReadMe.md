@@ -34,7 +34,7 @@ There is a `build.bat`/`build.sh` file that creates a necessary generated file n
 
 Prerequisites:
 
- * .NET Framework 4+
+ * .NET Framework 4.5+
  * Visual Studio is helpful for working on source.
  * ReSharper is immensely helpful (and there is a `.sln.DotSettings` file to help with code conventions).
 
@@ -49,5 +49,5 @@ Running the build on Windows should produce an artifact that is tested and ready
 
 You need the following installed on a machine that you will use the validator with:
 
-* .NET Framework 4.0.
+* .NET Framework 4.5.
 * Install the service and let it run.

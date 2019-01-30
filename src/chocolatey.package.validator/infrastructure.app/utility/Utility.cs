@@ -20,12 +20,16 @@ namespace chocolatey.package.validator.infrastructure.app.utility
     using System.Collections.ObjectModel;
     using System.Linq;
     using System.Management.Automation;
+    using System.Net;
     using System.Text.RegularExpressions;
+    using chocolatey.package.validator.infrastructure.app.registration;
     using NuGet;
 
     public class Utility
     {
         private static readonly Regex _powerShellScriptRegex = new Regex(@"['""]?(\S+\.psm?1)", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.IgnoreCase);
+
+        private static readonly Regex _UrlRegex = new Regex(@"\b((?:https?://|www\.)\S+)\b", RegexOptions.Compiled | RegexOptions.CultureInvariant | RegexOptions.Multiline | RegexOptions.IgnoreCase);
 
         public static IDictionary<IPackageFile, string> get_chocolatey_automation_scripts(IPackage package)
         {
@@ -100,5 +104,64 @@ namespace chocolatey.package.validator.infrastructure.app.utility
 
             );
         }
+
+        /// <summary>
+        ///   Tries to validate an URL
+        /// </summary>
+        /// <param name="url">Uri object</param>
+        public static bool url_is_valid(Uri url)
+        {
+            var request = (HttpWebRequest)WebRequest.Create(url);
+            // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
+            SecurityProtocol.set_protocol();
+            request.Timeout = 15000;
+            //This would allow 301 and 302 to be valid as well
+            request.AllowAutoRedirect = true;
+            try
+            {
+                using (var response = (HttpWebResponse)request.GetResponse())
+                {
+                    return response.StatusCode == HttpStatusCode.OK;
+                }
+            }
+            catch (WebException ex)
+            {
+                "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                // TODO: Perhaps this function should return true if there is a website that does not work with our SSL/TLS settings. 
+                return false;
+            }
+        }
+
+        /// <summary>
+        ///   Fetches all URLs from a string, and validates if the url results in a 200 OK
+        /// </summary>
+        /// <param name="contents">String that might contain URL</param>
+        public static bool all_urls_are_valid(String contents)
+        {
+            var result = true;
+
+            try
+            {
+                var matches = _UrlRegex.Matches(contents);
+                foreach (Match match in matches)
+                {
+                    var url = match.Groups[1].Value;
+                    var uri = new Uri(url);
+                    var urlResult = url_is_valid(uri);
+                    if (!urlResult)
+                    {
+                        result = urlResult;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                "package-validator".Log().Warn("Error when searching for urls - {0}".format_with(ex.Message));
+                return false;
+            }
+
+            return result;
+        }
+
     }
 }

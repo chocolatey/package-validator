@@ -135,6 +135,17 @@
     <Compile Include="infrastructure.app\rules\AuthorDoesNotMatchMaintainerNote.cs" />
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionHeadingMarkdownRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\ReleaseNotesUrlsValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\DocsUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\BugTrackerUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\DescriptionUrlsValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\PackageSourceUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\WikiUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\LicenseUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\ProjectUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\ProjectSourceUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\MailingListUrlValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\IconUrlValidRequirement.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptShouldNotCallUninstallScriptsRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CommentsShouldBeCleanedUpRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightAndAuthorFieldsShouldntContainEmailRequirement.cs" />
