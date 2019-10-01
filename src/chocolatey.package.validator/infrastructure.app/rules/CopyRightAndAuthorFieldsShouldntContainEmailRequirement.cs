@@ -30,7 +30,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"Email address should not be used in the Author and Copyright fields of the nuspec file. [More...](https://github.com/chocolatey/package-validator/wiki/CopyrightAndAuthorFieldsShouldntContainEmail)";
+@"Email address should not be used in the Author and Copyright fields of the nuspec file. [More...](https://github.com/chocolatey/package-validator/wiki/NuspecDoesNotContainEmail)";
             }
         }
 
