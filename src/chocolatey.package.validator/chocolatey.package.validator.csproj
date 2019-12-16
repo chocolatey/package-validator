@@ -134,6 +134,7 @@
     <Compile Include="infrastructure.app\messaging\PackageValidationResultMessage.cs" />
     <Compile Include="infrastructure.app\rules\AuthorDoesNotMatchMaintainerNote.cs" />
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
+    <Compile Include="infrastructure.app\rules\DescriptionHeadingMarkdownRequirement.cs" />
     <Compile Include="infrastructure.app\rules\InstallScriptShouldNotCallUninstallScriptsRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CommentsShouldBeCleanedUpRequirement.cs" />
     <Compile Include="infrastructure.app\rules\CopyrightAndAuthorFieldsShouldntContainEmailRequirement.cs" />
