@@ -9,7 +9,7 @@ src/packages
 
 *.suo
 *.sln.docstates
-*.user 
+*.user
 *.csproj.user
 *.[rR]esharper.user
 *.DotSettings.user
@@ -24,7 +24,7 @@ _ReSharper*
 *.pidb
 *userprefs
 *.nupkg
- 
+
 TestResult.xml
 submit.xml
 SolutionVersion.cs
@@ -35,3 +35,5 @@ SolutionVersion.vb
 src/_dotCover*/
 src/_dotTrace*/
 src/chocolatey.sln.GhostDoc.xml
+
+.vs/

@@ -89,6 +89,7 @@
     <Compile Include="infrastructure.app\BinariesAreIncludedNoteSpecs.cs" />
     <Compile Include="infrastructure.app\CopyrightAndAuthorFieldsShouldntContainEmailRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
+    <Compile Include="infrastructure.app\DescriptionHeadingMarkdownRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionWordCountMinimum30GuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionWordCountMaximum4000RequirementSpecs.cs" />
     <Compile Include="infrastructure.app\IncludesChocolateyDependencyNoteSpecs.cs" />
