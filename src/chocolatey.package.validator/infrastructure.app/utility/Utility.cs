@@ -1,4 +1,4 @@
-// Copyright © 2015 - Present RealDimensions Software, LLC
+﻿// Copyright © 2015 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -111,9 +111,11 @@ namespace chocolatey.package.validator.infrastructure.app.utility
         /// <param name="url">Uri object</param>
         public static bool url_is_valid(Uri url)
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
             // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
             SecurityProtocol.set_protocol();
+
+            var request = (HttpWebRequest)WebRequest.Create(url);
+
             request.Timeout = 15000;
             //This would allow 301 and 302 to be valid as well
             request.AllowAutoRedirect = true;
