@@ -233,4 +233,75 @@ See all - http://github.com/chocolatey/choco/blob/stable/CHANGELOG.md
             result.ValidationFailureMessageOverride.ShouldBeNull();
         }
     }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052281
+    /// </summary>
+    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_Useragent_header : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // This URL should require UserAgent header, otherwise a 403 response is returned
+            package.Setup(p => p.ReleaseNotes).Returns(@"
+This is a test description with a [url](https://hamapps.com/php/license.php) that requires a User Agent Header in order to work.
+");
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052562
+    /// </summary>
+    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_tls_1_3 : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // This URL should require TLS 1.3 on the client, otherwise it won't be able to establish a connection
+            // to the server
+            package.Setup(p => p.ReleaseNotes).Returns(@"
+This is a test description with a [url](https://talk.atomisystems.com/) that requires TLS 1.3 in the client.
+");
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
 }

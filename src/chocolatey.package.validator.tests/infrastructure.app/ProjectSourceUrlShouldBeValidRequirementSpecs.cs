@@ -1,4 +1,4 @@
-// Copyright © 2015 - Present RealDimensions Software, LLC
+﻿// Copyright © 2015 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -128,6 +128,73 @@ namespace chocolatey.package.validator.tests.infrastructure.app
 
             //This should redirect to https:// with a 301
             package.Setup(p => p.ProjectSourceUrl).Returns(new Uri("http://chocolatey.org"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052281
+    /// </summary>
+    public class when_inspecting_package_with_valid_project_source_url_that_requires_Useragent_header : ProjectSourceUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // This URL should require UserAgent header, otherwise a 403 response is returned
+            package.Setup(p => p.ProjectSourceUrl).Returns(new Uri("https://hamapps.com/php/license.php"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052562
+    /// </summary>
+    public class when_inspecting_package_with_valid_project_source_url_that_requires_tls_1_3 : ProjectSourceUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // This URL should require TLS 1.3 on the client, otherwise it won't be able to establish a connection
+            // to the server
+            package.Setup(p => p.ProjectSourceUrl).Returns(new Uri("https://talk.atomisystems.com/"));
         }
 
         public override void Because()
