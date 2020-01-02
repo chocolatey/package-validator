@@ -1,4 +1,4 @@
-﻿// Copyright © 2015 - Present RealDimensions Software, LLC
+// Copyright © 2015 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -127,7 +127,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             base.Context();
 
             //This should redirect to https:// with a 301
-            package.Setup(p => p.IconUrl).Returns(new Uri("http://chocolatey.org")); 
+            package.Setup(p => p.IconUrl).Returns(new Uri("http://chocolatey.org"));
         }
 
         public override void Because()

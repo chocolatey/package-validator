@@ -1,12 +1,12 @@
-﻿// Copyright © 2015 - Present RealDimensions Software, LLC
-// 
+// Copyright © 2015 - Present RealDimensions Software, LLC
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// 
+//
 // You may obtain a copy of the License at
-// 
+//
 // 	http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,7 +43,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 {
                     var contents = packageFile.GetStream().ReadToEnd();
                     automationScripts.Add(packageFile, contents);
-                   
+
                     // add any PowerShell scripts that were referenced
                     try
                     {
@@ -100,7 +100,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     StringExtensions.to_lower(f.Path).EndsWith(".iso") ||
                     StringExtensions.to_lower(f.Path).EndsWith(".dmg") ||
                     StringExtensions.to_lower(f.Path).EndsWith(".so")  ||
-                    StringExtensions.to_lower(f.Path).EndsWith(".jar") 
+                    StringExtensions.to_lower(f.Path).EndsWith(".jar")
 
             );
         }
@@ -127,7 +127,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
             catch (WebException ex)
             {
                 "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
-                // TODO: Perhaps this function should return true if there is a website that does not work with our SSL/TLS settings. 
+                // TODO: Perhaps this function should return true if there is a website that does not work with our SSL/TLS settings.
                 return false;
             }
         }
