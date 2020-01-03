@@ -214,4 +214,37 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             result.ValidationFailureMessageOverride.ShouldBeNull();
         }
     }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/199
+    /// </summary>
+    public class when_inspecting_package_with_valid_icon_url_with_non_http_or_https_scheme : IconUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // Non http/https URLs shouldn't be validated, and if passed in, should simply return true
+            package.Setup(p => p.IconUrl).Returns(new Uri("git://git.code.sf.net/p/mrviewer/code"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
 }

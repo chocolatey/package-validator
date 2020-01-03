@@ -111,6 +111,17 @@ namespace chocolatey.package.validator.infrastructure.app.utility
         /// <param name="url">Uri object</param>
         public static bool url_is_valid(Uri url)
         {
+            if (url == null)
+            {
+                return true;
+            }
+
+            if (!url.Scheme.StartsWith("http"))
+            {
+                // Currently we can only validate http/https URL's, therefore simply return true for any others.
+                return true;
+            }
+
             // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
             SecurityProtocol.set_protocol();
 
