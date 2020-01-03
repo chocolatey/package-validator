@@ -122,26 +122,26 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 return true;
             }
 
-            // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
-            SecurityProtocol.set_protocol();
-
-            var request = (HttpWebRequest)WebRequest.Create(url);
-
-            request.Timeout = 15000;
-            //This would allow 301 and 302 to be valid as well
-            request.AllowAutoRedirect = true;
-            request.UserAgent = "{0}/{1}".format_with(ApplicationParameters.Name, ApplicationParameters.FileVersion);
             try
             {
+                // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
+                SecurityProtocol.set_protocol();
+
+                var request = (HttpWebRequest)WebRequest.Create(url);
+
+                request.Timeout = 15000;
+                //This would allow 301 and 302 to be valid as well
+                request.AllowAutoRedirect = true;
+                request.UserAgent = "{0}/{1}".format_with(ApplicationParameters.Name, ApplicationParameters.FileVersion);
+
                 using (var response = (HttpWebResponse)request.GetResponse())
                 {
                     return response.StatusCode == HttpStatusCode.OK;
                 }
             }
-            catch (WebException ex)
+            catch (Exception ex)
             {
                 "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
-                // TODO: Perhaps this function should return true if there is a website that does not work with our SSL/TLS settings.
                 return false;
             }
         }
