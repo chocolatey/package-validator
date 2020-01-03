@@ -1,12 +1,12 @@
 ﻿// Copyright © 2015 - Present RealDimensions Software, LLC
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// 
+//
 // You may obtain a copy of the License at
-// 
+//
 // 	http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -43,7 +43,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 {
                     var contents = packageFile.GetStream().ReadToEnd();
                     automationScripts.Add(packageFile, contents);
-                   
+
                     // add any PowerShell scripts that were referenced
                     try
                     {
@@ -100,7 +100,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     StringExtensions.to_lower(f.Path).EndsWith(".iso") ||
                     StringExtensions.to_lower(f.Path).EndsWith(".dmg") ||
                     StringExtensions.to_lower(f.Path).EndsWith(".so")  ||
-                    StringExtensions.to_lower(f.Path).EndsWith(".jar") 
+                    StringExtensions.to_lower(f.Path).EndsWith(".jar")
 
             );
         }
@@ -111,12 +111,15 @@ namespace chocolatey.package.validator.infrastructure.app.utility
         /// <param name="url">Uri object</param>
         public static bool url_is_valid(Uri url)
         {
-            var request = (HttpWebRequest)WebRequest.Create(url);
             // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
             SecurityProtocol.set_protocol();
+
+            var request = (HttpWebRequest)WebRequest.Create(url);
+
             request.Timeout = 15000;
             //This would allow 301 and 302 to be valid as well
             request.AllowAutoRedirect = true;
+            request.UserAgent = "{0}/{1}".format_with(ApplicationParameters.Name, ApplicationParameters.FileVersion);
             try
             {
                 using (var response = (HttpWebResponse)request.GetResponse())
@@ -127,7 +130,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
             catch (WebException ex)
             {
                 "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
-                // TODO: Perhaps this function should return true if there is a website that does not work with our SSL/TLS settings. 
+                // TODO: Perhaps this function should return true if there is a website that does not work with our SSL/TLS settings.
                 return false;
             }
         }
