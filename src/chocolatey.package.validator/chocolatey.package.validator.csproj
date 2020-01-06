@@ -135,10 +135,10 @@
     <Compile Include="infrastructure.app\rules\AuthorDoesNotMatchMaintainerNote.cs" />
     <Compile Include="infrastructure.app\rules\BinariesAreIncludedNote.cs" />
     <Compile Include="infrastructure.app\rules\DescriptionHeadingMarkdownRequirement.cs" />
-    <Compile Include="infrastructure.app\rules\ReleaseNotesUrlsValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\ReleaseNotesUrlsValidGuideline.cs" />
     <Compile Include="infrastructure.app\rules\DocsUrlValidRequirement.cs" />
     <Compile Include="infrastructure.app\rules\BugTrackerUrlValidRequirement.cs" />
-    <Compile Include="infrastructure.app\rules\DescriptionUrlsValidRequirement.cs" />
+    <Compile Include="infrastructure.app\rules\DescriptionUrlsValidGuideline.cs" />
     <Compile Include="infrastructure.app\rules\PackageSourceUrlValidRequirement.cs" />
     <Compile Include="infrastructure.app\rules\WikiUrlValidRequirement.cs" />
     <Compile Include="infrastructure.app\rules\LicenseUrlValidRequirement.cs" />
