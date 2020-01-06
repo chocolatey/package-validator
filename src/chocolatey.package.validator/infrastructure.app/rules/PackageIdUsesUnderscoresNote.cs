@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"The package id includes underscorse (_). Usually the package id is separated by '-' instead of underscores.  The reviewer will ensure this is not a new package. [More...](https://github.com/chocolatey/package-validator/wiki/PackageIdUsesUnderscores)";
+@"The package id includes underscores (_). Usually the package id is separated by '-' instead of underscores.  The reviewer will ensure this is not a new package. [More...](https://github.com/chocolatey/package-validator/wiki/PackageIdUsesUnderscores)";
             }
         }
 
