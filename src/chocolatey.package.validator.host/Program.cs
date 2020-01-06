@@ -1,4 +1,4 @@
-// Copyright © 2015 - Present RealDimensions Software, LLC
+﻿// Copyright © 2015 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -18,6 +18,7 @@ namespace chocolatey.package.validator.host
     using System;
     using System.IO;
     using System.ServiceProcess;
+    using chocolatey.package.validator.infrastructure.app.registration;
 
     // ReSharper disable InconsistentNaming
 
@@ -29,6 +30,12 @@ namespace chocolatey.package.validator.host
         /// <param name="args">The args.</param>
         private static void Main(string[] args)
         {
+            // Ensure that the correct Security Protocol is being used.  Do this as early
+            // as possible, rather than having to do it in multiple places in the code
+            // base.
+            // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
+            SecurityProtocol.set_protocol();
+
             if ((args.Length > 0) && (Array.IndexOf(args, "/console") != -1))
             {
                 var service = new Service();

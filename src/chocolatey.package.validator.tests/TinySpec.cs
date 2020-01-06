@@ -19,6 +19,7 @@ namespace chocolatey.package.validator.tests
     using System;
     using NUnit.Framework;
     using validator.infrastructure.logging;
+    using chocolatey.package.validator.infrastructure.app.registration;
 
     // ReSharper disable InconsistentNaming
 
@@ -55,6 +56,9 @@ namespace chocolatey.package.validator.tests
         [TestFixtureSetUp]
         public void Setup()
         {
+            // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
+            SecurityProtocol.set_protocol();
+
             if (MockLogger != null) MockLogger.reset();
             //Log.InitializeWith(MockLogger);
             Context();

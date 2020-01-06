@@ -1,4 +1,4 @@
-// Copyright © 2015 - Present RealDimensions Software, LLC
+﻿// Copyright © 2015 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -22,7 +22,6 @@ namespace chocolatey.package.validator.infrastructure.app.utility
     using System.Management.Automation;
     using System.Net;
     using System.Text.RegularExpressions;
-    using chocolatey.package.validator.infrastructure.app.registration;
     using NuGet;
 
     public class Utility
@@ -123,9 +122,6 @@ namespace chocolatey.package.validator.infrastructure.app.utility
 
             try
             {
-                // Use TLS1.2, TLS1.1, TLS1.0, SSLv3
-                SecurityProtocol.set_protocol();
-
                 var request = (HttpWebRequest)WebRequest.Create(url);
 
                 request.Timeout = 15000;

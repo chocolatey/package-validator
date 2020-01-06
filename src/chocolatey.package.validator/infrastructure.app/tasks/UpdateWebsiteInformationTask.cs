@@ -1,4 +1,4 @@
-// Copyright © 2015 - Present RealDimensions Software, LLC
+﻿// Copyright © 2015 - Present RealDimensions Software, LLC
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -56,7 +56,6 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
 
         private void update_website(FinalPackageValidationResultMessage message)
         {
-            SecurityProtocol.set_protocol();
             if (string.IsNullOrWhiteSpace(_configurationSettings.PackagesApiKey)) return;
 
             this.Log().Info(() => "Updating website for {0} v{1} with results (package {2} requirements).".format_with(message.PackageId, message.PackageVersion, message.Success ? "passed": "failed"));
