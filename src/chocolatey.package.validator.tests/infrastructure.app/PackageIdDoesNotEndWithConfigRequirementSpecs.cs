@@ -88,5 +88,34 @@ namespace chocolatey.package.validator.tests.infrastructure.app
                 result.ValidationFailureMessageOverride.ShouldBeNull();
             }
         }
+
+        public class when_inspecting_package_ending_with_configuration : PackageIdDoesNotEndWithConfigRequirementSpecsBase
+        {
+            private PackageValidationOutput result;
+
+            public override void Context()
+            {
+                base.Context();
+
+                package.Setup(p => p.Id).Returns("bob.configuration");
+            }
+
+            public override void Because()
+            {
+                result = requirement.is_valid(package.Object);
+            }
+
+            [Fact]
+            public void should_be_valid()
+            {
+                result.Validated.ShouldBeTrue();
+            }
+
+            [Fact]
+            public void should_not_override_the_base_message()
+            {
+                result.ValidationFailureMessageOverride.ShouldBeNull();
+            }
+        }
     }
 }
