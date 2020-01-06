@@ -19,10 +19,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using infrastructure.rules;
     using utility;
 
-    public class DescriptionUrlValidRequirement : BasePackageRule
+    public class DescriptionUrlValidGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"In the Description element in the nuspec file an invalid Url is found. Please correct this [More...](https://github.com/chocolatey/package-validator/wiki/InvalidUrlProvided)";
+@"In the Description element of the nuspec file a potentially invalid Url has been found.  Recommendation is to fix this URL [More...](https://github.com/chocolatey/package-validator/wiki/InvalidUrlProvided)";
         }
         }
 

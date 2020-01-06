@@ -22,18 +22,18 @@ namespace chocolatey.package.validator.tests.infrastructure.app
     using Should;
     using System;
 
-    public abstract class DescriptionUrlsShouldBeValidRequirementSpecs : TinySpec
+    public abstract class DescriptionUrlsShouldBeValidGuidelineSpecs : TinySpec
     {
-        protected DescriptionUrlValidRequirement validationCheck;
+        protected DescriptionUrlValidGuideline validationCheck;
         protected Mock<IPackage> package = new Mock<IPackage>();
 
         public override void Context()
         {
-            validationCheck = new DescriptionUrlValidRequirement();
+            validationCheck = new DescriptionUrlValidGuideline();
         }
     }
 
-    public class when_inspecting_package_with_empty_description : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_empty_description : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -60,7 +60,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
         }
     }
 
-    public class when_inspecting_package_with_one_invalid_url_in_description : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_one_invalid_url_in_description : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -92,7 +92,7 @@ Chocolatey is brought to you by the work and inspiration of the community, the w
         }
     }
 
-    public class when_inspecting_package_with_valid_url_in_description : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_in_description : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -127,7 +127,7 @@ You can host your own sources and add them to Chocolatey, you can extend Chocola
         }
     }
 
-    public class when_inspecting_package_with_multiple_valid_url_in_description : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_multiple_valid_url_in_description : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -166,7 +166,7 @@ You can host your own sources and add them to Chocolatey, you can extend Chocola
         }
     }
 
-    public class when_inspecting_package_with_multiple_valid_url_and_one_invalid_in_description : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_multiple_valid_url_and_one_invalid_in_description : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -205,7 +205,7 @@ You can host your own sources and add them to Chocolatey, you can extend Chocola
         }
     }
 
-    public class when_inspecting_package_with_valid_url_in_description_using_redir : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_in_description_using_redir : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -244,7 +244,7 @@ You can host your own sources and add them to Chocolatey, you can extend Chocola
     /// <summary>
     /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052281
     /// </summary>
-    public class when_inspecting_package_with_valid_url_that_requires_Useragent_header : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_that_requires_Useragent_header : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -279,7 +279,7 @@ This is a test description with a [url](https://hamapps.com/php/license.php) tha
     /// <summary>
     /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052562
     /// </summary>
-    public class when_inspecting_package_with_valid_url_that_requires_tls_1_3 : DescriptionUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_that_requires_tls_1_3 : DescriptionUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 

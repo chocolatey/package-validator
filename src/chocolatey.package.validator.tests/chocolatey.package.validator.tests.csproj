@@ -90,12 +90,12 @@
     <Compile Include="infrastructure.app\CopyrightAndAuthorFieldsShouldntContainEmailRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DependencyWithNoVersionGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionHeadingMarkdownRequirementSpecs.cs" />
-    <Compile Include="infrastructure.app\ReleaseNotesUrlsShouldBeValidRequirementSpecs.cs" />
+    <Compile Include="infrastructure.app\ReleaseNotesUrlsShouldBeValidGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionWordCountMinimum30GuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\DescriptionWordCountMaximum4000RequirementSpecs.cs" />
     <Compile Include="infrastructure.app\DocsUrlShouldBeValidRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\BugTrackerUrlShouldBeValidRequirementSpecs.cs" />
-    <Compile Include="infrastructure.app\DescriptionUrlsShouldBeValidRequirementSpecs.cs" />
+    <Compile Include="infrastructure.app\DescriptionUrlsShouldBeValidGuidelineSpecs.cs" />
     <Compile Include="infrastructure.app\PackageSourceUrlShouldBeValidRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\WikiUrlShouldBeValidRequirementSpecs.cs" />
     <Compile Include="infrastructure.app\LicenseUrlShouldBeValidRequirementSpecs.cs" />

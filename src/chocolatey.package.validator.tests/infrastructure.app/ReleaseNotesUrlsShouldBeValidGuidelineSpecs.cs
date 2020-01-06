@@ -22,18 +22,18 @@ namespace chocolatey.package.validator.tests.infrastructure.app
     using Should;
     using System;
 
-    public abstract class ReleaseNotesUrlsShouldBeValidRequirementSpecs : TinySpec
+    public abstract class ReleaseNotesUrlsShouldBeValidGuidelineSpecs : TinySpec
     {
-        protected ReleaseNotesUrlValidRequirement validationCheck;
+        protected ReleaseNotesUrlValidGuideline validationCheck;
         protected Mock<IPackage> package = new Mock<IPackage>();
 
         public override void Context()
         {
-            validationCheck = new ReleaseNotesUrlValidRequirement();
+            validationCheck = new ReleaseNotesUrlValidGuideline();
         }
     }
 
-    public class when_inspecting_package_with_empty_releasenotes : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_empty_releasenotes : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -60,7 +60,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
         }
     }
 
-    public class when_inspecting_package_with_one_invalid_url_in_releasenotes : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_one_invalid_url_in_releasenotes : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -91,7 +91,7 @@ See all - https://invalid.url
         }
     }
 
-    public class when_inspecting_package_with_valid_url_in_releasenotes : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_in_releasenotes : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -125,7 +125,7 @@ See all - https://github.com/chocolatey/choco/blob/stable/CHANGELOG.md
         }
     }
 
-    public class when_inspecting_package_with_multiple_valid_url_in_releasenotes : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_multiple_valid_url_in_releasenotes : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -161,7 +161,7 @@ See all - https://github.com/chocolatey/choco/blob/stable/CHANGELOG.md
         }
     }
 
-    public class when_inspecting_package_with_multiple_valid_url_and_one_invalid_in_releasenotes : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_multiple_valid_url_and_one_invalid_in_releasenotes : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -197,7 +197,7 @@ See all - https://github.com/chocolatey/choco/blob/stable/CHANGELOG.md
         }
     }
 
-    public class when_inspecting_package_with_valid_url_in_releasenotes_using_redir : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_in_releasenotes_using_redir : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -237,7 +237,7 @@ See all - http://github.com/chocolatey/choco/blob/stable/CHANGELOG.md
     /// <summary>
     /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052281
     /// </summary>
-    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_Useragent_header : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_Useragent_header : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
@@ -272,7 +272,7 @@ This is a test description with a [url](https://hamapps.com/php/license.php) tha
     /// <summary>
     /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052562
     /// </summary>
-    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_tls_1_3 : ReleaseNotesUrlsShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_tls_1_3 : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
