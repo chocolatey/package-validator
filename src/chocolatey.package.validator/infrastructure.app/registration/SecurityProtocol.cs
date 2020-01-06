@@ -21,6 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.registration
     {
         private const int TLS_1_1 = 768;
         private const int TLS_1_2 = 3072;
+        private const int TLS_1_3 = 12288;
 
         public static void set_protocol()
         {
@@ -32,7 +33,8 @@ namespace chocolatey.package.validator.infrastructure.app.registration
                 // will allow us to set these protocols directly.
                 const SecurityProtocolType tls11 = (SecurityProtocolType)TLS_1_1;
                 const SecurityProtocolType tls12 = (SecurityProtocolType)TLS_1_2;
-                ServicePointManager.SecurityProtocol = tls12 | tls11 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
+                const SecurityProtocolType tls13 = (SecurityProtocolType)TLS_1_3;
+                ServicePointManager.SecurityProtocol = tls13 | tls12 | tls11 | SecurityProtocolType.Tls | SecurityProtocolType.Ssl3;
             }
             catch (Exception)
             {
