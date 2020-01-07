@@ -114,6 +114,12 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 return true;
             }
 
+            if (url.Scheme == "mailto")
+            {
+                // mailto links are not expected/allowed, therefore immediately fail with no further processing
+                return false;
+            }
+
             if (!url.Scheme.StartsWith("http"))
             {
                 // Currently we can only validate http/https URL's, therefore simply return true for any others.
