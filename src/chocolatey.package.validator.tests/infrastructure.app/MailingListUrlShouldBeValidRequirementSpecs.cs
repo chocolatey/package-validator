@@ -147,4 +147,137 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             result.ValidationFailureMessageOverride.ShouldBeNull();
         }
     }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052281
+    /// </summary>
+    public class when_inspecting_package_with_valid_mailing_list_url_that_requires_Useragent_header : MailingListUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // This URL should require UserAgent header, otherwise a 403 response is returned
+            package.Setup(p => p.MailingListUrl).Returns(new Uri("https://hamapps.com/php/license.php"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052562
+    /// </summary>
+    public class when_inspecting_package_with_valid_mailing_list_url_that_requires_tls_1_3 : MailingListUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // This URL should require TLS 1.3 on the client, otherwise it won't be able to establish a connection
+            // to the server
+            package.Setup(p => p.MailingListUrl).Returns(new Uri("https://talk.atomisystems.com/"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
+
+    /// <summary>
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/199
+    /// </summary>
+    public class when_inspecting_package_with_valid_mailing_list_url_with_non_http_or_https_scheme : MailingListUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // Non http/https URLs shouldn't be validated, and if passed in, should simply return true
+            package.Setup(p => p.MailingListUrl).Returns(new Uri("git://git.code.sf.net/p/mrviewer/code"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
+
+    /// <summary>
+    /// This test case comes from issue here: https://github.com/chocolatey/package-validator/issues/210
+    /// </summary>
+    public class when_inspecting_package_with_mailto_scheme_in_mailing_list_url : MailingListUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // mailto url shouldn't be allowed
+            package.Setup(p => p.MailingListUrl).Returns(new Uri("mailto:someone@yoursite.com"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_invalid()
+        {
+            result.Validated.ShouldBeFalse();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
 }
