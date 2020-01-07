@@ -127,7 +127,7 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             base.Context();
 
             //This should redirect to https:// with a 301
-            package.Setup(p => p.MailingListUrl).Returns(new Uri("http://chocolatey.org")); 
+            package.Setup(p => p.MailingListUrl).Returns(new Uri("http://chocolatey.org"));
         }
 
         public override void Because()
