@@ -247,4 +247,37 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             result.ValidationFailureMessageOverride.ShouldBeNull();
         }
     }
+
+    /// <summary>
+    /// This test case comes from issue here: https://github.com/chocolatey/package-validator/issues/210
+    /// </summary>
+    public class when_inspecting_package_with_mailto_scheme_in_project_source_url : ProjectSourceUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // mailto url shouldn't be allowed
+            package.Setup(p => p.ProjectSourceUrl).Returns(new Uri("mailto:someone@yoursite.com"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_invalid()
+        {
+            result.Validated.ShouldBeFalse();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
 }
