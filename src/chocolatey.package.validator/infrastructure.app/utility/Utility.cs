@@ -129,7 +129,9 @@ namespace chocolatey.package.validator.infrastructure.app.utility
             try
             {
                 var request = (HttpWebRequest)WebRequest.Create(url);
+                var cookieContainer = new CookieContainer();
 
+                request.CookieContainer = cookieContainer;
                 request.Timeout = 15000;
                 //This would allow 301 and 302 to be valid as well
                 request.AllowAutoRedirect = true;
