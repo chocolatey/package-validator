@@ -152,6 +152,13 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     return true;
                 }
 
+                if (ex.Status == WebExceptionStatus.ProtocolError && ex.Message == "The remote server returned an error: (503) Server Unavailable.")
+                {
+                    "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                    "package-validator".Log().Warn("This could be due to Cloudflare DDOS protection acting in front of the site, or another valid reason, as such, this URL will be marked as valid for the time being.");
+                    return true;
+                }
+
                 "package-validator".Log().Error("Error validating Url {0} - {1}", url.ToString(), ex.Message);
                 return false;
             }
