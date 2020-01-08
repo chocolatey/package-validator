@@ -128,7 +128,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
 
             try
             {
-                var request = (HttpWebRequest)WebRequest.Create(url);
+                var request = (HttpWebRequest) WebRequest.Create(url);
                 var cookieContainer = new CookieContainer();
 
                 request.CookieContainer = cookieContainer;
@@ -138,14 +138,26 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 request.UserAgent = "{0}/{1}".format_with(ApplicationParameters.Name, ApplicationParameters.FileVersion);
                 request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
 
-                using (var response = (HttpWebResponse)request.GetResponse())
+                using (var response = (HttpWebResponse) request.GetResponse())
                 {
                     return response.StatusCode == HttpStatusCode.OK;
                 }
             }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.SecureChannelFailure)
+                {
+                    "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                    "package-validator".Log().Warn("Since this is likely due to missing Ciphers on the machine hosting package-validator, this URL will be marked as valid for the time being.");
+                    return true;
+                }
+
+                "package-validator".Log().Error("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                return false;
+            }
             catch (Exception ex)
             {
-                "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                "package-validator".Log().Error("Error validating Url {0} - {1}", url.ToString(), ex.Message);
                 return false;
             }
         }
