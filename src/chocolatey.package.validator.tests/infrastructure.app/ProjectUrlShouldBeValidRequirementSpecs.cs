@@ -313,4 +313,37 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             result.ValidationFailureMessageOverride.ShouldBeNull();
         }
     }
+
+    /// <summary>
+    /// This test case comes from issue here: https://github.com/chocolatey/package-validator/issues/214
+    /// </summary>
+    public class when_inspecting_package_with_project_url_that_requires_accept_header : ProjectUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // mailto url shouldn't be allowed
+            package.Setup(p => p.ProjectUrl).Returns(new Uri("https://nbcgib.uesc.br/tinnr/en/"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
 }

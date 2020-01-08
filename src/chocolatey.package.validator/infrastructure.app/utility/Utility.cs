@@ -136,6 +136,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 //This would allow 301 and 302 to be valid as well
                 request.AllowAutoRedirect = true;
                 request.UserAgent = "{0}/{1}".format_with(ApplicationParameters.Name, ApplicationParameters.FileVersion);
+                request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
 
                 using (var response = (HttpWebResponse)request.GetResponse())
                 {
