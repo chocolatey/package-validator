@@ -182,9 +182,9 @@ namespace chocolatey.package.validator.tests.infrastructure.app
     }
 
     /// <summary>
-    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052562
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/216
     /// </summary>
-    public class when_inspecting_package_with_valid_icon_url_that_requires_tls_1_3 : IconUrlShouldBeValidRequirementSpecs
+    public class when_inspecting_package_with_valid_icon_url_that_requires_newer_tls_cipher : IconUrlShouldBeValidRequirementSpecs
     {
         private PackageValidationOutput result;
 

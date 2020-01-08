@@ -270,9 +270,9 @@ This is a test description with a [url](https://hamapps.com/php/license.php) tha
     }
 
     /// <summary>
-    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/200#issuecomment-570052562
+    /// This test case comes from a reported issue here: https://github.com/chocolatey/package-validator/issues/216
     /// </summary>
-    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_tls_1_3 : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
+    public class when_inspecting_package_with_valid_url_in_releasenotes_that_requires_newer_tls_cipher : ReleaseNotesUrlsShouldBeValidGuidelineSpecs
     {
         private PackageValidationOutput result;
 
