@@ -159,12 +159,12 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     return true;
                 }
 
-                "package-validator".Log().Error("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
                 return false;
             }
             catch (Exception ex)
             {
-                "package-validator".Log().Error("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
                 return false;
             }
         }
