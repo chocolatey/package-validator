@@ -379,4 +379,37 @@ namespace chocolatey.package.validator.tests.infrastructure.app
             result.ValidationFailureMessageOverride.ShouldBeNull();
         }
     }
+
+    /// <summary>
+    /// This test case comes from issue here: https://github.com/chocolatey/package-validator/issues/222
+    /// </summary>
+    public class when_inspecting_package_with_license_url_that_requires_specific_user_agent : LicenseUrlShouldBeValidRequirementSpecs
+    {
+        private PackageValidationOutput result;
+
+        public override void Context()
+        {
+            base.Context();
+
+            // mailto url shouldn't be allowed
+            package.Setup(p => p.LicenseUrl).Returns(new Uri("https://www.microsoft.com/en-us/edge"));
+        }
+
+        public override void Because()
+        {
+            result = validationCheck.is_valid(package.Object);
+        }
+
+        [Fact]
+        public void should_be_valid()
+        {
+            result.Validated.ShouldBeTrue();
+        }
+
+        [Fact]
+        public void should_not_override_the_base_message()
+        {
+            result.ValidationFailureMessageOverride.ShouldBeNull();
+        }
+    }
 }

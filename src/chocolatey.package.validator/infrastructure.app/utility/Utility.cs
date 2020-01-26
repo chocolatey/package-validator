@@ -135,7 +135,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 request.Timeout = 15000;
                 //This would allow 301 and 302 to be valid as well
                 request.AllowAutoRedirect = true;
-                request.UserAgent = "{0}/{1}".format_with(ApplicationParameters.Name, ApplicationParameters.FileVersion);
+                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36";
                 request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
 
                 using (var response = (HttpWebResponse) request.GetResponse())
