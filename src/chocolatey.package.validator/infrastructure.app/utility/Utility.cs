@@ -145,6 +145,14 @@ namespace chocolatey.package.validator.infrastructure.app.utility
             }
             catch (WebException ex)
             {
+                if (ex.Status == System.Net.WebExceptionStatus.ProtocolError && ex.Message == "The remote server returned an error: (403) Forbidden." && ex.Response.Headers["Server"] == "AkamaiGHost")
+                {
+                    "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                    "package-validator".Log().Warn("Since this is likely due to the fact that the server is using Akamai, which expects request headers to be in a VERY specific order and case, this URL will be marked as valid for the time being.");
+                    "package-validator".Log().Warn("This check was put in place as a result of this issue: https://github.com/chocolatey/package-validator/issues/225");
+                    return true;
+                }
+
                 if (ex.Status == WebExceptionStatus.SecureChannelFailure)
                 {
                     "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
