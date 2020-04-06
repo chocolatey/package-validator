@@ -137,6 +137,10 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 request.AllowAutoRedirect = true;
                 request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36";
                 request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
+                request.Headers["Sec-Fetch-Mode"] = "navigate";
+                request.Headers["Sec-Fetch-Dest"] = "document";
+                request.Headers["Sec-Fetch-Site"] = "cross-site";
+                request.Headers["Sec-Fetch-User"] = "?1";
 
                 using (var response = (HttpWebResponse) request.GetResponse())
                 {
