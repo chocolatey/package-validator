@@ -157,6 +157,14 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     return true;
                 }
 
+                if (ex.Status == System.Net.WebExceptionStatus.ProtocolError && ex.Message == "The remote server returned an error: (403) Forbidden." && ex.Response.Headers["Server"] == "cloudflare")
+                {
+                    "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+                    "package-validator".Log().Warn("Since this is likely due to the fact that the server is using Cloudflare, is sometimes popping up a Captcha which needs to be solved, obviously not possible by package-validator.");
+                    "package-validator".Log().Warn("This check was put in place as a result of this issue: https://github.com/chocolatey/package-validator/issues/229");
+                    return true;
+                }
+
                 if (ex.Status == WebExceptionStatus.SecureChannelFailure)
                 {
                     "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
