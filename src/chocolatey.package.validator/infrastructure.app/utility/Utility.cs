@@ -165,7 +165,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     return true;
                 }
 
-                if (ex.Status == WebExceptionStatus.SecureChannelFailure)
+                if (ex.Status == WebExceptionStatus.SecureChannelFailure || (ex.Status == WebExceptionStatus.UnknownError && ex.Message == "The SSL connection could not be established, see inner exception. Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host."))
                 {
                     "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
                     "package-validator".Log().Warn("Since this is likely due to missing Ciphers on the machine hosting package-validator, this URL will be marked as valid for the time being.");
