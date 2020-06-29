@@ -5,13 +5,6 @@ Contributors
 
 The process for contributions is roughly as follows:
 
-## Prerequisites
-
- * Ensure you have signed the Contributor License Agreement (CLA) - without this we are not able to take contributions that are not trivial.
-  * [Sign the Contributor License Agreement](https://www.clahub.com/agreements/chocolatey/package-validator).
-  * You must do this for each Chocolatey project that requires it.
-  * If you are curious why we would require a CLA, we agree with Julien Ponge - take a look at his [post](https://julien.ponge.org/blog/in-defense-of-contributor-license-agreements/).
-
 ## Contributing Process
 
 ### Get Buyoff Or Find Open Community Issues/Features
