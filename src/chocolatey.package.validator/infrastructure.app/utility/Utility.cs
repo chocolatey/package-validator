@@ -22,6 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
     using System.Management.Automation;
     using System.Net;
     using System.Text.RegularExpressions;
+    using System.Threading;
     using NuGet;
 
     public class Utility
@@ -209,6 +210,12 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     {
                         result = urlResult;
                     }
+
+                    // This was added as a result of this issue: https://github.com/chocolatey/package-validator/issues/234
+                    // It isn't pretty, but sending too many requests to GitHub in a row, and likely other sites, triggers
+                    // 429 responses, which fails the validation process.  When looping through a collection of URL's, like
+                    // those contained within a set of Release Notes for a package, add a delay between each check.
+                    Thread.Sleep(1000);
                 }
             }
             catch (Exception ex)
