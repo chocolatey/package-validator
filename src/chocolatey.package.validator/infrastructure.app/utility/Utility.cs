@@ -13,6 +13,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+using System.Net.Http;
+
 namespace chocolatey.package.validator.infrastructure.app.utility
 {
     using System;
@@ -129,35 +131,27 @@ namespace chocolatey.package.validator.infrastructure.app.utility
 
             try
             {
-                var request = (HttpWebRequest) WebRequest.Create(url);
-                var cookieContainer = new CookieContainer();
+                var message = new HttpRequestMessage(HttpMethod.Get, url);
+                var client = new System.Net.Http.HttpClient();
+                client.Timeout = TimeSpan.FromSeconds(30);
 
-                request.CookieContainer = cookieContainer;
-                request.Timeout = 30000;
-                //This would allow 301 and 302 to be valid as well
-                request.AllowAutoRedirect = true;
-                request.UserAgent = "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/79.0.3945.130 Safari/537.36";
-                request.Accept = "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9";
-                request.Headers["Sec-Fetch-Mode"] = "navigate";
-                request.Headers["Sec-Fetch-Dest"] = "document";
-                request.Headers["Sec-Fetch-Site"] = "cross-site";
-                request.Headers["Sec-Fetch-User"] = "?1";
+                client.DefaultRequestHeaders.Add("Connection", "keep-alive");
 
-                using (var response = (HttpWebResponse) request.GetResponse())
-                {
-                    return response.StatusCode == HttpStatusCode.OK;
-                }
+                message.Headers.Add("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9");
+                message.Headers.Add("Accept-Language", "en-GB,en-US;q=0.8,en;q=0.6,de-DE;q=0.4,de;q=0.2");
+                message.Headers.Add("Upgrade-Insecure-Requests", "1");
+                message.Headers.Add("User-Agent", "Mozilla/5.0 (Windows NT 6.3; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/83.0.4103.116 Safari/537.36");
+                message.Headers.Add("Accept-Encoding", "gzip, deflate, br");
+                message.Headers.Add("Sec-Fetch-Mode", "navigate");
+                message.Headers.Add("Sec-Fetch-Dest", "document");
+                message.Headers.Add("Sec-Fetch-Site", "cross-site");
+                message.Headers.Add("Sec-Fetch-User", "?1");
+
+                var response = client.SendAsync(message).GetAwaiter().GetResult();
+                return response.StatusCode == HttpStatusCode.OK;
             }
             catch (WebException ex)
             {
-                if (ex.Status == System.Net.WebExceptionStatus.ProtocolError && ex.Message == "The remote server returned an error: (403) Forbidden." && ex.Response.Headers["Server"] == "AkamaiGHost")
-                {
-                    "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
-                    "package-validator".Log().Warn("Since this is likely due to the fact that the server is using Akamai, which expects request headers to be in a VERY specific order and case, this URL will be marked as valid for the time being.");
-                    "package-validator".Log().Warn("This check was put in place as a result of this issue: https://github.com/chocolatey/package-validator/issues/225");
-                    return true;
-                }
-
                 if (ex.Status == System.Net.WebExceptionStatus.ProtocolError && ex.Message == "The remote server returned an error: (403) Forbidden." && ex.Response.Headers["Server"] == "cloudflare")
                 {
                     "package-validator".Log().Warn("Error validating Url {0} - {1}", url.ToString(), ex.Message);
