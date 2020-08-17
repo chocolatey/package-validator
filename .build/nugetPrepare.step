@@ -13,6 +13,7 @@
 
   <property name="pkg.build.date" value="20100801" overwrite="false" />
   <property name="file.nuget.version" value="${dirs.drop.nuget}${path.separator}version.xml" />
+  <property name="dirs.drop.docs" value="${dirs.drop}${path.separator}${folder.documentation}" />
 
   <property name="fail.build.on.error" value="false" />
 
@@ -47,10 +48,10 @@
     </copy>
   </target>
 
-  <target name="copy_docs_to_doc_folder">
+  <target name="copy_docs_to_doc_folder" if="${directory::exists(dirs.drop.docs)}">
     <echo level="Warning" message="Packaging docs to ${dirs.drop.nuget}${path.separator}docs."/>
     <copy todir="${dirs.drop.nuget}${path.separator}docs" failonerror="false">
-      <fileset basedir="${dirs.drop}${path.separator}${folder.documentation}">
+      <fileset basedir="${dirs.drop.docs}">
         <include name="**/**" />
       </fileset>
     </copy>

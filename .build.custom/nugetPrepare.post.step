@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="CUSTOM POST NUGETPREPARE" default="go">
+  <!-- Project UppercuT - http://projectuppercut.org -->
+  <property name="build.config.settings" value="__NONE__" overwrite="false" />
+  <include buildfile="${build.config.settings}" if="${file::exists(build.config.settings)}" />
+  <property name="path.separator" value="${string::trim(path::combine(' ', ' '))}" />
+  <property name="dirs.current" value="${directory::get-current-directory()}" />
+  <property name="dirs.current.file" value="${directory::get-parent-directory(project::get-buildfile-path())}" />
+  <property name="folder.build_scripts" value="build" overwrite="false" />
+  <include buildfile="${dirs.current}${path.separator}${folder.build_scripts}${path.separator}default.build.settings" />
+  <property name="build.step.name" value="${project::get-name()}" />
+  <property name="build.step.path" value="${project::get-buildfile-path()}" />
+  <!-- build step customizations below this -->
+  <target name="go" depends="prep_nuget, remove_app_drop_folder" />
+
+  <target name="prep_nuget">
+    <echo level="Warning" message="Moving '${dirs.drop.nuget}${path.separator}lib' to '${dirs.drop.nuget}${path.separator}tools${path.separator}service'." />
+    <move todir="${dirs.drop.nuget}${path.separator}tools${path.separator}service" overwrite="true">
+      <fileset basedir="${dirs.drop.nuget}${path.separator}lib">
+        <include name="**/*.*" />
+      </fileset>
+    </move>
+    <delete dir="${dirs.drop.nuget}${path.separator}lib" />
+
+    <echo level="Warning" message="Deleting '${dirs.drop.nuget}${path.separator}docs'." />
+    <delete dir="${dirs.drop.nuget}${path.separator}docs" />
+  </target>
+
+  <target name="remove_app_drop_folder">
+    <echo level="Warning" message="Removing ${dirs.drop}${path.separator}${folder.app.drop}." />
+    <delete>
+      <fileset basedir="${dirs.drop}${path.separator}${folder.app.drop}">
+        <include name="**/*.*" />
+      </fileset>
+    </delete>
+    <delete dir="${dirs.drop}${path.separator}${folder.app.drop}" failonerror="false" />
+  </target>
+</project>

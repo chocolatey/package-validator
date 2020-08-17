@@ -13,7 +13,7 @@
   <property name="build.step.path" value="${project::get-buildfile-path()}" />
   <!-- build step customizations below this -->
 
-  <target name="go" depends="remove_app_drop_folder, remove_docs_folder, remove_xml_doc_files" />
+  <target name="go" depends="remove_app_drop_folder, remove_docs_folder, remove_xml_doc_files, cleanup_bad_files, replace_config, copy_license" />
 
   <target name="remove_app_drop_folder">
     <echo level="Warning" message="Removing ${dirs.drop}${path.separator}${folder.app.drop}." />
@@ -23,8 +23,8 @@
       </fileset>
     </delete>
     <delete dir="${dirs.drop}${path.separator}${folder.app.drop}" failonerror="false" />
-  </target>  
-  
+  </target>
+
   <target name="remove_docs_folder">
     <echo level="Warning" message="Removing '${dirs.drop}${path.separator}${folder.documentation}'." />
     <delete>
@@ -34,7 +34,7 @@
     </delete>
     <delete dir="${dirs.drop}${path.separator}${folder.documentation}" failonerror="false" />
   </target>
-  
+
   <target name="remove_xml_doc_files">
     <echo level="Warning" message="Removing xml files from the bin folders." />
     <delete>
@@ -42,6 +42,47 @@
         <include name="**/*.xml" />
       </fileset>
     </delete>
+  </target>
+
+  <target name="cleanup_bad_files">
+    <echo level="Warning" message="Removing incorrect files from the top level folder." />
+    <delete>
+      <fileset basedir="${dirs.drop}${path.separator}_PublishedApplications${path.separator}${project.name}.host">
+        <include name="*.ps1" />
+        <include name="*.psm1" />
+        <include name="checksum.*" />
+      </fileset>
+    </delete>
+    <delete>
+      <fileset basedir="${dirs.drop}">
+        <include name="settings/**/*" />
+        <include name="chocolatey.services.Database/**/*" />
+      </fileset>
+    </delete>
+    <delete dir="${dirs.drop}${path.separator}settings" failonerror="false" />
+    <delete dir="${dirs.drop}${path.separator}chocolatey.services.Database" failonerror="false" />
+  </target>
+
+  <target name="replace_config">
+    <echo level="Warning" message="Replacing config." />
+    <delete>
+      <fileset basedir="${dirs.drop}${path.separator}_PublishedApplications">
+        <include name="**/*.exe.config" />
+      </fileset>
+    </delete>
+    <copy
+      file="${dirs.drop}${path.separator}environment.files${path.separator}RELEASE${path.separator}RELEASE.package.validator.exe.config"
+      tofile="${dirs.drop}${path.separator}_PublishedApplications${path.separator}chocolatey.package.validator.host${path.separator}package.validator.exe.config"
+      overwrite="true"
+      failonerror="true"
+      />
+    <delete dir="${dirs.drop}${path.separator}environment.files" failonerror="false" />
+  </target>
+
+  <target name ="copy_license">
+    <echo level="Warning" message="Copying License from '${dirs.current}${path.separator}LICENSE' to '${dirs.drop}${path.separator}_PublishedApplications${path.separator}chocolatey.package.validator.host${path.separator}LICENSE.txt'"/>
+    <!--<copy file="${dirs.current}${path.separator}LICENSE" tofile="${dirs.drop.nuget}${path.separator}extensions${path.separator}LICENSE.txt" failonerror="true" />-->
+    <copy file="${dirs.current}${path.separator}LICENSE" tofile="${dirs.drop}${path.separator}_PublishedApplications${path.separator}chocolatey.package.validator.host${path.separator}LICENSE.txt" failonerror="true" />
   </target>
 
 </project>

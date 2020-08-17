@@ -7,7 +7,7 @@
   <!-- Required Items -->
   <property name="project.name" value="chocolatey.package.validator" overwrite="false" />
   <property name="repository.path" value="https://github.com/chocolatey/package-validator" overwrite="false" />
-  <property name="company.name" value="RealDimensions Software, LLC" overwrite="false" />
+  <property name="company.name" value="Chocolatey Software, Inc" overwrite="false" />
 
   <!-- Folder Overrides -->
   <property name="folder.build_scripts" value=".build" overwrite="false" />
@@ -16,13 +16,14 @@
   <!-- ASSEMBLY VARIABLES -->
   <property name="version.use_semanticversioning" value="true" overwrite="false" />
   <property name="version.major" value="0" overwrite="false" />
-  <property name="version.minor" value="1" overwrite="false" />
-  <property name="version.patch" value="2" overwrite="false" />
+  <property name="version.minor" value="2" overwrite="false" />
+  <property name="version.patch" value="0" overwrite="false" />
   <property name="version.fix" value="0" overwrite="false" />
-  <property name="version.nuget.prerelease" value="" overwrite="false" />
-  <property name="version.use.build_date" value="false" overwrite="false" />
-  <property name="assembly.description" value="${project.name} is a product of ${company.name} - All rights reserved." overwrite="false" />
-  <property name="assembly.copyright" value="Copyright © 2015 - Present, ${company.name} - All Rights Reserved." overwrite="false" />
+  <property name="version.nuget.prerelease" value="beta" overwrite="false" />
+  <property name="version.use.build_date" value="true" overwrite="false" />
+  <property name="assembly.description" value="Chocolatey Package Validator is a product of ${company.name} - All rights reserved." overwrite="false" />
+  <property name="assembly.copyright" value="Copyright © 2017 - Present, ${company.name}, Copyright © 2016 - 2017 RealDimensions Software, LLC- All Rights Reserved." overwrite="false" />
+  <property name="assembly.clscompliant" value="false" overwrite="false" />
   <property name="sign.project_with_key" value="false" overwrite="false" />
 
   <property name="microsoft.framework" value="net-4.0" overwrite="false" />
@@ -37,10 +38,11 @@
   <property name="run.metrics" value="false" overwrite="false" />
   <property name="run.nitriq" value="false" overwrite="false" />
   <property name="run.moma" value="false" overwrite="false" />
-  <property name="run.fxcop" value="true" overwrite="false" />
-  <property name="run.stylecop" value="true" overwrite="false" />
+  <property name="run.fxcop" value="false" overwrite="false" />
+  <property name="run.stylecop" value="false" overwrite="false" />
   <property name="run.obfuscator" value="false" overwrite="false" />
   <property name="run.ilmerge" value="false" overwrite="false" />
+  <property name="run.codesign" value="false" overwrite="false" />
 
   <!-- EXTERNAL TOOL OVERRIDES -->
   <property name="path.separator" value="${string::trim(path::combine(' ', ' '))}" />
@@ -52,7 +54,4 @@
   <property name="app.coveralls" value="${dirs.current}${path.separator}src${path.separator}packages${path.separator}coveralls.io.1.1.86${path.separator}tools${path.separator}coveralls.net.exe" overwrite="false" />
   <property name="app.strongname" value="C:${path.separator}Program Files${path.separator}Microsoft SDKs${path.separator}Windows${path.separator}v7.0A${path.separator}Bin${path.separator}sn.exe" />
   <property name="app.strongname" value="C:${path.separator}Program Files (x86)${path.separator}Microsoft SDKs${path.separator}Windows${path.separator}v7.0A${path.separator}Bin${path.separator}sn.exe" if="${not file::exists(app.strongname)}" />
-
-  <property name="run.ilmerge" value="false" overwrite="false" />
-
 </project>

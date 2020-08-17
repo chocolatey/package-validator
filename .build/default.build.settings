@@ -124,8 +124,8 @@
   <!-- partially trusted callers doesn't set correctly with assembly generator - Leave false for now-->
   <property name="allow.partially_trusted_callers" value="false" overwrite="false" />
   <property name="sign.project_with_key" value="false" overwrite="false" />
-  <property name="path.key.name.private" value="${dirs.current}${path.separator}${project.name}.snk" overwrite="false" />
-  <property name="path.key.name.public" value="${dirs.build}${path.separator}public.${project.name}.snk" overwrite="false" />
+  <property name="path.key.name.private" value="${dirs.current}${path.separator}chocolatey.snk" overwrite="false" />
+  <property name="path.key.name.public" value="${dirs.build}${path.separator}public.chocolatey.snk" overwrite="false" />
 
   <!-- packaging versioning -->
   <property name="version.use.build_date" value="false" overwrite="false" />
@@ -225,7 +225,9 @@
   <property name="run.nuget" value="${directory::exists(dirs.nuget) and file::exists(app.nuget)}" overwrite="false" />
 
   <property name="app.ruby" value="ruby" overwrite="false" />
-  <property name="app.powershell" value="%WINDIR%${path.separator}System32${path.separator}WindowsPowerShell${path.separator}v1.0${path.separator}powershell.exe" overwrite="false" />
+  <property name="windows.dir" value="" />
+  <property name="windows.dir" value="${environment::get-variable('SystemRoot')}" if="${environment::variable-exists('SystemRoot')}" />
+  <property name="app.powershell" value="${windows.dir}${path.separator}System32${path.separator}WindowsPowerShell${path.separator}v1.0${path.separator}powershell.exe" overwrite="false" />
 
   <target name="load_uppercut_assemblies">
     <loadtasks assembly="${path.uppercut.assembly}" if="${file::exists(path.uppercut.assembly)}" />
