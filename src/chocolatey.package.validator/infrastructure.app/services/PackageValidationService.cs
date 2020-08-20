@@ -18,6 +18,7 @@ namespace chocolatey.package.validator.infrastructure.app.services
     using System;
     using System.Collections.Generic;
     using NuGet;
+    using configuration;
     using infrastructure.rules;
     using locators;
     using IPackageRule = infrastructure.rules.IPackageRule;
@@ -25,11 +26,13 @@ namespace chocolatey.package.validator.infrastructure.app.services
     public class PackageValidationService : IPackageValidationService
     {
         private readonly ITypeLocator _typeLocator;
+        private readonly IConfigurationSettings _configurationSettings;
         private IList<IPackageRule> _rules = new List<IPackageRule>();
 
-        public PackageValidationService(ITypeLocator typeLocator)
+        public PackageValidationService(ITypeLocator typeLocator, IConfigurationSettings configurationSettings)
         {
             _typeLocator = typeLocator;
+            _configurationSettings = configurationSettings;
 
             load_rules();
         }
@@ -65,7 +68,7 @@ namespace chocolatey.package.validator.infrastructure.app.services
             {
                 foreach (var rule in Rules.or_empty_list_if_null())
                 {
-                    results.Add(rule.validate(package));
+                    results.Add(rule.validate(package, _configurationSettings.ProxyAddress, _configurationSettings.ProxyUserName, _configurationSettings.ProxyPassword));
                 }
             }
 

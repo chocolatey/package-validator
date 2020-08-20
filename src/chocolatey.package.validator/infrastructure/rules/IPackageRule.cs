@@ -23,6 +23,6 @@ namespace chocolatey.package.validator.infrastructure.rules
 
         string ValidationFailureMessage { get; }
 
-        PackageValidationResult validate(IPackage package);
+        PackageValidationResult validate(IPackage package, string proxyAddress, string proxyUserName, string proxyPassword);
     }
 }

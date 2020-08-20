@@ -32,7 +32,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
             if (package.BugTrackerUrl != null)
             {
-                valid = Utility.url_is_valid(package.BugTrackerUrl);
+                valid = Utility.url_is_valid(package.BugTrackerUrl, ProxyAddress, ProxyUserName, ProxyPassword);
             }
 
             return valid;

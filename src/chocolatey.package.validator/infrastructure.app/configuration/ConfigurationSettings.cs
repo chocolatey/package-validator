@@ -109,5 +109,10 @@ namespace chocolatey.package.validator.infrastructure.app.configuration
 
         public string PackagesApiKey { get { return get_application_settings_value("PackagesApiKey"); } }
 
+        public string ProxyAddress { get { return get_application_settings_value("ProxyAddress"); } }
+
+        public string ProxyUserName { get { return get_application_settings_value("ProxyUserName"); } }
+
+        public string ProxyPassword { get { return get_application_settings_value("ProxyPassword"); } }
     }
 }

@@ -54,5 +54,20 @@ namespace chocolatey.package.validator.infrastructure.app.configuration
         ///   The api key used for submitting test results to the PackagesUrl.
         /// </summary>
         string PackagesApiKey { get; }
+
+        /// <summary>
+        ///   The web address to use when a proxy is required.
+        /// </summary>
+        string ProxyAddress { get;  }
+
+        /// <summary>
+        ///   The username to use when proxy requires authentication.
+        /// </summary>
+        string ProxyUserName { get; }
+
+        /// <summary>
+        ///   The password to use when proxy requires authentication.
+        /// </summary>
+        string ProxyPassword { get; }
     }
 }

@@ -32,7 +32,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
             if (package.MailingListUrl != null)
             {
-                valid = Utility.url_is_valid(package.MailingListUrl);
+                valid = Utility.url_is_valid(package.MailingListUrl, ProxyAddress, ProxyUserName, ProxyPassword);
             }
 
             return valid;
