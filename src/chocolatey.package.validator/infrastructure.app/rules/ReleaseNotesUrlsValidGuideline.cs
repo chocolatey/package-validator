@@ -32,7 +32,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
             if (package.ReleaseNotes != null)
             {
-                valid = Utility.all_urls_are_valid(package.ReleaseNotes);
+                valid = Utility.all_urls_are_valid(package.ReleaseNotes, ProxyAddress, ProxyUserName, ProxyPassword);
             }
 
             return valid;

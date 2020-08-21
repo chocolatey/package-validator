@@ -14,6 +14,7 @@
 // limitations under the License.
 
 using System.Net.Http;
+using chocolatey.package.validator.infrastructure.app.configuration;
 
 namespace chocolatey.package.validator.infrastructure.app.utility
 {
@@ -112,6 +113,18 @@ namespace chocolatey.package.validator.infrastructure.app.utility
         /// <param name="url">Uri object</param>
         public static bool url_is_valid(Uri url)
         {
+            return url_is_valid(url, string.Empty, string.Empty, string.Empty);
+        }
+
+        /// <summary>
+        ///   Tries to validate an URL
+        /// </summary>
+        /// <param name="url">Uri object</param>
+        /// <param name="proxyAddress">The web address to use when a proxy is required.</param>
+        /// <param name="proxyUserName">The username to use when proxy requires authentication.</param>
+        /// <param name="proxyPassword">The password to use when proxy requires authentication.</param>
+        public static bool url_is_valid(Uri url, string proxyAddress, string proxyUserName, string proxyPassword)
+        {
             if (url == null)
             {
                 return true;
@@ -132,7 +145,40 @@ namespace chocolatey.package.validator.infrastructure.app.utility
             try
             {
                 var message = new HttpRequestMessage(HttpMethod.Get, url);
-                var client = new System.Net.Http.HttpClient();
+
+                System.Net.Http.HttpClient client = null;
+
+                if (string.IsNullOrEmpty(proxyAddress))
+                {
+                    "package-validator".Log().Debug("Creating new HttpClient");
+                    client = new System.Net.Http.HttpClient();
+                }
+                else
+                {
+                    HttpClientHandler httpClientHandler = null;
+                    if (!string.IsNullOrEmpty(proxyUserName) && !string.IsNullOrEmpty(proxyPassword))
+                    {
+                        "package-validator".Log().Debug("Creating new HttpClient with authenticated proxy using web address: {0}", proxyAddress);
+                        httpClientHandler = new HttpClientHandler
+                        {
+                            Proxy = new WebProxy(proxyAddress, BypassOnLocal: false, BypassList: null, new NetworkCredential(proxyUserName, proxyPassword)),
+                            UseProxy = true
+                        };
+                    }
+                    else
+                    {
+                        "package-validator".Log().Debug("Creating new HttpClient with proxy using web address: {0}", proxyAddress);
+
+                        httpClientHandler = new HttpClientHandler
+                        {
+                            Proxy = new WebProxy(proxyAddress, BypassOnLocal: false),
+                            UseProxy = true
+                        };
+                    }
+
+                    client = new System.Net.Http.HttpClient(httpClientHandler);
+                }
+
                 client.Timeout = TimeSpan.FromSeconds(30);
 
                 client.DefaultRequestHeaders.Add("Connection", "keep-alive");
@@ -191,6 +237,18 @@ namespace chocolatey.package.validator.infrastructure.app.utility
         /// <param name="contents">String that might contain URL</param>
         public static bool all_urls_are_valid(String contents)
         {
+            return all_urls_are_valid(contents, string.Empty, string.Empty, string.Empty);
+        }
+
+        /// <summary>
+        ///   Fetches all URLs from a string, and validates if the url results in a 200 OK
+        /// </summary>
+        /// <param name="contents">String that might contain URL</param>
+        /// <param name="proxyAddress">The web address to use when a proxy is required.</param>
+        /// <param name="proxyUserName">The username to use when proxy requires authentication.</param>
+        /// <param name="proxyPassword">The password to use when proxy requires authentication.</param>
+        public static bool all_urls_are_valid(String contents, string proxyAddress, string proxyUserName, string proxyPassword)
+        {
             var result = true;
 
             try
@@ -200,7 +258,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 {
                     var url = match.Groups[1].Value;
                     var uri = new Uri(url);
-                    var urlResult = url_is_valid(uri);
+                    var urlResult = url_is_valid(uri, proxyAddress, proxyUserName, proxyPassword);
                     if (!urlResult)
                     {
                         result = urlResult;
@@ -221,6 +279,5 @@ namespace chocolatey.package.validator.infrastructure.app.utility
 
             return result;
         }
-
     }
 }
