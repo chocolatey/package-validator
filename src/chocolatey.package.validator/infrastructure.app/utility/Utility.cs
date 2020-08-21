@@ -161,7 +161,7 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                         "package-validator".Log().Debug("Creating new HttpClient with authenticated proxy using web address: {0}", proxyAddress);
                         httpClientHandler = new HttpClientHandler
                         {
-                            Proxy = new WebProxy(proxyAddress, BypassOnLocal: false, BypassList: null, new NetworkCredential(proxyUserName, proxyPassword)),
+                            Proxy = new WebProxy(proxyAddress, BypassOnLocal: false, BypassList: null, Credentials: new NetworkCredential(proxyUserName, proxyPassword)),
                             UseProxy = true
                         };
                     }
