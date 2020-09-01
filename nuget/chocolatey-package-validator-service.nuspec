@@ -32,6 +32,6 @@ What does the validator check? See https://github.com/chocolatey/package-validat
   </metadata>
   <files>
     <file src="tools\**" target="tools" />
-    <file src="..\code_drop\_PublishedApplications\chocolatey.package.validator.host\**\*" target="tools\files" exclude="**\package-validator.exe.config" />
+    <file src="..\_PublishedApplications\chocolatey.package.validator.host\**\*" target="tools\files" exclude="**\package-validator.exe.config" />
   </files>
 </package>
