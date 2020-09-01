@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>chocolatey-package-validator-service</id>
+    <version>0.1.2.132</version>
+    <title>Chocolatey Package Validator Service (Install)</title>
+    <authors>Chocolatey Software, Inc</authors>
+    <owners>Chocolatey Software, Inc</owners>
+    <projectUrl>https://github.com/chocolatey/package-validator</projectUrl>
+    <iconUrl>https://raw.githubusercontent.com/chocolatey/choco/master/docs/logo/chocolateyicon.gif</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Validates the contents of a package against the package review process parts that can be validated by a machine. See https://github.com/chocolatey/choco/wiki/Moderation for more details.
+
+The validator is a service that checks the quality of a package based on requirements, guidelines and suggestions for creating packages for Chocolatey’s community feed. We like to think of the validator as unit testing. It is validating that everything is as it should be and meets the minimum requirements for a package on the community feed.
+
+What does the validator check? See https://github.com/chocolatey/package-validator/wiki
+
+### Package Parameters
+
+* `/Username:` - OPTIONAL - username the service will run under. If not specified LocalSystem will be used;
+* `/Password:` - OPTIONAL OR /EnterPassword - the password the service will run under. If a password is not provided a random one will be used;
+* `/EnterPassword` - OPTIONAL OR /Password - allows you to enter the password at package install. If a password is not provided a random one will be used;
+* `/DoNotStartService` - OPTIONAL - do not shut down and restart the service. You will need to restart the service manually or reboot;
+* `/DoNotReinstallService` - OPTIONAL - do not shut down or reinstall the service. You will need to install the service manually;</description>
+    <summary>Chocolatey Package Validator Service</summary>
+    <copyright>Copyright © 2017-2019 Chocolatey Software, Inc, © 2016 - 2017 RealDimensions Software, LLC - All Rights Reserved.</copyright>
+    <tags>chocolatey-package-validator admin</tags>
+    <dependencies>
+      <dependency id="chocolatey.extension" version="2.0.3" />
+      <dependency id="chocolatey-package-validator-config" version="1.0.0" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="tools\**" target="tools" />
+    <file src="..\code_drop\_PublishedApplications\chocolatey.package.validator.host\**\*" target="tools\files" exclude="**\package-validator.exe.config" />
+  </files>
+</package>
