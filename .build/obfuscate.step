@@ -38,7 +38,8 @@
     <foreach item="File" property="dll.filename">
       <in>
         <items>
-          <include name="${dirs.build.code}${path.separator}**${path.separator}*" />
+          <include name="${dirs.build.code}${path.separator}**${path.separator}*.dll" />
+          <include name="${dirs.build.code}${path.separator}**${path.separator}*.exe" />
         </items>
       </in>
       <do>

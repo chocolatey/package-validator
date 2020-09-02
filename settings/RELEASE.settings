@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<project name="Settings">
+  <!-- environment settings -->
+  <property name="environment" value="PROD" />
+  <property name="log.level" value="INFO" />
+</project>

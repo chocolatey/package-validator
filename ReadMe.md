@@ -42,8 +42,7 @@ Build Process:
 
  * Run `build.bat`.
 
-Running the build on Windows should produce an artifact that is tested and ready to be used.
-
+Running the build on Windows should produce an artifact that is tested and ready to be used. It will also produce a Chocolatey package which requires licensed components to use. To use it ensure you are running a currently licensed version of Chocolatey For Business.
 
 ## Setup
 
