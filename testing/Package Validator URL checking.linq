@@ -120,18 +120,21 @@ public static bool url_is_valid(string problem, Uri url)
 	{
 		var exceptions = new List<Exception>();
 		var currentException = ex;
+		exceptions.Add(currentException);
 
 		while (currentException.InnerException != null)
 		{
-			exceptions.Add(currentException);
+			exceptions.Add(currentException.InnerException);
 			currentException = currentException.InnerException;
 		}
 
 		foreach (var exception in exceptions)
 		{
-			if (exception.Message == "Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host." || exception.Message == "An existing connection was forcibly closed by the remote host")
+			if (exception.Message == "Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host." ||
+				exception.Message == "An existing connection was forcibly closed by the remote host." ||
+				exception.Message == "The request was aborted: Could not create SSL/TLS secure channel.")
 			{
-				Console.WriteLine("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+				Console.WriteLine("Error validating Url {0} - {1}", url.ToString(), exception.Message);
 				Console.WriteLine("Since this is likely due to missing Ciphers on the machine hosting package-validator, this URL will be marked as valid for the time being.");
 				return true;
 			}
