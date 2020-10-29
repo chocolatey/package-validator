@@ -22,8 +22,11 @@ void Main()
 
 public static bool url_is_valid(string problem, Uri url)
 {
-	Console.Write(string.Format("{0} - ", problem));
-
+	Console.WriteLine(string.Format("{0} - ", problem));
+	string proxyUserName = string.Empty;
+	string proxyPassword = string.Empty;
+	string proxyAddress = string.Empty;
+	
 	if (url == null)
 	{
 		return true;
@@ -44,7 +47,42 @@ public static bool url_is_valid(string problem, Uri url)
 	try
 	{
 		var message = new System.Net.Http.HttpRequestMessage(System.Net.Http.HttpMethod.Get, url);
-		var client = new System.Net.Http.HttpClient();
+
+		System.Net.Http.HttpClient client = null;
+
+		if (string.IsNullOrEmpty(proxyAddress))
+		{
+			Console.WriteLine("Creating new HttpClient");
+			client = new System.Net.Http.HttpClient();
+		}
+		else
+		{
+			System.Net.Http.HttpClientHandler httpClientHandler = null;
+			if (!string.IsNullOrEmpty(proxyUserName) && !string.IsNullOrEmpty(proxyPassword))
+			{
+				Console.WriteLine("Creating new HttpClient with authenticated proxy using web address: {0}", proxyAddress);
+				httpClientHandler = new System.Net.Http.HttpClientHandler
+				{
+					Proxy = new System.Net.WebProxy(proxyAddress, BypassOnLocal: false, BypassList: null, Credentials: new System.Net.NetworkCredential(proxyUserName, proxyPassword)),
+					UseProxy = true
+				};
+			}
+			else
+			{
+				Console.WriteLine("Creating new HttpClient with proxy using web address: {0}", proxyAddress);
+
+				httpClientHandler = new System.Net.Http.HttpClientHandler
+				{
+					Proxy = new System.Net.WebProxy(proxyAddress, BypassOnLocal: false),
+					UseProxy = true
+				};
+			}
+			
+			httpClientHandler.AllowAutoRedirect = true;
+
+			client = new System.Net.Http.HttpClient(httpClientHandler);
+		}
+
 		client.Timeout = TimeSpan.FromSeconds(30);
 
 		client.DefaultRequestHeaders.Add("Connection", "keep-alive");
@@ -61,38 +99,22 @@ public static bool url_is_valid(string problem, Uri url)
 
 		var response = client.SendAsync(message).GetAwaiter().GetResult();
 
-		if (response.StatusCode == System.Net.HttpStatusCode.Forbidden && response.Headers.Server.ToString() == "cloudflare")
+		if (response.ReasonPhrase == "Permanent Redirect")
 		{
+			Console.WriteLine("Received a HTTP Status Code of 308, which this version of .Net Framework HttpClient doesn't understand, assuming that this is a valid URL.");
+			Console.WriteLine("This check was put in place as a result of this issue: https://github.com/chocolatey/package-validator/issues/247");
 			return true;
 		}
-
-		return response.StatusCode == System.Net.HttpStatusCode.OK;
-	}
-	catch (System.Net.WebException ex)
-	{
-		if (ex.Status == System.Net.WebExceptionStatus.ProtocolError && ex.Message == "The remote server returned an error: (403) Forbidden." && ex.Response.Headers["Server"] == "cloudflare")
+		
+		if (response.StatusCode == System.Net.HttpStatusCode.Forbidden && response.Headers.Server.ToString() == "cloudflare")
 		{
-			Console.WriteLine("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+			Console.WriteLine("Received a Forbidden response validating Url {0}", url.ToString());
 			Console.WriteLine("Since this is likely due to the fact that the server is using Cloudflare, is sometimes popping up a Captcha which needs to be solved, obviously not possible by package-validator.");
 			Console.WriteLine("This check was put in place as a result of this issue: https://github.com/chocolatey/package-validator/issues/229");
 			return true;
 		}
-		if (ex.Status == System.Net.WebExceptionStatus.SecureChannelFailure || (ex.Status == System.Net.WebExceptionStatus.UnknownError && ex.Message == "The SSL connection could not be established, see inner exception. Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host.."))
-		{
-			Console.WriteLine("Error validating Url {0} - {1}", url.ToString(), ex.Message);
-			Console.WriteLine("Since this is likely due to missing Ciphers on the machine hosting package-validator, this URL will be marked as valid for the time being.");
-			return true;
-		}
 
-		if (ex.Status == System.Net.WebExceptionStatus.ProtocolError && ex.Message == "The remote server returned an error: (503) Server Unavailable.")
-		{
-			Console.WriteLine("Error validating Url {0} - {1}", url.ToString(), ex.Message);
-			Console.WriteLine("This could be due to Cloudflare DDOS protection acting in front of the site, or another valid reason, as such, this URL will be marked as valid for the time being.");
-			return true;
-		}
-
-		Console.WriteLine("Web Exception - Error validating Url {0} - {1}", url.ToString(), ex.Message);
-		return false;
+		return response.StatusCode == System.Net.HttpStatusCode.OK;
 	}
 	catch (Exception ex)
 	{
@@ -109,11 +131,13 @@ public static bool url_is_valid(string problem, Uri url)
 		{
 			if (exception.Message == "Unable to read data from the transport connection: An existing connection was forcibly closed by the remote host." || exception.Message == "An existing connection was forcibly closed by the remote host")
 			{
+				Console.WriteLine("Error validating Url {0} - {1}", url.ToString(), ex.Message);
+				Console.WriteLine("Since this is likely due to missing Ciphers on the machine hosting package-validator, this URL will be marked as valid for the time being.");
 				return true;
 			}
 		}
 
-		Console.WriteLine("General Exception - Error validating Url {0} - {1}", url.ToString(), ex.Message);
+		Console.WriteLine("Error validating Url {0} - {1}", url.ToString(), ex.Message);
 		return false;
 	}
 }
