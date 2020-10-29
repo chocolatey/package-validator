@@ -176,6 +176,8 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                         };
                     }
 
+                    httpClientHandler.AllowAutoRedirect = true;
+
                     client = new System.Net.Http.HttpClient(httpClientHandler);
                 }
 
@@ -194,6 +196,13 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                 message.Headers.Add("Accept-Language", "en-GB,en-US;q=0.8,en;q=0.6,de-DE;q=0.4,de;q=0.2");
 
                 var response = client.SendAsync(message).GetAwaiter().GetResult();
+
+                if (response.ReasonPhrase == "Permanent Redirect")
+                {
+                    "package-validator".Log().Warn("Received a HTTP Status Code of 308, which this version of .Net Framework HttpClient doesn't understand, assuming that this is a valid URL.");
+                    "package-validator".Log().Warn("This check was put in place as a result of this issue: https://github.com/chocolatey/package-validator/issues/247");
+                    return true;
+                }
 
                 if (response.StatusCode == HttpStatusCode.Forbidden && response.Headers.Server.ToString() == "cloudflare")
                 {
