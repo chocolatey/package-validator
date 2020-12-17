@@ -32,7 +32,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         public override PackageValidationOutput is_valid(IPackage package)
         {
             return !string.IsNullOrWhiteSpace(package.DocsUrl.to_string())
-                || !string.IsNullOrWhiteSpace(package.BugTrackerUrl.to_string()) 
+                || !string.IsNullOrWhiteSpace(package.BugTrackerUrl.to_string())
                 || !string.IsNullOrWhiteSpace(package.MailingListUrl.to_string())
                 || !string.IsNullOrWhiteSpace(package.ProjectSourceUrl.to_string());
         }

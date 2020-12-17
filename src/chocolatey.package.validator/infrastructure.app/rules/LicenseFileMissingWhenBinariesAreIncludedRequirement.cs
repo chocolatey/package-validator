@@ -37,10 +37,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
                 f =>
                     StringExtensions.to_lower(f.Path).EndsWith("license.txt") ||
                     StringExtensions.to_lower(f.Path).EndsWith("license")     ||
-                    StringExtensions.to_lower(f.Path).EndsWith("license.md")  ||       
+                    StringExtensions.to_lower(f.Path).EndsWith("license.md")  ||
                     StringExtensions.to_lower(f.Path).EndsWith("notice.txt")  ||
                     StringExtensions.to_lower(f.Path).EndsWith("notice")      ||
-                    StringExtensions.to_lower(f.Path).EndsWith("notice.md") 
+                    StringExtensions.to_lower(f.Path).EndsWith("notice.md")
              ))
             {
                 return true;
