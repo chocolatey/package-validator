@@ -26,7 +26,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             get
             {
-                return @"The install script should not directly call the uninstall script.  Your script does this, and it will need to be changed. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptShouldntCallUninstallScript)";
+                return @"The install script should not directly call the uninstall script.  Your script does this, and it will need to be changed. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0018)";
             }
         }
 

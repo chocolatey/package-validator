@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class NuspecFileShouldBeUtf8Guideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"Nuspec file should be UTF-8 encoded. [More...](https://github.com/chocolatey/package-validator/wiki/NuspecFileShouldBeUtf8)";
+@"Nuspec file should be UTF-8 encoded. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0054)";
         }
         }
 

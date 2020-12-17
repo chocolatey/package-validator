@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"If this is a brand new package that has never went through approval before, the reviewer will suggest a change to the package id. [More...](https://github.com/chocolatey/package-validator/wiki/PackageIdTooLongWithNoDashes)";
+@"If this is a brand new package that has never went through approval before, the reviewer will suggest a change to the package id. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0069)";
             }
         }
 

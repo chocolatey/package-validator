@@ -23,8 +23,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsContainTooManyLinesGuideline : BasePackageRule
     {
-@"Chocolatey Packages are meant to be thin wrappers on top of the native installation packages, as a result, there is an expectation that the installation scripts will be less than 100 lines. Can the automation scripts be simplified? [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsContainTooManyLines)";
         public override string ValidationFailureMessage { get { return
+@"Chocolatey Packages are meant to be thin wrappers on top of the native installation packages, as a result, there is an expectation that the installation scripts will be less than 100 lines. Can the automation scripts be simplified? [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0043)";
         }
         }
 

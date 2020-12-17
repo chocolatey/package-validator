@@ -19,9 +19,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     using infrastructure.rules;
 
     public class IconUrlMissingGuideline : BasePackageRule
-@"The iconUrl should be added if there is one. Please correct this in the nuspec, if applicable. [More...](https://github.com/chocolatey/package-validator/wiki/IconUrlMissing)"; } }
     {
         public override string ValidationFailureMessage { get { return
+@"The iconUrl should be added if there is one. Please correct this in the nuspec, if applicable. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0033)"; } }
+
         public override PackageValidationOutput is_valid(IPackage package)
         {
             return package.IconUrl != null;

@@ -26,7 +26,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"Nuspec file contains templated values which should be removed. [More...](https://github.com/chocolatey/package-validator/wiki/NuspecDoesNotContainTemplatedValues)";
+@"Nuspec file contains templated values which should be removed. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0019)";
             }
         }
 

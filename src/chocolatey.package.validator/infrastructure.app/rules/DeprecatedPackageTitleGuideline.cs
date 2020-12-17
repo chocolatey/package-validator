@@ -20,8 +20,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class DeprecatedPackageTitleGuideline : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"Deprecated Packages should have a title that starts with ""[Deprecated] "" (note the space). [More...](https://github.com/chocolatey/package-validator/wiki/DeprecatedPackageTitleShouldStartWithDeprecated)"; } }
+        public override string ValidationFailureMessage { get { return
+@"Deprecated Packages should have a title that starts with ""[Deprecated] "" (note the space). [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0053)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

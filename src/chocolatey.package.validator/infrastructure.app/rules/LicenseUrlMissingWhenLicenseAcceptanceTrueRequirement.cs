@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class LicenseUrlMissingWhenLicenseAcceptanceTrueRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"If the package sets requireLicenseAcceptance to true, it must also ensure licenseUrl is properly added to the nuspec as well. Please correct this in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/LicenseUrlMissingWhenLicenseAcceptanceTrue)";
+@"If the package sets requireLicenseAcceptance to true, it must also ensure licenseUrl is properly added to the nuspec as well. Please correct this in the nuspec. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0007)";
         }
         }
 

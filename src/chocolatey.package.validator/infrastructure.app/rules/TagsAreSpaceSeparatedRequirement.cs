@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class TagsAreSpaceSeparatedRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"Tags (tags) are space separated values for referencing categories for software. Please don't use comma to separate tags. [More...](https://github.com/chocolatey/package-validator/wiki/TagsAreSpaceSeparated)";
+@"Tags (tags) are space separated values for referencing categories for software. Please don't use comma to separate tags. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0014)";
         }
         }
 

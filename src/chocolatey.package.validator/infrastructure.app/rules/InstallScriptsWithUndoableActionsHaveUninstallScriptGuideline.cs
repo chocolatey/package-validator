@@ -24,7 +24,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class InstallScriptsWithUndoableActionsHaveUninstallScriptGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"This packages has used a function that doesn't have an automatic undo on uninstall, so it will also need an uninstall script. Please correcting that by adding a chocolateyUninstall.ps1 to the package to undo the action. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptWithUndoableActionsNeedsUninstallScript)";
+@"This packages has used a function that doesn't have an automatic undo on uninstall, so it will also need an uninstall script. Please correcting that by adding a chocolateyUninstall.ps1 to the package to undo the action. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0037)";
             }
         }
 

@@ -22,8 +22,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsUseWscriptNote : BasePackageRule
     {
-@"Package installation scripts make use of WScript. The reviewer will ensure this is actually required. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfWScript)"; } }
         public override string ValidationFailureMessage { get { return
+@"Package installation scripts make use of WScript. The reviewer will ensure this is actually required. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0063)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

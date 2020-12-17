@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class PackageInternalFilesAreNotPackagedRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The package contains files that are normally not exposed as package files. Please remove them. [More...](https://github.com/chocolatey/package-validator/wiki/PackageInternalFilesIncluded) Possibilities include the following:
+@"The package contains files that are normally not exposed as package files. Please remove them. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0004) Possibilities include the following:
   * [Content_Types].xml
   * *.psmdcp
   * _rels\*

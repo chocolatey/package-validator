@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class ScriptsDoNotUseDownloadersGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The package script downloads a file outside of using built-in helpers. Scripts should use the built-in helpers to download files. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotUseDownloaders)";
+@"The package script downloads a file outside of using built-in helpers. Scripts should use the built-in helpers to download files. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0055)";
             } }
 
         public override PackageValidationOutput is_valid(IPackage package)

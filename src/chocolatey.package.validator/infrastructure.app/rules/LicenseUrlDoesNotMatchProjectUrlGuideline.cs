@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class LicenseUrlDoesNotMatchProjectUrlGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The licenseUrl should not usually be an exact match to softwareUrl. Please correct this in the nuspec, if applicable. [More...](https://github.com/chocolatey/package-validator/wiki/LicenseUrlShouldNotMatchProjectUrl)";
+@"The licenseUrl should not usually be an exact match to softwareUrl. Please correct this in the nuspec, if applicable. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0038)";
         }
         }
 

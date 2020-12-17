@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class LicenseUrlMissingGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The licenseUrl should be added if there is one. Please correct this in the nuspec, if applicable. [More...](https://github.com/chocolatey/package-validator/wiki/LicenseUrlMissing)";
+@"The licenseUrl should be added if there is one. Please correct this in the nuspec, if applicable. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0039)";
         }
         }
 

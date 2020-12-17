@@ -1,10 +1,10 @@
 # Chocolatey Package Validator
 
-Validates the contents of a package against the package review process parts that can be validated by a machine. See https://github.com/chocolatey/choco/wiki/Moderation for more details.
+Validates the contents of a package against the package review process parts that can be validated by a machine. See https://docs.chocolatey.org/en-us/community-repository/moderation/ for more details.
 
 The validator is a service that checks the quality of a package based on requirements, guidelines and suggestions for creating packages for Chocolatey’s community feed. We like to think of the validator as unit testing. It is validating that everything is as it should be and meets the minimum requirements for a package on the community feed.
 
-What does the validator check? See the [wiki](https://github.com/chocolatey/package-validator/wiki) for more information.
+What does the validator check? See the [docs](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/) for more information.
 
 ## Chat Room
 

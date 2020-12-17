@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             get
             {
-                return @"Do not use the environment variables for accessing the Chocolatey Installation Arguments  Instead, use the passed in Package Parameters. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptContainsUsageOfInstallationArguments)";
+                return @"Do not use the environment variables for accessing the Chocolatey Installation Arguments  Instead, use the passed in Package Parameters. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0016)";
             }
         }
 

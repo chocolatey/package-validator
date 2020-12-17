@@ -28,7 +28,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"Package Description should not contain invalid Markdown Headings. [More...](https://github.com/chocolatey/package-validator/wiki/DescriptionValidMarkdownHeading)";
+@"Package Description should not contain invalid Markdown Headings. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0030)";
             }
         }
 

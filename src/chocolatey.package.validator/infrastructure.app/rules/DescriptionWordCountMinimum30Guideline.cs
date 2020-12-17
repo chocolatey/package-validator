@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class DescriptionWordCountMinimum30Guideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"Description should be sufficient to explain the software. Please fill in the description with more information about the software. Feel free to use use markdown. [More...](https://github.com/chocolatey/package-validator/wiki/DescriptionCharacterCountMinimum)";
+@"Description should be sufficient to explain the software. Please fill in the description with more information about the software. Feel free to use use markdown. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0032)";
         }
         }
 

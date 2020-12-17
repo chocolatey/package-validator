@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class ScriptsShouldNotUseSourceforgeGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get{ return
-@"Using SourceForge as the download source of installers is not recommended. Please consider an alternative, official distribution location if one is available. [More...](https://github.com/chocolatey/package-validator/wiki/UseOfSourceForge)";
+@"Using SourceForge as the download source of installers is not recommended. Please consider an alternative, official distribution location if one is available. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0034)";
             }
         }
 

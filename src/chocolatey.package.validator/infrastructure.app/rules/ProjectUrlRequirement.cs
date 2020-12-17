@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class ProjectUrlRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"ProjectUrl (projectUrl) in the nuspec file is required. Please add it to the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/ProjectUrl)";
+@"ProjectUrl (projectUrl) in the nuspec file is required. Please add it to the nuspec. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0009)";
         }
         }
 

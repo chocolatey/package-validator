@@ -24,7 +24,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage
         {
-            get { return @"Binary files (.exe, .msi, .zip) have been included without including a VERIFICATION.txt file. This file is required when including binaries  [More...](https://github.com/chocolatey/package-validator/wiki/VerificationFileMissing)"; }
+            get { return @"Binary files (.exe, .msi, .zip) have been included without including a VERIFICATION.txt file. This file is required when including binaries  [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0006)"; }
         }
 
         public override PackageValidationOutput is_valid(IPackage package)

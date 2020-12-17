@@ -27,7 +27,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             get
             {
-                return @"The package script attempts to download from FossHub. This is not an available location for downloading software. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotDownloadFromFossHub)";
+                return @"The package script attempts to download from FossHub. This is not an available location for downloading software. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0028)";
             }
         }
 

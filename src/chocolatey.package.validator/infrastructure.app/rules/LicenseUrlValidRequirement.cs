@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class LicenseUrlValidRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The LicenseUrl element in the nuspec file should be a valid Url. Please correct this [More...](https://github.com/chocolatey/package-validator/wiki/InvalidUrlProvided)";
+@"The LicenseUrl element in the nuspec file should be a valid Url. Please correct this [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0031)";
         }
         }
 

@@ -22,8 +22,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsDoNotContainStartProcessGuideline : BasePackageRule
     {
-@"The automation scripts script contains a call to Start-Process. This is not recommended, and can most likely be replaced by using the Chocolatey Helper Function called Start-ChocolateyProcessAsAdmin. [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainStartProcess) This could also flag a comment or message with the following words:
         public override string ValidationFailureMessage { get { return
+@"The automation scripts script contains a call to Start-Process. This is not recommended, and can most likely be replaced by using the Chocolatey Helper Function called Start-ChocolateyProcessAsAdmin. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0046) This could also flag a comment or message with the following words:
   * Start-Process
   ";} }
 

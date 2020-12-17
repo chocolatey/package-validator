@@ -24,7 +24,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class InstallScriptsWithGetBinRootShouldHaveUninstallScriptGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"This package uses Get-BinRoot without having an uninstall script. Please consider adding a chocolateyUninstall.ps1 to the package to remove files from the custom install location. [More...](https://github.com/chocolatey/package-validator/wiki/UseOfGetBinRoot)";
+@"This package uses Get-BinRoot without having an uninstall script. Please consider adding a chocolateyUninstall.ps1 to the package to remove files from the custom install location. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0035)";
             }
         }
 

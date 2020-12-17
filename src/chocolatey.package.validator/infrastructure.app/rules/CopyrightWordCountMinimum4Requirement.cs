@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class CopyrightWordCountMinimum4Requirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"If you are going to use copyright in the nuspec, please use more than 4 characters. [More...](https://github.com/chocolatey/package-validator/wiki/CopyrightCharacterCountMinimum)";
+@"If you are going to use copyright in the nuspec, please use more than 4 characters. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0001)";
         }
         }
 

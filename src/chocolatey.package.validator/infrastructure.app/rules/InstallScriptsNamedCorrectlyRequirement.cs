@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class InstallScriptsNamedCorrectlyRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The install script should be named chocolateyInstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed. [More...](https://github.com/chocolatey/package-validator/wiki/InstallScriptNamedCorrectly)";
+@"The install script should be named chocolateyInstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0003)";
         }
         }
 

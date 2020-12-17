@@ -23,8 +23,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class TooManyAutomationScriptsGuideline : BasePackageRule
     {
-@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://github.com/chocolatey/package-validator/wiki/MoreThanMaximumAutomationScripts)"; } }
         public override string ValidationFailureMessage { get { return
+@"There are more than 3 automation scripts in this package. This is not recommended as it increases the complexity of the package. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0051)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

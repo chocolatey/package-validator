@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class PortablePackageScriptsDoNotUseProgramFilesRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"This portable package uses Program Files or some derivative in it's automation scripts. This is not allowed as portable packages should not attempt to install into locations that require administrative access. Please let the package download into the package folder or use Get-BinRoot to find a suitable location for portables. [More...](https://github.com/chocolatey/package-validator/wiki/PortablePackageScriptsDoNotUseProgramFiles)";
+@"This portable package uses Program Files or some derivative in it's automation scripts. This is not allowed as portable packages should not attempt to install into locations that require administrative access. Please let the package download into the package folder or use Get-BinRoot to find a suitable location for portables. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0008)";
             }
         }
 

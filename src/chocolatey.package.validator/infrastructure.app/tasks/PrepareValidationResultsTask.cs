@@ -92,7 +92,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (failedRequirements.Count() == 0)
             {
                 this.Log().Info("{0} v{1} passed validation.".format_with(message.PackageId, message.PackageVersion));
-                validationMessages = "**NOTE**: No [required changes](https://github.com/chocolatey/package-validator/wiki#requirements) that the validator checks have been flagged! It is appreciated if you fix other items, but only Requirements will hold up a package version from approval. A human review could still turn up issues a computer may not easily find.{0}{0}".format_with(Environment.NewLine);
+                validationMessages = "**NOTE**: No [required changes](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/#requirements) that the validator checks have been flagged! It is appreciated if you fix other items, but only Requirements will hold up a package version from approval. A human review could still turn up issues a computer may not easily find.{0}{0}".format_with(Environment.NewLine);
             }
 
             validationMessages += resultsMessage.ToString();

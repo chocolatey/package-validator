@@ -9,11 +9,11 @@
     <projectUrl>https://github.com/chocolatey/package-validator</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/chocolatey/choco/master/docs/logo/chocolateyicon.gif</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
-    <description>Validates the contents of a package against the package review process parts that can be validated by a machine. See https://github.com/chocolatey/choco/wiki/Moderation for more details.
+    <description>Validates the contents of a package against the package review process parts that can be validated by a machine. See https://docs.chocolatey.org/en-us/community-repository/moderation/ for more details.
 
 The validator is a service that checks the quality of a package based on requirements, guidelines and suggestions for creating packages for Chocolatey’s community feed. We like to think of the validator as unit testing. It is validating that everything is as it should be and meets the minimum requirements for a package on the community feed.
 
-What does the validator check? See https://github.com/chocolatey/package-validator/wiki
+What does the validator check? See https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/
 
 ### Package Parameters
 

@@ -27,7 +27,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
         {
             get
             {
-                return @"The package script contains a choco command. This is not allowed. Perhaps there should be a dependency on a package? [More...](https://github.com/chocolatey/package-validator/wiki/ScriptsDoNotContainChocoCommands)";
+                return @"The package script contains a choco command. This is not allowed. Perhaps there should be a dependency on a package? [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0010)";
             }
         }
 

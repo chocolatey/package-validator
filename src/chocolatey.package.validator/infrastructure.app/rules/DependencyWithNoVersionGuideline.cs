@@ -26,7 +26,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-                    @"Package contains dependencies with no specified version. You should at least specify a minimum version of a dependency. [More...](https://github.com/chocolatey/package-validator/wiki/DependencyWithNoVersion)";
+                    @"Package contains dependencies with no specified version. You should at least specify a minimum version of a dependency. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0052)";
             }
         }
 
