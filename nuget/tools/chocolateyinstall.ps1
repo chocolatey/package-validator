@@ -2,7 +2,7 @@
 
 $toolsDir   = "$(Split-Path -parent $MyInvocation.MyCommand.Definition)"
 $serviceExe = 'package-validator.exe'
-$destinationPath = Join-Path (Get-ToolsLocation) -ChildPath 'chocolatey-package-validator'
+$destinationPath = Join-Path (Get-ToolsLocation) -ChildPath 'validator'
 $configPath = Join-Path -Path $destinationPath -ChildPath 'package-validator.exe.config'
 
 $serviceParams = @{
