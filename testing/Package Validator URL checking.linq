@@ -114,6 +114,12 @@ public static bool url_is_valid(string problem, Uri url)
 			return true;
 		}
 
+		if (response.StatusCode == System.Net.HttpStatusCode.Redirect)
+		{
+			Console.WriteLine("Received a 302 response from the server");
+			return true;
+		}
+		
 		return response.StatusCode == System.Net.HttpStatusCode.OK;
 	}
 	catch (Exception ex)
