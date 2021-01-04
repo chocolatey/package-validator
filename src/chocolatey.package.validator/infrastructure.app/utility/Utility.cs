@@ -212,6 +212,13 @@ namespace chocolatey.package.validator.infrastructure.app.utility
                     return true;
                 }
 
+                if (response.StatusCode == HttpStatusCode.Redirect)
+                {
+                    "package-validator".Log().Warn("Received a 302 response (so assuming a valid URL) from the server when validating URL {0}", url.ToString());
+                    "package-validator".Log().Warn("This check was put in place as a result of this issue: https://github.com/chocolatey/package-validator/issues/254");
+                    return true;
+                }
+
                 return response.StatusCode == HttpStatusCode.OK;
             }
             catch (Exception ex)
