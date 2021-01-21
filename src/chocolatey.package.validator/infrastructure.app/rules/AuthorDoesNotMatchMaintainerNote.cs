@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class AuthorDoesNotMatchMaintainerNote : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-            @"The package maintainer field (owners) matches the software author field (authors) in the nuspec.  The reviewer will ensure that the package maintainer is also the software author. [More...](https://github.com/chocolatey/package-validator/wiki/AuthorDoesNotMatchMaintainer)";
+            @"The package maintainer field (owners) matches the software author field (authors) in the nuspec.  The reviewer will ensure that the package maintainer is also the software author. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0068)";
         }
         }
 

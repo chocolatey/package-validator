@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"Description should not exceed 4000 characters. [More...](https://github.com/chocolatey/package-validator/wiki/DescriptionCharacterCountMaximum)";
+@"Description should not exceed 4000 characters. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0026)";
             }
         }
 

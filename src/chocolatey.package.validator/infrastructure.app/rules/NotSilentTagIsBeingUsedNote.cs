@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class NotSilentTagIsBeingUsedNote : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"notSilent tag is being used. The reviewer will ensure this is being used appropriately. [More...](https://github.com/chocolatey/package-validator/wiki/notSilentTagIsBeingUsed)";
+@"notSilent tag is being used. The reviewer will ensure this is being used appropriately. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0067)";
         }
         }
 

@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     {
         public override string ValidationFailureMessage
         {
-            get { return @"Binary files (.exe, .msi, .zip, etc) have been included without including a LICENSE.txt file. This file is required when including binaries  [More...](https://github.com/chocolatey/package-validator/wiki/LicenseFileMissing)"; }
+            get { return @"Binary files (.exe, .msi, .zip, etc) have been included without including a LICENSE.txt file. This file is required when including binaries  [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0005)"; }
         }
 
         public override PackageValidationOutput is_valid(IPackage package)
@@ -37,10 +37,10 @@ namespace chocolatey.package.validator.infrastructure.app.rules
                 f =>
                     StringExtensions.to_lower(f.Path).EndsWith("license.txt") ||
                     StringExtensions.to_lower(f.Path).EndsWith("license")     ||
-                    StringExtensions.to_lower(f.Path).EndsWith("license.md")  ||       
+                    StringExtensions.to_lower(f.Path).EndsWith("license.md")  ||
                     StringExtensions.to_lower(f.Path).EndsWith("notice.txt")  ||
                     StringExtensions.to_lower(f.Path).EndsWith("notice")      ||
-                    StringExtensions.to_lower(f.Path).EndsWith("notice.md") 
+                    StringExtensions.to_lower(f.Path).EndsWith("notice.md")
              ))
             {
                 return true;

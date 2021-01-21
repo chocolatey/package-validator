@@ -22,8 +22,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsShouldntUseCreateShortcutNote : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"Installation Scripts are using .CreateShortcut. The reviewer will ensure that there is a valid reason for not using a built-in Chocolatey Helper for creating shortcuts. [More...](https://github.com/chocolatey/package-validator/wiki/UsageOfCreateShortcut)"; } }
+        public override string ValidationFailureMessage { get { return
+@"Installation Scripts are using .CreateShortcut. The reviewer will ensure that there is a valid reason for not using a built-in Chocolatey Helper for creating shortcuts. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0064)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

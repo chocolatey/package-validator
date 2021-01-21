@@ -25,7 +25,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"The package id includes a prerelease version name which should be included only in the version of the package. [More...](https://github.com/chocolatey/package-validator/wiki/PrereleaseVersionAsPartOfPackageId)";
+@"The package id includes a prerelease version name which should be included only in the version of the package. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0024)";
             }
         }
 

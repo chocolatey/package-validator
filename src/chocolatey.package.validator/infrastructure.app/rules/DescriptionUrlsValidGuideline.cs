@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class DescriptionUrlValidGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"In the Description element of the nuspec file a potentially invalid Url has been found.  Recommendation is to fix this URL [More...](https://github.com/chocolatey/package-validator/wiki/InvalidUrlProvided)";
+@"In the Description element of the nuspec file a potentially invalid Url has been found.  Recommendation is to fix this URL [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0056)";
         }
         }
 

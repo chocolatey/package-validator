@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class IncludesChocolateyDependencyNote : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The package takes a dependency on Chocolatey. The reviewer will ensure the package uses a specific Chocolatey feature that requires a minimum version. [More...](https://github.com/chocolatey/package-validator/wiki/ChocolateyDependency)";
+@"The package takes a dependency on Chocolatey. The reviewer will ensure the package uses a specific Chocolatey feature that requires a minimum version. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0062)";
         }
         }
 

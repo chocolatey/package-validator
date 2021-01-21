@@ -26,7 +26,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"The package contains source control ignore files (.gitignore, .hgignore). Please remove all source control ignore files from the package. [More...](https://github.com/chocolatey/package-validator/wiki/SourceControlIgnoreFilesIncluded)";
+@"The package contains source control ignore files (.gitignore, .hgignore). Please remove all source control ignore files from the package. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0025)";
             }
         }
 

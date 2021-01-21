@@ -1,12 +1,12 @@
 ﻿// Copyright © 2015 - Present RealDimensions Software, LLC
-// 
+//
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
-// 
+//
 // You may obtain a copy of the License at
-// 
+//
 // 	http://www.apache.org/licenses/LICENSE-2.0
-// 
+//
 // Unless required by applicable law or agreed to in writing, software
 // distributed under the License is distributed on an "AS IS" BASIS,
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -64,7 +64,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             {
                 resultsMessage.Append("* " + flaggedGuideline.ValidationFailureMessage + Environment.NewLine);
             }
-            
+
             var flaggedSuggestions = message.ValidationResults.Where(r => r.Validated == false && (r.ValidationLevel == ValidationLevelType.Suggestion));
             if (flaggedSuggestions.Count() != 0)
             {
@@ -75,7 +75,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             {
                 resultsMessage.Append("* " + flaggedSuggestion.ValidationFailureMessage + Environment.NewLine);
             }
-            
+
             var flaggedNotes = message.ValidationResults.Where(r => r.Validated == false && (r.ValidationLevel == ValidationLevelType.Note));
             if (flaggedNotes.Count() != 0)
             {
@@ -92,7 +92,7 @@ namespace chocolatey.package.validator.infrastructure.app.tasks
             if (failedRequirements.Count() == 0)
             {
                 this.Log().Info("{0} v{1} passed validation.".format_with(message.PackageId, message.PackageVersion));
-                validationMessages = "**NOTE**: No [required changes](https://github.com/chocolatey/package-validator/wiki#requirements) that the validator checks have been flagged! It is appreciated if you fix other items, but only Requirements will hold up a package version from approval. A human review could still turn up issues a computer may not easily find.{0}{0}".format_with(Environment.NewLine);
+                validationMessages = "**NOTE**: No [required changes](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/#requirements) that the validator checks have been flagged! It is appreciated if you fix other items, but only Requirements will hold up a package version from approval. A human review could still turn up issues a computer may not easily find.{0}{0}".format_with(Environment.NewLine);
             }
 
             validationMessages += resultsMessage.ToString();

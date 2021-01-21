@@ -22,8 +22,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class ScriptsShouldntUseGetWmiObjectSuggestion : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"Installation Scripts should avoid using Get-WmiObject for finding software install information. [More...](https://github.com/chocolatey/package-validator/wiki/DontUseGetWmiObjectForFindingInstalledPackages)"; } }
+        public override string ValidationFailureMessage { get { return
+@"Installation Scripts should avoid using Get-WmiObject for finding software install information. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0059)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

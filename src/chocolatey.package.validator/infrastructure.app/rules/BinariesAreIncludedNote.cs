@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class BinariesAreIncludedNote : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"Binary files (.exe, .msi, .zip) have been included. The reviewer will ensure the maintainers have distribution rights. [More...](https://github.com/chocolatey/package-validator/wiki/BinariesIncluded)";
+@"Binary files (.exe, .msi, .zip) have been included. The reviewer will ensure the maintainers have distribution rights. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0060)";
         }
         }
 

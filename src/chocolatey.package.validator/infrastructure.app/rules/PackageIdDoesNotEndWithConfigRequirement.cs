@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class PackageIdDoesNotEndWithConfigRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The package id ends with .config, this is a reserved file extension, and should not be used. [More...](https://github.com/chocolatey/package-validator/wiki/PackageIdDoesNotEndWithConfig)";
+@"The package id ends with .config, this is a reserved file extension, and should not be used. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0029)";
         }
         }
 

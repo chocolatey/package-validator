@@ -26,7 +26,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             get
             {
                 return
-@"The package contains Operating System index files, .ds_store or thumbs.db. Please remove all index files from the package. [More...](https://github.com/chocolatey/package-validator/wiki/OperatingSystemIndexFilesIncluded)";
+@"The package contains Operating System index files, .ds_store or thumbs.db. Please remove all index files from the package. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0021)";
             }
         }
 

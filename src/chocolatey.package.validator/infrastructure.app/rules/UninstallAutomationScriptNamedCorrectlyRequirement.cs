@@ -7,7 +7,7 @@
     public class UninstallAutomationScriptNamedCorrectlyRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"The uninstall script should be named chocolateyUninstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed. [More...](https://github.com/chocolatey/package-validator/wiki/UninstallAutomationScriptNamedCorrectly)";
+@"The uninstall script should be named chocolateyUninstall.ps1 and be found in the tools folder. Your script is named incorrectly and will need to be renamed. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0015)";
         }
         }
 

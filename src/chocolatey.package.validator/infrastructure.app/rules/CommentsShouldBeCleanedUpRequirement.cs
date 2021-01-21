@@ -23,7 +23,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class CommentsShouldBeCleanedUpRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"Comments from template should be cleaned up and removed. [More...](https://github.com/chocolatey/package-validator/wiki/CommentsAreNotCleanedUp)";
+@"Comments from template should be cleaned up and removed. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0022)";
             }
         }
 

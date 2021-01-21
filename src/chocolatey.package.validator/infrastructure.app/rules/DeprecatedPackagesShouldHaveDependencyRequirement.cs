@@ -21,8 +21,8 @@ namespace chocolatey.package.validator.infrastructure.app.rules
 
     public class DeprecatedPackagesShouldHaveDependencyRequirement : BasePackageRule
     {
-        public override string ValidationFailureMessage { get { return 
-@"Deprecated Packages must contain a dependency to the package(s) which the package is deprecating for. [More...](https://github.com/chocolatey/package-validator/wiki/DeprecatedPackagesMustHaveADependency)"; } }
+        public override string ValidationFailureMessage { get { return
+@"Deprecated Packages must contain a dependency to the package(s) which the package is deprecating for. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0017)"; } }
 
         public override PackageValidationOutput is_valid(IPackage package)
         {

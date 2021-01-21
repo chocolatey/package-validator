@@ -21,7 +21,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class TagsNotEmptyRequirement : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"Tags (tags) are space separated values for referencing categories for software. Please include tags in the nuspec as space separated values. [More...](https://github.com/chocolatey/package-validator/wiki/TagsNotEmpty)";
+@"Tags (tags) are space separated values for referencing categories for software. Please include tags in the nuspec as space separated values. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0023)";
         }
         }
 

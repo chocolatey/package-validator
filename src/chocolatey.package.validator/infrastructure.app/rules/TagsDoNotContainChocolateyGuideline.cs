@@ -22,7 +22,7 @@ namespace chocolatey.package.validator.infrastructure.app.rules
     public class TagsDoNotContainChocolateyGuideline : BasePackageRule
     {
         public override string ValidationFailureMessage { get { return
-@"Tags (tags) should not contain 'chocolatey' as a tag. Please remove that in the nuspec. [More...](https://github.com/chocolatey/package-validator/wiki/TagsDoNotContainChocolatey)";
+@"Tags (tags) should not contain 'chocolatey' as a tag. Please remove that in the nuspec. [More...](https://docs.chocolatey.org/en-us/community-repository/moderation/package-validator/rules/cpmr0048)";
         }
         }
 
