@@ -27,7 +27,6 @@ What does the validator check? See https://docs.chocolatey.org/en-us/community-r
     <tags>chocolatey-package-validator admin</tags>
     <dependencies>
       <dependency id="chocolatey.extension" version="2.0.3" />
-      <dependency id="chocolatey-package-validator-config" version="1.0.0" />
     </dependencies>
   </metadata>
   <files>
