@@ -38,9 +38,9 @@ namespace chocolatey.package.validator.infrastructure.app.rules
             {
                 var contents = packageFile.Value.to_lower();
 
-                if (contents.Contains("installarguments") ||
-                    contents.Contains("installerarguments") ||
-                    contents.Contains("chocolateyinstallarguments"))
+                if (contents.Contains("$installarguments") ||
+                    contents.Contains("$installerarguments") ||
+                    contents.Contains("$chocolateyinstallarguments"))
                 {
                     valid = false;
                 }
